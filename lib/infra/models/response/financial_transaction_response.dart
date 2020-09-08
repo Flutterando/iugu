@@ -7,7 +7,7 @@ class FinancialTransactionResponse {
 
   List<Items> items;
 
-  List<Transactions> transactions;
+  List<TransactionsResponse> transactions;
 
   Total total;
 
@@ -21,7 +21,7 @@ class FinancialTransactionResponse {
   FinancialTransactionResponse copyWith({
     String totalItems,
     List<Items> items,
-    List<Transactions> transactions,
+    List<TransactionsResponse> transactions,
     Total total,
   }) {
     return FinancialTransactionResponse(
@@ -47,8 +47,8 @@ class FinancialTransactionResponse {
     return FinancialTransactionResponse(
       totalItems: map['totalItems'],
       items: List<Items>.from(map['items']?.map((x) => Items.fromMap(x))),
-      transactions: List<Transactions>.from(
-          map['transactions']?.map((x) => Transactions.fromMap(x))),
+      transactions: List<TransactionsResponse>.from(
+          map['transactions']?.map((x) => TransactionsResponse.fromMap(x))),
       total: Total.fromMap(map['total']),
     );
   }
@@ -149,14 +149,14 @@ class Total {
       advancedValue.hashCode ^ advanceFee.hashCode ^ receivedValue.hashCode;
 }
 
-class Transactions extends Items {
+class TransactionsResponse extends Items {
   String advancedValue;
 
   String advanceFee;
 
   String receivedValue;
 
-  Transactions({
+  TransactionsResponse({
     this.advancedValue,
     this.advanceFee,
     this.receivedValue,
@@ -170,10 +170,10 @@ class Transactions extends Items {
     };
   }
 
-  factory Transactions.fromMap(Map<String, dynamic> map) {
+  factory TransactionsResponse.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Transactions(
+    return TransactionsResponse(
       advancedValue: map['advancedValue'],
       advanceFee: map['advanceFee'],
       receivedValue: map['receivedValue'],
@@ -182,8 +182,8 @@ class Transactions extends Items {
 
   String toJson() => json.encode(toMap());
 
-  factory Transactions.fromJson(String source) =>
-      Transactions.fromMap(json.decode(source));
+  factory TransactionsResponse.fromJson(String source) =>
+      TransactionsResponse.fromMap(json.decode(source));
 
   @override
   String toString() =>
@@ -193,7 +193,7 @@ class Transactions extends Items {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Transactions &&
+    return o is TransactionsResponse &&
         o.advancedValue == advancedValue &&
         o.advanceFee == advanceFee &&
         o.receivedValue == receivedValue;

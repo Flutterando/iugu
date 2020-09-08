@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 
 class FinancialTransactionRequestMessage {
   ///  Variáveis Personalizadas
-  List<Transactions> transactions;
+  List<TransactionsRequest> transactions;
 
   FinancialTransactionRequestMessage({
     this.transactions,
   });
 
   FinancialTransactionRequestMessage copyWith({
-    List<Transactions> transactions,
+    List<TransactionsRequest> transactions,
   }) {
     return FinancialTransactionRequestMessage(
       transactions: transactions ?? this.transactions,
@@ -28,8 +28,8 @@ class FinancialTransactionRequestMessage {
     if (map == null) return null;
 
     return FinancialTransactionRequestMessage(
-      transactions: List<Transactions>.from(
-          map['transactions']?.map((x) => Transactions.fromMap(x))),
+      transactions: List<TransactionsRequest>.from(
+          map['transactions']?.map((x) => TransactionsRequest.fromMap(x))),
     );
   }
 
@@ -54,17 +54,17 @@ class FinancialTransactionRequestMessage {
   int get hashCode => transactions.hashCode;
 }
 
-class Transactions {
+class TransactionsRequest {
   int id;
 
-  Transactions({
+  TransactionsRequest({
     this.id,
   });
 
-  Transactions copyWith({
+  TransactionsRequest copyWith({
     int id,
   }) {
-    return Transactions(
+    return TransactionsRequest(
       id: id ?? this.id,
     );
   }
@@ -75,18 +75,18 @@ class Transactions {
     };
   }
 
-  factory Transactions.fromMap(Map<String, dynamic> map) {
+  factory TransactionsRequest.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Transactions(
+    return TransactionsRequest(
       id: map['id'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Transactions.fromJson(String source) =>
-      Transactions.fromMap(json.decode(source));
+  factory TransactionsRequest.fromJson(String source) =>
+      TransactionsRequest.fromMap(json.decode(source));
 
   @override
   String toString() => 'Transactions(id: $id)';
@@ -95,7 +95,7 @@ class Transactions {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Transactions && o.id == id;
+    return o is TransactionsRequest && o.id == id;
   }
 
   @override

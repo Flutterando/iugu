@@ -9,13 +9,13 @@ import 'package:iugu/domain/entities/payer_model.dart';
 
 class InvoiceRequestMessage {
   /// E-Mail do cliente
-  String email; // { get; }
+  String email;
 
   /// Data de Expiração (DD/MM/AAAA)
-  String dueDate; // { get; }
+  String dueDate;
 
   ///  Itens da Fatura
-  List<Item> items; // { get; }
+  List<Item> items;
 
   /// Informações do Cliente para o Anti Fraude ou Boleto
   PayerModel payer;
@@ -54,10 +54,10 @@ class InvoiceRequestMessage {
   String subscriptionId;
 
   /// (opcional) Método de pagamento que será disponibilizado para esta Fatura (‘all’, ‘credit_card’ ou ‘bank_slip’).
-  /// Obs: Caso esta Fatura esteja atrelada à uma Assinatura, a prioridade é herdar o valor atribuído na Assinatura;
-  /// caso esta esteja atribuído o valor ‘all’, o sistema considerará o payable_with da Fatura; se não, o sistema considerará o payable_with da Assinatura.
   String paymentMethod;
 
+  /// Obs: Caso esta Fatura esteja atrelada à uma Assinatura, a prioridade é herdar o valor atribuído na Assinatura;
+  /// caso esta esteja atribuído o valor ‘all’, o sistema considerará o payable_with da Fatura; se não, o sistema considerará o payable_with da Assinatura.
   /// (opcional) Caso tenha o subscription_id, pode-se enviar o número de créditos a adicionar nessa Assinatura quando a Fatura for paga
   int credits;
 
@@ -74,6 +74,9 @@ class InvoiceRequestMessage {
   List<CustomVariables> customVariables;
 
   InvoiceRequestMessage({
+    this.email,
+    this.dueDate,
+    this.items,
     this.payer,
     this.returnUrl,
     this.expiredUrl,
@@ -94,14 +97,10 @@ class InvoiceRequestMessage {
     this.customVariables,
   });
 
-  //  InvoiceRequestMessage(String email, DateTime dueDate, Item[] items)
-  // {
-  //     Email = email;
-  //     DueDate = dueDate.ToString("dd/MM/yyyy");
-  //     Items = items;
-  // }
-
   InvoiceRequestMessage copyWith({
+    String email,
+    String dueDate,
+    List<Item> items,
     PayerModel payer,
     String returnUrl,
     String expiredUrl,
@@ -122,6 +121,9 @@ class InvoiceRequestMessage {
     List<CustomVariables> customVariables,
   }) {
     return InvoiceRequestMessage(
+      email: email ?? this.email,
+      dueDate: dueDate ?? this.dueDate,
+      items: items ?? this.items,
       payer: payer ?? this.payer,
       returnUrl: returnUrl ?? this.returnUrl,
       expiredUrl: expiredUrl ?? this.expiredUrl,
@@ -148,25 +150,28 @@ class InvoiceRequestMessage {
 
   Map<String, dynamic> toMap() {
     return {
+      'email': email,
+      'dueDate': dueDate,
+      'items': items?.map((x) => x?.toMap())?.toList(),
       'payer': payer?.toMap(),
-      'return_url': returnUrl,
-      'expired_url': expiredUrl,
-      'notification_url': notificationUrl,
-      'tax_cents': taxCents,
-      'fines': enableLateFine,
-      'late_payment_fine': latePaymentFine,
-      'per_day_interest': enableProportionalDailyTax,
-      'discount_cents': discountCents,
-      'customer_id': customerId,
-      'ignore_due_date_mail': ignoreDueDateMail,
-      'subscription_id': subscriptionId,
-      'payable_with': paymentMethod,
+      'returnUrl': returnUrl,
+      'expiredUrl': expiredUrl,
+      'notificationUrl': notificationUrl,
+      'taxCents': taxCents,
+      'enableLateFine': enableLateFine,
+      'latePaymentFine': latePaymentFine,
+      'enableProportionalDailyTax': enableProportionalDailyTax,
+      'discountCents': discountCents,
+      'customerId': customerId,
+      'ignoreDueDateMail': ignoreDueDateMail,
+      'subscriptionId': subscriptionId,
+      'paymentMethod': paymentMethod,
       'credits': credits,
       'logs': logs?.map((x) => x?.toMap())?.toList(),
-      'early_payment_discount': enableEarlyPaymentDiscount,
-      'early_payment_discounts':
+      'enableEarlyPaymentDiscount': enableEarlyPaymentDiscount,
+      'earlyPaymentDiscounts':
           earlyPaymentDiscounts?.map((x) => x?.toMap())?.toList(),
-      'custom_variables': customVariables?.map((x) => x?.toMap())?.toList(),
+      'customVariables': customVariables?.map((x) => x?.toMap())?.toList(),
     };
   }
 
@@ -174,27 +179,30 @@ class InvoiceRequestMessage {
     if (map == null) return null;
 
     return InvoiceRequestMessage(
+      email: map['email'],
+      dueDate: map['dueDate'],
+      items: List<Item>.from(map['items']?.map((x) => Item.fromMap(x))),
       payer: PayerModel.fromMap(map['payer']),
-      returnUrl: map['return_url'],
-      expiredUrl: map['expired_url'],
-      notificationUrl: map['notification_url'],
-      taxCents: map['tax_cents'],
-      enableLateFine: map['fines'],
-      latePaymentFine: map['late_payment_fine'],
-      enableProportionalDailyTax: map['per_day_interest'],
-      discountCents: map['discount_cents'],
-      customerId: map['customer_id'],
-      ignoreDueDateMail: map['ignore_due_date_mail'],
-      subscriptionId: map['subscription_id'],
-      paymentMethod: map['payable_with'],
+      returnUrl: map['returnUrl'],
+      expiredUrl: map['expiredUrl'],
+      notificationUrl: map['notificationUrl'],
+      taxCents: map['taxCents'],
+      enableLateFine: map['enableLateFine'],
+      latePaymentFine: map['latePaymentFine'],
+      enableProportionalDailyTax: map['enableProportionalDailyTax'],
+      discountCents: map['discountCents'],
+      customerId: map['customerId'],
+      ignoreDueDateMail: map['ignoreDueDateMail'],
+      subscriptionId: map['subscriptionId'],
+      paymentMethod: map['paymentMethod'],
       credits: map['credits'],
       logs: List<Logs>.from(map['logs']?.map((x) => Logs.fromMap(x))),
-      enableEarlyPaymentDiscount: map['early_payment_discount'],
+      enableEarlyPaymentDiscount: map['enableEarlyPaymentDiscount'],
       earlyPaymentDiscounts: List<EarlyPaymentDiscounts>.from(
-          map['early_payment_discounts']
+          map['earlyPaymentDiscounts']
               ?.map((x) => EarlyPaymentDiscounts.fromMap(x))),
       customVariables: List<CustomVariables>.from(
-          map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
+          map['customVariables']?.map((x) => CustomVariables.fromMap(x))),
     );
   }
 
@@ -205,7 +213,7 @@ class InvoiceRequestMessage {
 
   @override
   String toString() {
-    return 'InvoiceRequestMessage(payer: $payer, returnUrl: $returnUrl, expiredUrl: $expiredUrl, notificationUrl: $notificationUrl, taxCents: $taxCents, enableLateFine: $enableLateFine, latePaymentFine: $latePaymentFine, enableProportionalDailyTax: $enableProportionalDailyTax, discountCents: $discountCents, customerId: $customerId, ignoreDueDateMail: $ignoreDueDateMail, subscriptionId: $subscriptionId, paymentMethod: $paymentMethod, credits: $credits, logs: $logs, enableEarlyPaymentDiscount: $enableEarlyPaymentDiscount, earlyPaymentDiscounts: $earlyPaymentDiscounts, customVariables: $customVariables)';
+    return 'InvoiceRequestMessage(email: $email, dueDate: $dueDate, items: $items, payer: $payer, returnUrl: $returnUrl, expiredUrl: $expiredUrl, notificationUrl: $notificationUrl, taxCents: $taxCents, enableLateFine: $enableLateFine, latePaymentFine: $latePaymentFine, enableProportionalDailyTax: $enableProportionalDailyTax, discountCents: $discountCents, customerId: $customerId, ignoreDueDateMail: $ignoreDueDateMail, subscriptionId: $subscriptionId, paymentMethod: $paymentMethod, credits: $credits, logs: $logs, enableEarlyPaymentDiscount: $enableEarlyPaymentDiscount, earlyPaymentDiscounts: $earlyPaymentDiscounts, customVariables: $customVariables)';
   }
 
   @override
@@ -213,6 +221,9 @@ class InvoiceRequestMessage {
     if (identical(this, o)) return true;
 
     return o is InvoiceRequestMessage &&
+        o.email == email &&
+        o.dueDate == dueDate &&
+        listEquals(o.items, items) &&
         o.payer == payer &&
         o.returnUrl == returnUrl &&
         o.expiredUrl == expiredUrl &&
@@ -235,7 +246,10 @@ class InvoiceRequestMessage {
 
   @override
   int get hashCode {
-    return payer.hashCode ^
+    return email.hashCode ^
+        dueDate.hashCode ^
+        items.hashCode ^
+        payer.hashCode ^
         returnUrl.hashCode ^
         expiredUrl.hashCode ^
         notificationUrl.hashCode ^

@@ -142,7 +142,9 @@ class CustomerModel {
       customVariables: List<CustomVariables>.from(
           map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
       zipCode: map['zip_code'],
-      number: map['number'],
+      number: map['number'] != null
+          ? map['number'] is String ? int.parse(map['number']) : map['number']
+          : null,
       complement: map['complement'],
       cpfCnpj: map['cpf_cnpj'],
     );
