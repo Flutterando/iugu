@@ -9,14 +9,6 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => HomeController(i())),
-        Bind(
-          (i) => IuguClient(
-            properties: IuguProperties(
-              apiKey: "6d066d71094216d9da6341bdbb4d95ca",
-              urlApi: "https://api.iugu.com/v1/",
-            ),
-          ),
-        ),
         Bind((i) => Customer(i())),
       ];
 

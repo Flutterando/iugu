@@ -9,10 +9,10 @@ import 'api_resource.dart';
 
 /// Os clientes efetuam pagamentos através das faturas.
 /// As faturas contém itens que representam o que o cliente está pagando, o serviço ou produto.
-class Charge extends IDisposable {
+class Invoice extends IDisposable {
   APIResource apiResource;
 
-  Charge(IuguClient client) {
+  Invoice(IuguClient client) {
     apiResource = APIResource(client.properties.dio, "/invoices");
   }
 
@@ -42,20 +42,31 @@ class Charge extends IDisposable {
   /// <param name="customApiToken">ApiToken customizado</param>
   /// <param name="filter">Opções de filtros, para paginação e ordenação</param>
   /// <returns></returns>
-  // Future<PaggedResponseMessage<InvoiceModel>> getAll(String customApiToken, QueryStringFilter filter) async
-  // {
-  //     var queryStringFilter = filter?.ToQueryStringUrl();
-  //     var retorno = await apiResource.getById(queryStringFilter, customApiToken);
-  //     return PaggedResponseMessage<InvoiceModel>.fromMap(retorno);
-  // }
+  ///Future<PaggedResponseMessage<InvoiceModel>> getAll(String customApiToken, QueryStringFilter filter) async
+  Future<PaggedResponseMessage<InvoiceModel>> getAll(
+      {String customApiToken}) async {
+    //  var queryStringFilter = filter?.ToQueryStringUrl();
+    var retorno = await apiResource.getById(
+        partOfUrl: "?limit=1000", apiUserToken: customApiToken);
+    return PaggedResponseMessage<InvoiceModel>(
+      totalItems: retorno["totalItems"],
+      items: (retorno["items"] as List)
+          .map((e) => InvoiceModel.fromMap(e))
+          .toList(),
+    );
+  }
 
-  Future<InvoiceModel> get(String id, String apiUserToken) async {
-    var retorno = await apiResource.getById(id: id, apiUserToken: apiUserToken);
+  Future<InvoiceModel> getById({String id, String apiUserToken}) async {
+    var retorno = await apiResource.getById(
+      id: id,
+      apiUserToken: apiUserToken,
+    );
+
     return InvoiceModel.fromMap(retorno);
   }
 
   /// <summary>
-  /// Cria uma Fatura para um Cliente (Podendo ser um objeto cliente ou apenas um e-mail).
+  /// Cria uma Fatura para um Cliente (Podendo ser apenas um e-mail).
   /// </summary>
   /// <param name="email">E-Mail do cliente</param>
   /// <param name="due_date">Data de Expiração (DD/MM/AAAA)</param>
@@ -72,15 +83,9 @@ class Charge extends IDisposable {
   /// <param name="logs">(opcional) Logs da Fatura</param>
   /// <param name="custom_variables">(opcional) Variáveis Personalizadas</param>
   /// <param name="payer">Dados do pagador, obrigatórios para boletos registrados</param>
+  /// <param name="customApiToken">Token customizado opcional, mais utilizado em marketplaces</param>
   /// <returns></returns>
 
-  /// <summary>
-  /// Cria uma Fatura para um Cliente
-  /// </summary>
-  /// <param name="invoice"></param>
-  /// <param name="customApiToken">Token customizado opcional, mais utilizado em marketplaces</param>
-  /// <returns>Objeto invoice resultante da requisição</returns>
-  ///
   Future<InvoiceModel> create({
     String email,
     DateTime dueDate,
@@ -99,6 +104,7 @@ class Charge extends IDisposable {
     PayerModel payer,
     bool earlyPaymentDiscount = false,
     List<EarlyPaymentDiscounts> earlyPaymentDiscounts,
+    String customApiToken,
   }) async {
     var invoice = InvoiceRequestMessage(
         email: email,
@@ -119,7 +125,8 @@ class Charge extends IDisposable {
         earlyPaymentDiscounts: earlyPaymentDiscounts,
         payer: payer);
 
-    var retorno = await apiResource.post(data: invoice.toMap());
+    var retorno = await apiResource.post(
+        data: invoice.toMap(), apiUserToken: customApiToken);
     return InvoiceModel.fromMap(retorno);
   }
 
@@ -133,14 +140,14 @@ class Charge extends IDisposable {
     return InvoiceModel.fromMap(retorno);
   }
 
-  Future<InvoiceModel> refund(String id) async {
-    var retorno = await apiResource.post(partOfUrl: "$id/refund");
+  Future<InvoiceModel> refund({String id}) async {
+    var retorno = await apiResource.post(partOfUrl: "/$id/refund");
     return InvoiceModel.fromMap(retorno);
   }
 
   Future<InvoiceModel> cancel({String id, String customApiToken}) async {
     var retorno = await apiResource.put(
-        partOfUrl: "$id/cancel", apiUserToken: customApiToken);
+        partOfUrl: "/$id/cancel", apiUserToken: customApiToken);
     return InvoiceModel.fromMap(retorno);
   }
 
@@ -150,21 +157,15 @@ class Charge extends IDisposable {
   /// <param name="id">Identificador da fatura</param>
   /// <param name="data">Informações da nova fatura</param>
   /// <returns>Objeto invoice resultante da requisição</returns>
-
-  /// <summary>
-  /// Gera segunda via de uma Fatura. Somente faturas pendentes podem ter segunda via gerada. A fatura atual é cancelada e uma nova é gerada com status ‘pending’.
-  /// </summary>
-  /// <param name="id">Identificador da fatura</param>
-  /// <param name="data">Informações da nova fatura</param>
   /// <param name="customApiToken">Token customizado geralmente passado quando está se trabalhando como marketplace</param>
-  /// <returns>Objeto invoice resultante da requisição</returns>
+
   Future<InvoiceModel> duplicate(
       {String id,
       InvoiceDuplicateRequestMessage data,
       String customApiToken}) async {
     var retorno = await apiResource.post(
-        data: data.toMap(),
-        partOfUrl: "$id/duplicate",
+        data: data?.toMap(),
+        partOfUrl: "/$id/duplicate",
         apiUserToken: customApiToken);
     return InvoiceModel.fromMap(retorno);
   }
@@ -174,8 +175,8 @@ class Charge extends IDisposable {
   /// </summary>
   /// <param name="id">Identificador da fatura</param>
   /// <returns>Objeto invoice resultante da requisição</returns>
-  Future<InvoiceModel> capture(String id) async {
-    var retorno = await apiResource.post(partOfUrl: "$id/capture");
+  Future<InvoiceModel> capture({String id}) async {
+    var retorno = await apiResource.post(partOfUrl: "/$id/capture");
     return InvoiceModel.fromMap(retorno);
   }
 
@@ -184,17 +185,12 @@ class Charge extends IDisposable {
   /// </summary>
   /// <param name="id">Identificador da fatura</param>
   /// <returns>Objeto invoice resultante da requisição</returns>
-
-  /// <summary>
-  /// Reenviar fatura para o email do cliente
-  /// </summary>
-  /// <param name="id">Identificador da fatura</param>
   /// <param name="customApiToken">Token customizado geralmente passado quando está se trabalhando como marketplace</param>
-  /// <returns>Objeto invoice resultante da requisição</returns>
+
   Future<InvoiceModel> resendInvoiceMail(
       {String id, String customApiToken}) async {
     var retorno = await apiResource.post(
-        partOfUrl: "$id/send_email", apiUserToken: customApiToken);
+        partOfUrl: "/$id/send_email", apiUserToken: customApiToken);
     return InvoiceModel.fromMap(retorno);
   }
 }

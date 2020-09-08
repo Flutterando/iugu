@@ -27,11 +27,11 @@ abstract class _HomeControllerBase with Store {
     //   ),
     // );
     // print(includeUser);
-    var res = await customer.get();
+    // var res = await customer.get();
 
-    var result = await customer.getById(id: "DD7F0CD3343548BABD97D7E1AB36FE10");
-    print(result);
-    var deleted = await customer.delete(id: "DD7F0CD3343548BABD97D7E1AB36FE10");
+    // var result = await customer.getById(id: "DD7F0CD3343548BABD97D7E1AB36FE10");
+    // print(result);
+    // var deleted = await customer.delete(id: "DD7F0CD3343548BABD97D7E1AB36FE10");
   }
 
   @observable

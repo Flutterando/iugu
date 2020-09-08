@@ -28,3 +28,4 @@ export './infra/models/response/transfers_report_response_message.dart';
 export './ui/iugu_client.dart';
 export './infra/repositories/account.dart';
 export './infra/repositories/customer.dart';
+export './infra/repositories/invoice.dart';

@@ -55,7 +55,7 @@ class APIResource extends IApiResources {
     var url = "$baseURI";
 
     if (partOfUrl != null) {
-      url += '/$partOfUrl';
+      url += '$partOfUrl';
     }
 
     if (id != null) {
@@ -120,7 +120,7 @@ class APIResource extends IApiResources {
     var url = "$baseURI";
 
     if (partOfUrl != null) {
-      url += '/$partOfUrl';
+      url += '$partOfUrl';
     }
 
     var result = await dio.post(url, data: data);

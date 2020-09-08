@@ -18,37 +18,6 @@ class PaggedResponseMessage<T> {
     this.items,
   });
 
-  PaggedResponseMessage<T> copyWith({
-    int totalItems,
-    List<T> items,
-  }) {
-    return PaggedResponseMessage<T>(
-      totalItems: totalItems ?? this.totalItems,
-      items: items ?? this.items,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'totalItems': totalItems,
-      'Items': items,
-    };
-  }
-
-  factory PaggedResponseMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return PaggedResponseMessage<T>(
-      totalItems: map['totalItems'],
-      items: map['Items'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory PaggedResponseMessage.fromJson(String source) =>
-      PaggedResponseMessage.fromMap(json.decode(source));
-
   @override
   String toString() =>
       'PaggedResponseMessage(totalItems: $totalItems, items: $items)';
