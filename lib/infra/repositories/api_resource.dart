@@ -16,7 +16,7 @@ class APIResource extends IApiResources {
         "api_token",
         () => "$apiUserToken",
       );
-      dio.options.headers = queryParameters;
+      dio.options.queryParameters = queryParameters;
     }
 
     var url = '$baseURI';
@@ -49,7 +49,7 @@ class APIResource extends IApiResources {
         "api_token",
         () => "$apiUserToken",
       );
-      dio.options.headers = queryParameters;
+      dio.options.queryParameters = queryParameters;
     }
 
     var url = "$baseURI";
@@ -81,7 +81,7 @@ class APIResource extends IApiResources {
         "api_token",
         () => "$apiUserToken",
       );
-      dio.options.headers = queryParameters;
+      dio.options.queryParameters = queryParameters;
     }
 
     var url = "$baseURI";
@@ -114,7 +114,7 @@ class APIResource extends IApiResources {
         "api_token",
         () => "$apiUserToken",
       );
-      dio.options.headers = queryParameters;
+      dio.options.queryParameters = queryParameters;
     }
 
     var url = "$baseURI";

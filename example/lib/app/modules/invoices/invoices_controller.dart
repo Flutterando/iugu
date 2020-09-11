@@ -94,12 +94,14 @@ abstract class _InvoicesControllerBase with Store {
   void segundaViaFatura(String id, List<Item> invoiceItems) async {
     try {
       var result = await _invoice.duplicate(
-          id: id,
-          data: InvoiceDuplicateRequestMessage(
-              ignoreCanceledEmail: false,
-              ignoreDueEmail: false,
-              invoiceItems: invoiceItems,
-              newDueDate: DateTime.now().add(Duration(days: 5)).toString()));
+        id: id,
+        data: InvoiceDuplicateRequestMessage(
+          ignoreCanceledEmail: false,
+          ignoreDueEmail: false,
+          invoiceItems: invoiceItems,
+          newDueDate: DateTime.now().add(Duration(days: 5)).toString(),
+        ),
+      );
 
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
