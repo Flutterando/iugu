@@ -46,11 +46,11 @@ class Invoice extends IDisposable {
   Future<PaggedResponseMessage<InvoiceModel>> getAll(
       {String customApiToken}) async {
     //  var queryStringFilter = filter?.ToQueryStringUrl();
-    var retorno = await apiResource.getById(
+    var result = await apiResource.getById(
         partOfUrl: "?limit=1000", apiUserToken: customApiToken);
     return PaggedResponseMessage<InvoiceModel>(
-      totalItems: retorno["totalItems"],
-      items: (retorno["items"] as List)
+      totalItems: result["totalItems"],
+      items: (result["items"] as List)
           .map((e) => InvoiceModel.fromMap(e))
           .toList(),
     );
