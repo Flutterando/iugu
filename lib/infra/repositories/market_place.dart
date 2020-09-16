@@ -61,6 +61,15 @@ class MarketPlace extends IDisposable {
     return MarketplaceAccountsResponse.fromMap(result);
   }
 
+  //limit (opcional)	Máximo de registros retornados
+  //start (opcional)	Quantos registros pular do início da pesquisa (muito utilizado para paginação)
+  //created_at_from (opcional)	Registros criados a partir desta data passada no parâmetro
+  //created_at_to (opcional)	Registros criados até esta data passada no parâmetro
+  //query (opcional)	Neste parâmetro pode ser passado um texto para pesquisa
+  //updated_since (opcional)	Registros atualizados desde o valor passado no parâmetro
+  //sortBy (opcional)	Um hash sendo a chave o nome do campo para ordenação e o valor sendo DESC ou ASC para descendente e ascendente, respectivamente
+  //customer_id (opcional)	ID do Cliente
+
   /// <summary>
   /// Listas todas as subcontas dentro de um marketplace com paginação e filtro
   /// </summary>
@@ -68,10 +77,13 @@ class MarketPlace extends IDisposable {
   /// <param name="filter">Opções de filtros e ordenação</param>
   /// <returns></returns>
   Future<PaggedResponseMessage<MarketPlaceAccountItem>>
-      getAllSubAccountsWithLimit({String customApiToken}) async {
+      getAllSubAccountsWithLimit({
+    String filter = "?limit=1000",
+    String customApiToken,
+  }) async {
     //  var queryStringFilter = filter?.ToQueryStringUrl();
     var retorno = await apiResource.getById(
-        partOfUrl: "?limit=1000", apiUserToken: customApiToken);
+        partOfUrl: filter, apiUserToken: customApiToken);
 
     return PaggedResponseMessage<MarketPlaceAccountItem>(
       totalItems: retorno["totalItems"],

@@ -43,11 +43,13 @@ class Invoice extends IDisposable {
   /// <param name="filter">Opções de filtros, para paginação e ordenação</param>
   /// <returns></returns>
   ///Future<PaggedResponseMessage<InvoiceModel>> getAll(String customApiToken, QueryStringFilter filter) async
-  Future<PaggedResponseMessage<InvoiceModel>> getAll(
-      {String customApiToken}) async {
+  Future<PaggedResponseMessage<InvoiceModel>> getAll({
+    String filter = "?limit=1000",
+    String customApiToken,
+  }) async {
     //  var queryStringFilter = filter?.ToQueryStringUrl();
     var result = await apiResource.getById(
-        partOfUrl: "?limit=1000", apiUserToken: customApiToken);
+        partOfUrl: filter, apiUserToken: customApiToken);
     return PaggedResponseMessage<InvoiceModel>(
       totalItems: result["totalItems"],
       items: (result["items"] as List)

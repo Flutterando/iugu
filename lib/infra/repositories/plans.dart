@@ -10,11 +10,21 @@ class Plans extends IDisposable {
   Plans(IuguClient client)
       : apiResource = APIResource(client.properties.dio, "/plans");
 
-  Future<PaggedResponseMessage<PlanModel>> getAll(
-      {String customApiToken}) async {
+  //limit (opcional)	Máximo de registros retornados
+  //start (opcional)	Quantos registros pular do início da pesquisa (muito utilizado para paginação)
+  //created_at_from (opcional)	Registros criados a partir desta data passada no parâmetro
+  //created_at_to (opcional)	Registros criados até esta data passada no parâmetro
+  //query (opcional)	Neste parâmetro pode ser passado um texto para pesquisa
+  //updated_since (opcional)	Registros atualizados desde o valor passado no parâmetro
+  //sortBy (opcional)	Um hash sendo a chave o nome do campo para ordenação e o valor sendo DESC ou ASC para descendente e ascendente, respectivamente
+  //customer_id (opcional)	ID do Cliente
+  Future<PaggedResponseMessage<PlanModel>> getAll({
+    String customApiToken,
+    String filter = "?limit=1000",
+  }) async {
     //  var queryStringFilter = filter?.ToQueryStringUrl();
     var retorno = await apiResource.getById(
-        partOfUrl: "?limit=1000", apiUserToken: customApiToken);
+        partOfUrl: filter, apiUserToken: customApiToken);
 
     return PaggedResponseMessage<PlanModel>(
       totalItems: retorno["totalItems"],
