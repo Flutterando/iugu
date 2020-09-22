@@ -1,8 +1,7 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:iugu/iugu.dart';
 
 import 'invoices_controller.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:dio/dio.dart';
 import 'invoices_page.dart';
 
 class InvoicesModule extends ChildModule {

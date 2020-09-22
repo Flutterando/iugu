@@ -1,4 +1,3 @@
-// TODO: Precisa de refatoração, nomes fora do padrão .Net
 import 'dart:convert';
 
 class Logs {

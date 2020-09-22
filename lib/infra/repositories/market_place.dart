@@ -13,7 +13,7 @@ import 'api_resource.dart';
 class MarketPlace extends IDisposable {
   APIResource apiResource;
 
-  Invoice(IuguClient client) {
+  MarketPlace(IuguClient client) {
     apiResource = APIResource(client.properties.dio, "/marketplace");
   }
 

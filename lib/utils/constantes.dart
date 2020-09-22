@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 /// Forma de pagamento cartão ou boleto
 class PaymentMethod {
   static String ALL = "all";

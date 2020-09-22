@@ -336,7 +336,6 @@ class InvoiceModel {
   }
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class BankSlip {
   String digitableLine;
   String barcodeData;
@@ -402,7 +401,6 @@ class BankSlip {
       digitableLine.hashCode ^ barcodeData.hashCode ^ barcode.hashCode;
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class Item {
   String id;
   String description;
@@ -511,7 +509,6 @@ class Item {
   }
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class Variable {
   String id;
   String variable;
@@ -575,7 +572,6 @@ class Variable {
   int get hashCode => id.hashCode ^ variable.hashCode ^ value.hashCode;
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class InvoiceListModel {
   Facets facets;
   int totalItems;
@@ -641,7 +637,6 @@ class InvoiceListModel {
   int get hashCode => facets.hashCode ^ totalItems.hashCode ^ items.hashCode;
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class Term {
   String term;
   int count;
@@ -695,7 +690,6 @@ class Term {
   int get hashCode => term.hashCode ^ count.hashCode;
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class Status {
   String type;
   int missing;
@@ -780,7 +774,6 @@ class Status {
   }
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class Facets {
   Status status;
 
@@ -828,7 +821,6 @@ class Facets {
   int get hashCode => status.hashCode;
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class EarlyPaymentDiscounts {
   int days;
   String percent;

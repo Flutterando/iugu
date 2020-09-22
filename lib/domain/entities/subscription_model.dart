@@ -487,13 +487,13 @@ class SubscriptionLog {
     String id,
     String description,
     String notes,
-    String created_at,
+    String createdat,
   }) {
     return SubscriptionLog(
       id: id ?? this.id,
       description: description ?? this.description,
       notes: notes ?? this.notes,
-      createdAt: created_at ?? this.createdAt,
+      createdAt: createdat ?? this.createdAt,
     );
   }
 

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net
 class CreditCard {
   /// Número do Cartão de Crédito
   int number;

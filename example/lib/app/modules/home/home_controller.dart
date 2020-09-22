@@ -1,4 +1,3 @@
-import 'package:iugu/domain/entities/customer_model.dart';
 import 'package:iugu/iugu.dart';
 import 'package:mobx/mobx.dart';
 

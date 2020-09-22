@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net
 class Prices {
   /// Moeda do Preço (Somente "BRL" por enquanto)
   String currency;

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net
 class Feature {
   /// Nome da Funcionalidade
   String name;

@@ -77,7 +77,6 @@ class PaymentMethodModel {
   }
 }
 
-// TODO: Precisa de refatoração, nomes fora do padrão .Net, sem documentação também
 class PaymentMethodData {
   String token;
   String displayNumber;
