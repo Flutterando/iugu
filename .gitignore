@@ -30,6 +30,8 @@
 .pub/
 build/
 
+./fvm/flutter_sdk
+
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
