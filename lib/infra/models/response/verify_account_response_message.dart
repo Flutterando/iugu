@@ -52,7 +52,9 @@ class VerifyAccountResponseMessage {
       id: map['id'],
       accountId: map['account_id'],
       data: AccountModel.fromMap(map['data']),
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['created_at']),
+      createdAt: map['created_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['created_at'])
+          : null,
     );
   }
 

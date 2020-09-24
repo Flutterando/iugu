@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:iugu/domain/interfaces/api_resources_interface.dart';
 
@@ -12,7 +14,7 @@ class APIResource extends IApiResources {
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
-      queryParameters.putIfAbsent(
+      queryParameters?.putIfAbsent(
         "api_token",
         () => "$apiUserToken",
       );
@@ -27,13 +29,13 @@ class APIResource extends IApiResources {
 
     var result = await dio.delete(url);
 
-    return result.data;
+    return result.data is String ? json.decode(result.data) : result.data;
   }
 
   @override
   Future<Map<String, dynamic>> get() async {
     var result = await dio.get("$baseURI");
-    return result.data;
+    return result.data is String ? json.decode(result.data) : result.data;
   }
 
   @override
@@ -45,7 +47,7 @@ class APIResource extends IApiResources {
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
-      queryParameters.putIfAbsent(
+      queryParameters?.putIfAbsent(
         "api_token",
         () => "$apiUserToken",
       );
@@ -64,7 +66,7 @@ class APIResource extends IApiResources {
 
     var result = await dio.get(url);
 
-    return result.data;
+    return result.data is String ? json.decode(result.data) : result.data;
   }
 
   @override
@@ -77,7 +79,7 @@ class APIResource extends IApiResources {
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
-      queryParameters.putIfAbsent(
+      queryParameters?.putIfAbsent(
         "api_token",
         () => "$apiUserToken",
       );
@@ -98,7 +100,7 @@ class APIResource extends IApiResources {
       data: data,
     );
 
-    return result.data;
+    return result.data is String ? json.decode(result.data) : result.data;
   }
 
   @override
@@ -110,7 +112,7 @@ class APIResource extends IApiResources {
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
-      queryParameters.putIfAbsent(
+      queryParameters?.putIfAbsent(
         "api_token",
         () => "$apiUserToken",
       );
@@ -125,7 +127,7 @@ class APIResource extends IApiResources {
 
     var result = await dio.post(url, data: data);
 
-    return result.data;
+    return result.data is String ? json.decode(result.data) : result.data;
   }
 
   @override

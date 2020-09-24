@@ -7,6 +7,7 @@ import 'package:example/app/app_widget.dart';
 import 'package:example/app/modules/home/home_module.dart';
 
 import 'modules/invoices/invoices_module.dart';
+import 'modules/tokenizacao/tokenizacao_module.dart';
 
 class AppModule extends MainModule {
   @override
@@ -15,7 +16,7 @@ class AppModule extends MainModule {
         Bind(
           (i) => IuguClient(
             properties: IuguProperties(
-              apiKey: "6d066d71094216d9da6341bdbb4d95ca",
+              apiKey: "d8c80978cd7fe15c9fcf6dc2f4fdd150",
               urlApi: "https://api.iugu.com/v1/",
             ),
           ),
@@ -26,6 +27,7 @@ class AppModule extends MainModule {
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, module: HomeModule()),
         ModularRouter('/invoices', module: InvoicesModule()),
+        ModularRouter('/tokenizacao', module: TokenizacaoModule()),
       ];
 
   @override

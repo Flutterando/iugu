@@ -21,7 +21,7 @@ class Charge extends IDisposable {
   /// <param name="request">Parametros para criar uma cobrança</param>
   /// <param name="customApiToken">Token customizado/param>
   /// <returns>Uma cobrança do tipo boleto</returns>
-  Future<ChargeResponseMessage> createAsync({
+  Future<ChargeResponseMessage> create({
     ChargeRequestMessage request,
     String apiUserToken,
   }) async {

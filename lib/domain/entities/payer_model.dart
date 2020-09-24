@@ -51,7 +51,7 @@ class PayerModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'cpf_or_cnpj': cpfOrCnpj,
+      'cpf_cnpj': cpfOrCnpj,
       'name': name,
       'phone_prefix': phonePrefix,
       'phone': phone,

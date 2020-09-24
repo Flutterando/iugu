@@ -38,10 +38,20 @@ class ChargeRequestMessage {
   /// Necessário caso sua conta necessite de anti fraude ou para informações do boleto
   PayerModel payerCustomer;
 
+  //Se true, restringe o método de pagamento da cobrança para o definido em method, que no caso será apenas bank_slip.
+  bool restrictPaymentMethod;
+
+  ///Define o prazo em dias para o pagamento do boleto. Caso não seja enviado, aplica-se o prazo padrão de 3 dias corridos.
+  int bankSlipExtraDays;
+
+  ///Por padrão, a fatura é cancelada caso haja falha na cobrança, a não ser que este parâmetro seja enviado como "true". Obs: Funcionalidade disponível apenas para faturas criadas no momento da cobrança.
+  bool keepDunning;
+
   ChargeRequestMessage({
     this.method,
     this.token,
     this.customerPaymentMethodId,
+    this.restrictPaymentMethod,
     this.customerId,
     this.invoiceId,
     this.email,
@@ -49,35 +59,27 @@ class ChargeRequestMessage {
     this.discountCents,
     this.invoiceItems,
     this.payerCustomer,
+    this.bankSlipExtraDays,
+    this.keepDunning,
   });
-  ChargeRequestMessage copyWith({
-    String method,
-    String token,
-    String customerPaymentMethodId,
-    String customerId,
-    String invoiceId,
-    String email,
-    int months,
-    int discountCents,
-    List<InvoiceItem> invoiceItems,
-    PayerModel payerCustomer,
-  }) {
-    return ChargeRequestMessage(
-      method: method ?? this.method,
-      token: token ?? this.token,
-      customerPaymentMethodId:
-          customerPaymentMethodId ?? this.customerPaymentMethodId,
-      customerId: customerId ?? this.customerId,
-      invoiceId: invoiceId ?? this.invoiceId,
-      email: email ?? this.email,
-      months: months ?? this.months,
-      discountCents: discountCents ?? this.discountCents,
-      invoiceItems: invoiceItems ?? this.invoiceItems,
-      payerCustomer: payerCustomer ?? this.payerCustomer,
-    );
-  }
 
   Map<String, dynamic> toMap() {
+    if (customerPaymentMethodId == null) {
+      return {
+        'method': method,
+        'customer_id': customerId,
+        'invoice_id': invoiceId,
+        'email': email,
+        'months': months,
+        'discount_cents': discountCents,
+        'items': invoiceItems?.map((x) => x?.toMap())?.toList(),
+        'payer': payerCustomer?.toMap(),
+        'restrict_payment_method': restrictPaymentMethod,
+        'bank_slip_extra_days': bankSlipExtraDays,
+        'keep_dunning': keepDunning,
+      };
+    }
+
     return {
       'method': method,
       'token': token,
@@ -89,6 +91,9 @@ class ChargeRequestMessage {
       'discount_cents': discountCents,
       'items': invoiceItems?.map((x) => x?.toMap())?.toList(),
       'payer': payerCustomer?.toMap(),
+      'restrict_payment_method': restrictPaymentMethod,
+      'bank_slip_extra_days': bankSlipExtraDays,
+      'keep_dunning': keepDunning,
     };
   }
 
@@ -107,6 +112,9 @@ class ChargeRequestMessage {
       invoiceItems: List<InvoiceItem>.from(
           map['items']?.map((x) => InvoiceItem.fromMap(x))),
       payerCustomer: PayerModel.fromMap(map['payer']),
+      restrictPaymentMethod: map['restrict_payment_method'],
+      bankSlipExtraDays: map['bank_slip_extra_days'],
+      keepDunning: map['keep_dunning'],
     );
   }
 

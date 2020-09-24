@@ -151,7 +151,7 @@ class InvoiceRequestMessage {
   Map<String, dynamic> toMap() {
     return {
       'email': email,
-      'dueDate': dueDate,
+      'due_date': dueDate,
       'items': items?.map((x) => x?.toMap())?.toList(),
       'payer': payer?.toMap(),
       'returnUrl': returnUrl,

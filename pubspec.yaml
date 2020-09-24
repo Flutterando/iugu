@@ -11,10 +11,12 @@ environment:
 dependencies:
   dartz: ^0.9.1
   dio: ^3.0.10
+  uuid: 2.2.2
   flutter:
     sdk: flutter
 
 dev_dependencies:
+  mockito: ^4.1.1
   flutter_test:
     sdk: flutter
 

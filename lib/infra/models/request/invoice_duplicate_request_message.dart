@@ -44,7 +44,7 @@ class InvoiceDuplicateRequestMessage {
       'items': invoiceItems?.map((x) => x?.toMap())?.toList(),
       'ignore_due_email': ignoreDueEmail,
       'ignore_canceled_email': ignoreCanceledEmail,
-    };
+    }..removeWhere((key, value) => value == null);
   }
 
   factory InvoiceDuplicateRequestMessage.fromMap(Map<String, dynamic> map) {

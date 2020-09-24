@@ -19,29 +19,16 @@ class ChargeResponseMessage {
   /// Mensagem de resposta
   String message;
 
+  String pdf;
+
   ChargeResponseMessage({
     this.errors,
     this.url,
     this.success,
     this.invoiceId,
     this.message,
+    this.pdf,
   });
-
-  ChargeResponseMessage copyWith({
-    Map<String, Object> errors,
-    String url,
-    bool success,
-    String invoiceId,
-    String message,
-  }) {
-    return ChargeResponseMessage(
-      errors: errors ?? this.errors,
-      url: url ?? this.url,
-      success: success ?? this.success,
-      invoiceId: invoiceId ?? this.invoiceId,
-      message: message ?? this.message,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -50,6 +37,7 @@ class ChargeResponseMessage {
       'success': success,
       'invoice_id': invoiceId,
       'message': message,
+      'pdf': pdf
     };
   }
 
@@ -57,12 +45,14 @@ class ChargeResponseMessage {
     if (map == null) return null;
 
     return ChargeResponseMessage(
-      errors: Map<String, Object>.from(map['errors']),
-      url: map['url'],
-      success: map['success'],
-      invoiceId: map['invoice_id'],
-      message: map['message'],
-    );
+        errors: map['errors'] != null
+            ? Map<String, Object>.from(map['errors'])
+            : null,
+        url: map['url'],
+        success: map['success'],
+        invoiceId: map['invoice_id'],
+        message: map['message'],
+        pdf: map['pdf']);
   }
 
   String toJson() => json.encode(toMap());

@@ -272,20 +272,28 @@ class GetAccountResponseMessage {
     return GetAccountResponseMessage(
       accountId: map['id'],
       name: map['name'],
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['created_at']),
-      updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updated_at']),
+      createdAt: map['created_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['created_at'])
+          : null,
+      updatedAt: map['updated_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['updated_at'])
+          : null,
       canReceive: map['can_receive'],
       isVerified: map['is_verified'],
       lastAccountVerificationRequestStatus:
           map['last_verification_request_status'],
       lastAccountVerificationRequestData:
-          AccountModel.fromMap(map['last_verification_request_data']),
+          map['last_verification_request_data'] == null
+              ? null
+              : AccountModel.fromMap(map['last_verification_request_data']),
       lastAccountVerificationRequestDataFeedback:
           map['last_verification_request_feedback'],
       changePlanType: map['change_plan_type'],
       subscriptionsTrialPeriod: map['subscriptions_trial_period'],
       disableEmails: map['disable_emails'],
-      lastWithdraw: WithdrawModel.fromMap(map['last_withdraw']),
+      lastWithdraw: map['last_withdraw'] == null
+          ? null
+          : WithdrawModel.fromMap(map['last_withdraw']),
       totalSubscriptions: map['total_subscriptions'],
       replyToEmail: map['reply_to'],
       runningInTestMode: map['webapp_on_test_mode'],
@@ -302,8 +310,10 @@ class GetAccountResponseMessage {
       taxesPaidMonth: map['taxes_paid_this_month'],
       clientLogoUrl: map['custom_logo_url'],
       clientSmallLogoUrl: map['custom_logo_small_url'],
-      extraInformations: List<Information>.from(
-          map['informations']?.map((x) => Information.fromMap(x))),
+      extraInformations: map['informations'] == null
+          ? null
+          : List<Information>.from(
+              map['informations']?.map((x) => Information.fromMap(x))),
     );
   }
 

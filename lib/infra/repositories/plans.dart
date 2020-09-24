@@ -43,7 +43,7 @@ class Plans extends IDisposable {
       {String planIdentifier, String customApiToken}) async {
     var result = await apiResource.getById(
         id: null,
-        partOfUrl: "identifier/$planIdentifier",
+        partOfUrl: "/identifier/$planIdentifier",
         apiUserToken: customApiToken);
     return PlanModel.fromMap(result);
   }

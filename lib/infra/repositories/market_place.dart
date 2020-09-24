@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:iugu/domain/interfaces/diposable_interface.dart';
 
 import '../../iugu.dart';
@@ -13,8 +14,8 @@ import 'api_resource.dart';
 class MarketPlace extends IDisposable {
   APIResource apiResource;
 
-  MarketPlace(IuguClient client) {
-    apiResource = APIResource(client.properties.dio, "/marketplace");
+  MarketPlace(IuguClient client, [Dio dio]) {
+    apiResource = APIResource(dio ?? client.properties.dio, "/marketplace");
   }
 
   /// <summary>
@@ -38,7 +39,7 @@ class MarketPlace extends IDisposable {
       {AccountRequestMessage underAccount}) async {
     var result = await apiResource.post(
       data: underAccount.toMap(),
-      partOfUrl: "create_account",
+      partOfUrl: "/create_account",
     );
 
     return AccountResponseMessage.fromMap(result);

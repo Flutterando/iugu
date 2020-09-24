@@ -31,7 +31,7 @@ class Account extends IDisposable {
       String userToken) async {
     var result = await apiResource.post(
         data: accountData.toMap(),
-        partOfUrl: "$accountId/request_verification",
+        partOfUrl: "/$accountId/request_verification",
         apiUserToken: userToken);
     return VerifyAccountResponseMessage.fromMap(result);
   }
@@ -56,7 +56,7 @@ class Account extends IDisposable {
       String targetAccountId, double amount, String customUserApiToken) async {
     var result = await apiResource.post(
       data: {"amount": amount},
-      partOfUrl: "$targetAccountId/request_withdraw",
+      partOfUrl: "/$targetAccountId/request_withdraw",
       apiUserToken: customUserApiToken,
     );
     return AccountRequestWithdrawResponse.fromMap(result);
@@ -78,7 +78,7 @@ class Account extends IDisposable {
         .replaceAll(",", "."));
     var result = await apiResource.post(
         data: {"amount": _convertedValue},
-        partOfUrl: "{$targetAccountId}/request_withdraw",
+        partOfUrl: "/$targetAccountId/request_withdraw",
         apiUserToken: customUserApiToken);
     return AccountRequestWithdrawResponse.fromMap(result);
   }

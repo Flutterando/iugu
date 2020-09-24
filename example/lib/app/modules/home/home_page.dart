@@ -26,6 +26,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               Modular.to.pushNamed("/invoices");
             },
             child: Text("Invoices"),
+          ),
+          RaisedButton(
+            onPressed: () {
+              Modular.to.pushNamed("/tokenizacao");
+            },
+            child: Text("Tokenizacao"),
           )
         ],
       ),
