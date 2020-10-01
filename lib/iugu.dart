@@ -29,3 +29,5 @@ export './ui/iugu_client.dart';
 export './infra/repositories/account.dart';
 export './infra/repositories/customer.dart';
 export './infra/repositories/invoice.dart';
+
+export './utils/utils_iugu.dart';
