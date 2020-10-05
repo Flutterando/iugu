@@ -91,6 +91,45 @@ void main() {
       expect(date.year, equals(invoiceDate.year));
     });
 
+    test('Create_a_valid_invoice_subconta', () async {
+      // Arrange
+      InvoiceModel invoice;
+
+      var earlyPaymentDiscounts = [
+        EarlyPaymentDiscounts(days: 10, percent: "8.2"),
+        EarlyPaymentDiscounts(days: 5, percent: "5")
+      ];
+
+      var invoiceDate = DateTime.now().add(Duration(days: 2));
+
+      var customer = CustomerRequestMessage(
+        email: "anyemailSubConta@email.com",
+        name: "Client Name",
+      );
+
+      // Act
+      var apiInvoice = Invoice(IuguClientData.createClient);
+
+      var invoiceItems = [
+        Item(description: "Mensalidade", priceCents: 65000, quantity: 1)
+      ];
+
+      invoice = await apiInvoice.create(
+          email: "anyemailSubConta@gmail.com.br",
+          dueDate: invoiceDate,
+          items: invoiceItems,
+          payer: _payer,
+          earlyPaymentDiscount: true,
+          earlyPaymentDiscounts: earlyPaymentDiscounts,
+          customApiToken: '658db6aab2c4ec27a54afcb5dc7ce7cc');
+
+      // Assert
+      var date = DateTime.parse(invoice.dueDate);
+      expect(invoice, isNotNull);
+      expect(date.day, equals(invoiceDate.day));
+      expect(date.month, equals(invoiceDate.month));
+      expect(date.year, equals(invoiceDate.year));
+    });
     test('Create_a_new_invoice_and_cancel_after', () async {
       // Arrange
       InvoiceModel invoice;

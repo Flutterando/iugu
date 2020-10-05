@@ -14,10 +14,11 @@ class APIResource extends IApiResources {
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
-      queryParameters?.putIfAbsent(
-        "api_token",
-        () => "$apiUserToken",
-      );
+      if (queryParameters.containsKey("api_token")) {
+        queryParameters?.remove('api_token');
+        queryParameters?.addAll({'api_token': apiUserToken});
+      }
+
       dio.options.queryParameters = queryParameters;
     }
 
@@ -47,10 +48,11 @@ class APIResource extends IApiResources {
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
-      queryParameters?.putIfAbsent(
-        "api_token",
-        () => "$apiUserToken",
-      );
+      if (queryParameters.containsKey("api_token")) {
+        queryParameters?.remove('api_token');
+        queryParameters?.addAll({'api_token': apiUserToken});
+      }
+
       dio.options.queryParameters = queryParameters;
     }
 
@@ -79,10 +81,11 @@ class APIResource extends IApiResources {
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
-      queryParameters?.putIfAbsent(
-        "api_token",
-        () => "$apiUserToken",
-      );
+      if (queryParameters.containsKey("api_token")) {
+        queryParameters?.remove('api_token');
+        queryParameters?.addAll({'api_token': apiUserToken});
+      }
+
       dio.options.queryParameters = queryParameters;
     }
 
@@ -112,10 +115,11 @@ class APIResource extends IApiResources {
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
-      queryParameters?.putIfAbsent(
-        "api_token",
-        () => "$apiUserToken",
-      );
+      if (queryParameters.containsKey("api_token")) {
+        queryParameters?.remove('api_token');
+        queryParameters?.addAll({'api_token': apiUserToken});
+      }
+
       dio.options.queryParameters = queryParameters;
     }
 
