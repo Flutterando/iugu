@@ -107,6 +107,7 @@ class Invoice extends IDisposable {
     bool earlyPaymentDiscount = false,
     List<EarlyPaymentDiscounts> earlyPaymentDiscounts,
     String customApiToken,
+    String paymentMethod = 'bank_slip',
   }) async {
     var invoice = InvoiceRequestMessage(
         email: email,
@@ -125,7 +126,8 @@ class Invoice extends IDisposable {
         notificationUrl: notificationUrl,
         enableEarlyPaymentDiscount: earlyPaymentDiscount,
         earlyPaymentDiscounts: earlyPaymentDiscounts,
-        payer: payer);
+        payer: payer,
+        paymentMethod: paymentMethod);
 
     var retorno = await apiResource.post(
         data: invoice.toMap(), apiUserToken: customApiToken);

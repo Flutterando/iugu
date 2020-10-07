@@ -5,9 +5,10 @@ import 'package:iugu/iugu.dart';
 class PayerModelData {
   static PayerModel createValid() {
     return PayerModel(
-        cpfOrCnpj: "23687237818",
-        address: createValidAddress(),
-        name: 'Vilson Dauinheimer');
+      cpfOrCnpj: "23687237818",
+      address: createValidAddress(),
+      name: 'Vilson Dauinheimer',
+    );
   }
 
   static AddressModel createValidAddress() {

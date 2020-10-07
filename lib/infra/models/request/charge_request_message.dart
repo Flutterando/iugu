@@ -64,23 +64,23 @@ class ChargeRequestMessage {
   });
 
   Map<String, dynamic> toMap() {
-    if (customerPaymentMethodId == null) {
-      return {
-        'method': method,
-        'customer_id': customerId,
-        'invoice_id': invoiceId,
-        'email': email,
-        'months': months,
-        'discount_cents': discountCents,
-        'items': invoiceItems?.map((x) => x?.toMap())?.toList(),
-        'payer': payerCustomer?.toMap(),
-        'restrict_payment_method': restrictPaymentMethod,
-        'bank_slip_extra_days': bankSlipExtraDays,
-        'keep_dunning': keepDunning,
-      };
-    }
+    // if (customerPaymentMethodId == null) {
+    //   return {
+    //     'method': method,
+    //     'customer_id': customerId,
+    //     'invoice_id': invoiceId,
+    //     'email': email,
+    //     'months': months,
+    //     'discount_cents': discountCents,
+    //     'items': invoiceItems?.map((x) => x?.toMap())?.toList(),
+    //     'payer': payerCustomer?.toMap(),
+    //     'restrict_payment_method': restrictPaymentMethod,
+    //     'bank_slip_extra_days': bankSlipExtraDays,
+    //     'keep_dunning': keepDunning,
+    //   };
+    // }
 
-    return {
+    var a = {
       'method': method,
       'token': token,
       'customer_payment_method_id': customerPaymentMethodId,
@@ -94,7 +94,9 @@ class ChargeRequestMessage {
       'restrict_payment_method': restrictPaymentMethod,
       'bank_slip_extra_days': bankSlipExtraDays,
       'keep_dunning': keepDunning,
-    };
+    }..removeWhere((key, value) => value == null);
+
+    return a;
   }
 
   factory ChargeRequestMessage.fromMap(Map<String, dynamic> map) {
