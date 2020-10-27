@@ -72,6 +72,33 @@ class APIResource extends IApiResources {
   }
 
   @override
+  Future<List<dynamic>> getAll({
+    String partOfUrl,
+    String apiUserToken,
+  }) async {
+    Map<String, dynamic> queryParameters = dio.options.queryParameters;
+
+    if (apiUserToken != null && apiUserToken.trim() != "") {
+      if (queryParameters.containsKey("api_token")) {
+        queryParameters?.remove('api_token');
+        queryParameters?.addAll({'api_token': apiUserToken});
+      }
+
+      dio.options.queryParameters = queryParameters;
+    }
+
+    var url = "$baseURI";
+
+    if (partOfUrl != null) {
+      url += '$partOfUrl';
+    }
+
+    var result = await dio.get(url);
+
+    return result.data is String ? json.decode(result.data) : result.data;
+  }
+
+  @override
   Future<Map<String, dynamic>> put({
     String id,
     String partOfUrl,

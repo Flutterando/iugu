@@ -29,6 +29,11 @@ class Charge extends IDisposable {
       data: request.toMap(),
       apiUserToken: apiUserToken,
     );
+
+    if (result.containsKey('errors') && result['errors'].isNotEmpty) {
+      throw Exception(result['errors']);
+    }
+
     return ChargeResponseMessage.fromMap(result);
   }
 }

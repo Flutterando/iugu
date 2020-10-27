@@ -1,5 +1,5 @@
 import 'package:iugu/domain/entities/data_entry/credit_card.dart';
-import 'package:iugu/domain/entities/payment_method_model.dart';
+import 'package:iugu/domain/entities/payment_method_complete_model.dart';
 import 'package:iugu/domain/interfaces/diposable_interface.dart';
 
 import '../../iugu.dart';
@@ -13,9 +13,14 @@ class PaymentMethod extends IDisposable {
       : apiResource = APIResource(
             client.properties.dio, "/customers/$customerId/payment_methods");
 
-  Future<PaymentMethodModel> get({String id}) async {
+  Future<PaymentMethodCompleteModel> get({String id}) async {
     var result = await apiResource.getById(id: id);
-    return PaymentMethodModel.fromMap(result);
+    return PaymentMethodCompleteModel.fromMap(result);
+  }
+
+  Future<List<PaymentMethodCompleteModel>> getAll() async {
+    var result = await apiResource.getAll();
+    return result.map((e) => PaymentMethodCompleteModel.fromMap(e)).toList();
   }
 
   /// <summary>
@@ -26,7 +31,7 @@ class PaymentMethod extends IDisposable {
   /// <param name="set_as_default">(opcional)	Tipo da Forma de Pagamento. Atualmente suportamos apenas Cartão de Crédito (tipo credit_card). Só deve ser enviado caso não envie token.</param>
   /// <param name="token">(opcional)	Token de Pagamento, pode ser utilizado em vez de enviar os dados da forma de pagamento</param>
   /// <param name="item_type">(opcional)	Tipo da Forma de Pagamento. Atualmente suportamos apenas Cartão de Crédito (tipo credit_card). Só deve ser enviado caso não envie token.</param>
-  Future<PaymentMethodModel> create(
+  Future<PaymentMethodCompleteModel> create(
     String description,
     CreditCard data,
     bool setAsDefault,
@@ -37,9 +42,9 @@ class PaymentMethod extends IDisposable {
 
     if (data == null && token != null) {
       paymentmethod = {
-        description: description,
-        setAsDefault: setAsDefault,
-        token: token,
+        'description': description,
+        'setAsDefault': setAsDefault,
+        'token': token,
       };
     } else {
       paymentmethod = {
@@ -52,18 +57,19 @@ class PaymentMethod extends IDisposable {
 
     var result = await apiResource.post(data: paymentmethod);
 
-    return PaymentMethodModel.fromMap(result);
+    return PaymentMethodCompleteModel.fromMap(result);
   }
 
-  Future<PaymentMethodModel> delete(String id) async {
+  Future<PaymentMethodCompleteModel> delete(String id) async {
     var result = await apiResource.delete(id: id);
-    return PaymentMethodModel.fromMap(result);
+    return PaymentMethodCompleteModel.fromMap(result);
   }
 
   //[Obsolete("Sera descontinuado na versão 2.x do client, use a versão assincrona do método")]
-  Future<PaymentMethodModel> put(String id, PaymentMethodModel model) async {
+  Future<PaymentMethodCompleteModel> put(
+      String id, PaymentMethodCompleteModel model) async {
     var result = await apiResource.put(id: id, data: model.toMap());
-    return PaymentMethodModel.fromMap(result);
+    return PaymentMethodCompleteModel.fromMap(result);
   }
 
   void dispose() {}

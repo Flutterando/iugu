@@ -41,6 +41,8 @@ void main() {
       // Arrange
       PaymentTokenResponse paymentTokenResponse;
 
+      // // Act
+
       var paymentRequest = PaymentTokenRequest(
           accountId: "D3652156004B44D9A638232B1EC787B1",
           method: PaymentMethod.CREDIT_CARD,
@@ -59,7 +61,7 @@ void main() {
       var chargeRequest = ChargeRequestMessage(
           // method: PaymentMethod.CREDIT_CARD,
           token: paymentTokenResponse.id,
-          customerId: "D3652156004B44D9A638232B1EC787B1",
+          customerId: "6DD884D094E74F0B9762267EDC7A8FA0",
           email: "anyemail@gmail.com",
           invoiceItems: [
             InvoiceItem(

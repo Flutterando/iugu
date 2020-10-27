@@ -11,6 +11,11 @@ abstract class IApiResources extends IDisposable {
     String apiUserToken,
   });
 
+  Future<dynamic> getAll({
+    String partOfUrl,
+    String apiUserToken,
+  });
+
   Future<dynamic> post({
     Map<String, dynamic> data,
     String partOfUrl,

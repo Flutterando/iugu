@@ -46,7 +46,9 @@ class ChargeResponseMessage {
 
     return ChargeResponseMessage(
         errors: map['errors'] != null
-            ? Map<String, Object>.from(map['errors'])
+            ? map['errors'] is Map
+                ? map['errors']
+                : Map<String, Object>.from(map['errors'])
             : null,
         url: map['url'],
         success: map['success'],
