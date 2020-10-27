@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:iugu/domain/entities/data_entry/custom_variables.dart';
 
 class CustomerRequestMessage {
@@ -119,7 +117,6 @@ class CustomerRequestMessage {
         o.cpfOrCnpj == cpfOrCnpj &&
         o.withCopyEmails == withCopyEmails &&
         o.notes == notes &&
-        listEquals(o.customVariables, customVariables) &&
         o.zipCode == zipCode &&
         o.number == number &&
         o.complement == complement;

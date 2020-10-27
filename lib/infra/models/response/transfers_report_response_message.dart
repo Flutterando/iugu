@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class TransfersReportResponseMessage {
   List<TransferSentInfo> transfersSent;
 
@@ -53,9 +51,7 @@ class TransfersReportResponseMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is TransfersReportResponseMessage &&
-        listEquals(o.transfersSent, transfersSent) &&
-        listEquals(o.transfersReceived, transfersReceived);
+    return o is TransfersReportResponseMessage;
   }
 
   @override

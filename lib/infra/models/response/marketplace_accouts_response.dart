@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class MarketplaceAccountsResponse {
   int totalItems;
 
@@ -52,9 +50,7 @@ class MarketplaceAccountsResponse {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is MarketplaceAccountsResponse &&
-        o.totalItems == totalItems &&
-        listEquals(o.accounts, accounts);
+    return o is MarketplaceAccountsResponse && o.totalItems == totalItems;
   }
 
   @override

@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class FinancialTransactionRequestMessage {
   ///  Variáveis Personalizadas
   List<TransactionsRequest> transactions;
@@ -46,8 +44,7 @@ class FinancialTransactionRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is FinancialTransactionRequestMessage &&
-        listEquals(o.transactions, transactions);
+    return o is FinancialTransactionRequestMessage;
   }
 
   @override

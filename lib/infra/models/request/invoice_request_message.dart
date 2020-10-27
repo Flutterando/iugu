@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:iugu/domain/entities/data_entry/custom_variables.dart';
 import 'package:iugu/domain/entities/data_entry/logs.dart';
 import 'package:iugu/domain/entities/invoice_model.dart';
@@ -223,7 +221,6 @@ class InvoiceRequestMessage {
     return o is InvoiceRequestMessage &&
         o.email == email &&
         o.dueDate == dueDate &&
-        listEquals(o.items, items) &&
         o.payer == payer &&
         o.returnUrl == returnUrl &&
         o.expiredUrl == expiredUrl &&
@@ -238,10 +235,7 @@ class InvoiceRequestMessage {
         o.subscriptionId == subscriptionId &&
         o.paymentMethod == paymentMethod &&
         o.credits == credits &&
-        listEquals(o.logs, logs) &&
-        o.enableEarlyPaymentDiscount == enableEarlyPaymentDiscount &&
-        listEquals(o.earlyPaymentDiscounts, earlyPaymentDiscounts) &&
-        listEquals(o.customVariables, customVariables);
+        o.enableEarlyPaymentDiscount == enableEarlyPaymentDiscount;
   }
 
   @override

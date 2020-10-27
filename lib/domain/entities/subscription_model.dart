@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import 'data_entry/custom_variables.dart';
 
 class SubscriptionModel {
@@ -223,10 +221,7 @@ class SubscriptionModel {
         o.inTrial == inTrial &&
         o.credits == credits &&
         o.creditsBased == creditsBased &&
-        o.recentInvoices == recentInvoices &&
-        listEquals(o.subitems, subitems) &&
-        listEquals(o.logs, logs) &&
-        listEquals(o.customVariables, customVariables);
+        o.recentInvoices == recentInvoices;
   }
 
   @override

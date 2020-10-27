@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class PaggedResponseMessage<T> {
   /// Total de items existentes
   int totalItems;
@@ -24,9 +22,7 @@ class PaggedResponseMessage<T> {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PaggedResponseMessage<T> &&
-        o.totalItems == totalItems &&
-        listEquals(o.items, items);
+    return o is PaggedResponseMessage<T> && o.totalItems == totalItems;
   }
 
   @override

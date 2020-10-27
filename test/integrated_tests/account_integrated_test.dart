@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:iugu/domain/entities/account_model.dart';
 import 'package:iugu/infra/models/response/verify_account_response_message.dart';
 import 'package:iugu/infra/repositories/market_place.dart';

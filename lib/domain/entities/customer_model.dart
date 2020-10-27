@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:iugu/domain/entities/data_entry/custom_variables.dart';
 
 class CustomersModel {
@@ -50,9 +49,7 @@ class CustomersModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is CustomersModel &&
-        o.totalItems == totalItems &&
-        listEquals(o.items, items);
+    return o is CustomersModel && o.totalItems == totalItems;
   }
 
   @override
@@ -171,7 +168,6 @@ class CustomerModel {
         o.notes == notes &&
         o.createdAt == createdAt &&
         o.updatedAt == updatedAt &&
-        listEquals(o.customVariables, customVariables) &&
         o.zipCode == zipCode &&
         o.number == number &&
         o.complement == complement &&

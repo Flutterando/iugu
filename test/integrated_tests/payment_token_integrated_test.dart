@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:iugu/domain/entities/payment_info_model.dart';
 import 'package:iugu/infra/repositories/payment_token.dart';
 import 'package:iugu/iugu.dart';

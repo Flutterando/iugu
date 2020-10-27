@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:iugu/domain/entities/plan_models_list.dart';
 
 class PlanRequestMessage {
@@ -164,9 +162,7 @@ class PlanRequestMessage {
         o.intervalType == intervalType &&
         o.currencyTypeName == currencyTypeName &&
         o.valueInCents == valueInCents &&
-        o.paymentMethod == paymentMethod &&
-        listEquals(o.prices, prices) &&
-        listEquals(o.features, features);
+        o.paymentMethod == paymentMethod;
   }
 
   @override

@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class PlanModelsList {
   int totalItems;
   List<PlanModel> items;
@@ -49,9 +47,7 @@ class PlanModelsList {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PlanModelsList &&
-        o.totalItems == totalItems &&
-        listEquals(o.items, items);
+    return o is PlanModelsList && o.totalItems == totalItems;
   }
 
   @override
@@ -158,9 +154,7 @@ class PlanModel {
         o.interval == interval &&
         o.intervalType == intervalType &&
         o.createdAt == createdAt &&
-        o.updatedAt == updatedAt &&
-        listEquals(o.prices, prices) &&
-        listEquals(o.features, features);
+        o.updatedAt == updatedAt;
   }
 
   @override

@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 import 'data_entry/custom_variables.dart';
 import 'data_entry/logs.dart';
 
@@ -288,12 +285,7 @@ class InvoiceModel {
         o.refundable == refundable &&
         o.installments == installments &&
         o.bankSlip == bankSlip &&
-        listEquals(o.items, items) &&
-        listEquals(o.variables, variables) &&
-        listEquals(o.customVariables, customVariables) &&
-        o.earlyPaymentDiscount == earlyPaymentDiscount &&
-        listEquals(o.earlyPaymentDiscounts, earlyPaymentDiscounts) &&
-        listEquals(o.logs, logs);
+        o.earlyPaymentDiscount == earlyPaymentDiscount;
   }
 
   @override
@@ -629,8 +621,7 @@ class InvoiceListModel {
 
     return o is InvoiceListModel &&
         o.facets == facets &&
-        o.totalItems == totalItems &&
-        listEquals(o.items, items);
+        o.totalItems == totalItems;
   }
 
   @override
@@ -760,8 +751,7 @@ class Status {
         o.type == type &&
         o.missing == missing &&
         o.total == total &&
-        o.other == other &&
-        listEquals(o.terms, terms);
+        o.other == other;
   }
 
   @override

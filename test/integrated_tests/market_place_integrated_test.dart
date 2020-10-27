@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:iugu/infra/repositories/market_place.dart';
 import 'package:iugu/iugu.dart';
 import 'package:mockito/mockito.dart';

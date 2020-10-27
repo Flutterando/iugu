@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 import 'package:iugu/domain/entities/invoice_model.dart';
 
 class InvoiceDuplicateRequestMessage {
@@ -74,7 +71,6 @@ class InvoiceDuplicateRequestMessage {
 
     return o is InvoiceDuplicateRequestMessage &&
         o.newDueDate == newDueDate &&
-        listEquals(o.invoiceItems, invoiceItems) &&
         o.ignoreDueEmail == ignoreDueEmail &&
         o.ignoreCanceledEmail == ignoreCanceledEmail;
   }

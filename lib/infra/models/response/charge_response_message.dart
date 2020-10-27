@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 /// Representa a resposta da API para uma requisição de cobrança direta
 class ChargeResponseMessage {
   /// Erros
@@ -72,7 +70,6 @@ class ChargeResponseMessage {
     if (identical(this, o)) return true;
 
     return o is ChargeResponseMessage &&
-        mapEquals(o.errors, errors) &&
         o.url == url &&
         o.success == success &&
         o.invoiceId == invoiceId &&

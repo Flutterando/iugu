@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:iugu/domain/entities/data_entry/custom_variables.dart';
 import 'package:iugu/domain/entities/subscription_model.dart';
 
@@ -142,9 +140,7 @@ class SubscriptionRequestMessage {
         o.isCreditBased == isCreditBased &&
         o.priceCents == priceCents &&
         o.creditsCycle == creditsCycle &&
-        o.creditsMin == creditsMin &&
-        listEquals(o.subitems, subitems) &&
-        listEquals(o.customVariables, customVariables);
+        o.creditsMin == creditsMin;
   }
 
   @override

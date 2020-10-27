@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:iugu/domain/entities/invoice_item.dart';
 import 'package:iugu/domain/entities/payer_model.dart';
 
@@ -143,7 +141,6 @@ class ChargeRequestMessage {
         o.email == email &&
         o.months == months &&
         o.discountCents == discountCents &&
-        listEquals(o.invoiceItems, invoiceItems) &&
         o.payerCustomer == payerCustomer;
   }
 

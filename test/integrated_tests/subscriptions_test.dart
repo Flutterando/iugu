@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:iugu/domain/entities/customer_model.dart';
 import 'package:iugu/domain/entities/plan_models_list.dart';
 import 'package:iugu/domain/entities/subscription_model.dart';

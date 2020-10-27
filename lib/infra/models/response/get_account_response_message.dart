@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 import 'package:iugu/domain/entities/account_model.dart';
 
 class GetAccountResponseMessage {
@@ -363,8 +360,7 @@ class GetAccountResponseMessage {
         o.taxesPaidLastMonth == taxesPaidLastMonth &&
         o.taxesPaidMonth == taxesPaidMonth &&
         o.clientLogoUrl == clientLogoUrl &&
-        o.clientSmallLogoUrl == clientSmallLogoUrl &&
-        listEquals(o.extraInformations, extraInformations);
+        o.clientSmallLogoUrl == clientSmallLogoUrl;
   }
 
   @override

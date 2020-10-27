@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class FinancialTransactionResponse {
   String totalItems;
 
@@ -69,8 +67,6 @@ class FinancialTransactionResponse {
 
     return o is FinancialTransactionResponse &&
         o.totalItems == totalItems &&
-        listEquals(o.items, items) &&
-        listEquals(o.transactions, transactions) &&
         o.total == total;
   }
 
