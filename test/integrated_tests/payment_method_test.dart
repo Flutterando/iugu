@@ -46,7 +46,7 @@ void main() {
     test('Create_recover_payment_methods', () async {
       // Arrange
       var paymentMethod = PaymentMethod(
-          IuguClientData.createClient, '6DD884D094E74F0B9762267EDC7A8FA0');
+          IuguClientData.createClient, '385770B5795E4603A395DA9F2DE7AA05');
 
       var paymentMethods = await paymentMethod.getAll();
       // Assert

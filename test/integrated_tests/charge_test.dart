@@ -13,9 +13,10 @@ void main() {
     test('valid bank_slip', () async {
       // Arrange
       var chargeRequest = new ChargeRequestMessage(
-          method: PaymentMethod.BANK_SLIP,
-          customerId: "D3652156004B44D9A638232B1EC787B1",
-          email: "anyemail@gmail.com",
+          //method: PaymentMethod.CREDIT_CARD,
+          customerPaymentMethodId: 'BA491E7DB6F448818D1266A10B6BAB3C',
+          //   customerId: "6DD884D094E74F0B9762267EDC7A8FA0",
+          email: "bwolfnoob@gmail.com",
           invoiceItems: [
             InvoiceItem(
               description: "Mensalidade",
@@ -30,7 +31,10 @@ void main() {
       // Act
       var apiClient = Charge(IuguClientData.createClient);
 
-      chargeTokenResponse = await apiClient.create(request: chargeRequest);
+      chargeTokenResponse = await apiClient.create(
+        request: chargeRequest,
+        apiUserToken: '8f3e08bec02d75b455ce3c3816b9ec23',
+      );
 
       // Assert
       expect(chargeTokenResponse.success, true);
@@ -40,9 +44,7 @@ void main() {
     test('valid credit_cart_token', () async {
       // Arrange
       PaymentTokenResponse paymentTokenResponse;
-
       // // Act
-
       var paymentRequest = PaymentTokenRequest(
           accountId: "D3652156004B44D9A638232B1EC787B1",
           method: PaymentMethod.CREDIT_CARD,

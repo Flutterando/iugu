@@ -205,5 +205,19 @@ void main() {
       // Assert
       expect(invoice, isNotNull);
     });
+
+    test('list_invoices', () async {
+      // Act
+      var apiInvoice = Invoice(IuguClientData.createClient);
+
+      var radomPlan = Uuid().v1();
+
+      var invoice = await apiInvoice.getById(
+        id: 'A78901420BE74ACDBAB185D34FD7F0EF',
+      );
+
+      // Assert
+      expect(invoice, isNotNull);
+    });
   });
 }
