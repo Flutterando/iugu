@@ -11,15 +11,17 @@ class APIResource extends IApiResources {
 
   @override
   Future<Map<String, dynamic>> delete({String id, String apiUserToken}) async {
+    Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
       if (queryParameters.containsKey("api_token")) {
+        _dio = copyDio(dio.options);
         queryParameters?.remove('api_token');
         queryParameters?.addAll({'api_token': apiUserToken});
       }
 
-      dio.options.queryParameters = queryParameters;
+      _dio.options.queryParameters = queryParameters;
     }
 
     var url = '$baseURI';
@@ -28,7 +30,7 @@ class APIResource extends IApiResources {
       url += "/$id";
     }
 
-    var result = await dio.delete(url);
+    var result = await _dio.delete(url);
 
     return result.data is String ? json.decode(result.data) : result.data;
   }
@@ -45,15 +47,17 @@ class APIResource extends IApiResources {
     String partOfUrl,
     String apiUserToken,
   }) async {
+    Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
       if (queryParameters.containsKey("api_token")) {
+        _dio = copyDio(dio.options);
         queryParameters?.remove('api_token');
         queryParameters?.addAll({'api_token': apiUserToken});
       }
 
-      dio.options.queryParameters = queryParameters;
+      _dio.options.queryParameters = queryParameters;
     }
 
     var url = "$baseURI";
@@ -66,7 +70,7 @@ class APIResource extends IApiResources {
       url += "/$id";
     }
 
-    var result = await dio.get(url);
+    var result = await _dio.get(url);
 
     return result.data is String ? json.decode(result.data) : result.data;
   }
@@ -76,15 +80,18 @@ class APIResource extends IApiResources {
     String partOfUrl,
     String apiUserToken,
   }) async {
+    Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
       if (queryParameters.containsKey("api_token")) {
+        _dio = copyDio(dio.options);
+
         queryParameters?.remove('api_token');
         queryParameters?.addAll({'api_token': apiUserToken});
       }
 
-      dio.options.queryParameters = queryParameters;
+      _dio.options.queryParameters = queryParameters;
     }
 
     var url = "$baseURI";
@@ -93,7 +100,7 @@ class APIResource extends IApiResources {
       url += '$partOfUrl';
     }
 
-    var result = await dio.get(url);
+    var result = await _dio.get(url);
 
     return result.data is String ? json.decode(result.data) : result.data;
   }
@@ -105,15 +112,18 @@ class APIResource extends IApiResources {
     Map<String, dynamic> data,
     String apiUserToken,
   }) async {
+    Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
     if (apiUserToken != null && apiUserToken.trim() != "") {
       if (queryParameters.containsKey("api_token")) {
+        _dio = copyDio(dio.options);
+
         queryParameters?.remove('api_token');
         queryParameters?.addAll({'api_token': apiUserToken});
       }
 
-      dio.options.queryParameters = queryParameters;
+      _dio.options.queryParameters = queryParameters;
     }
 
     var url = "$baseURI";
@@ -125,7 +135,7 @@ class APIResource extends IApiResources {
       url += "/$id";
     }
 
-    var result = await dio.put(
+    var result = await _dio.put(
       "$url",
       data: data,
     );
@@ -139,31 +149,14 @@ class APIResource extends IApiResources {
     String partOfUrl,
     String apiUserToken,
   }) async {
+    Dio _dio = dio;
     Map<String, dynamic> queryParameters =
         dio.options.queryParameters.map((key, value) => MapEntry(key, value));
 
-    var opt = dio.options;
-    Dio _dio = Dio(BaseOptions(
-      baseUrl: opt.baseUrl,
-      extra: opt.extra,
-      headers: opt.headers,
-      contentType: opt.contentType,
-      connectTimeout: opt.connectTimeout,
-      followRedirects: opt.followRedirects,
-      maxRedirects: opt.maxRedirects,
-      method: opt.method,
-      queryParameters: queryParameters,
-      receiveDataWhenStatusError: opt.receiveDataWhenStatusError,
-      receiveTimeout: opt.receiveTimeout,
-      requestEncoder: opt.requestEncoder,
-      responseDecoder: opt.responseDecoder,
-      responseType: opt.responseType,
-      sendTimeout: opt.sendTimeout,
-      validateStatus: opt.validateStatus,
-    ));
-
     if (apiUserToken != null && apiUserToken.trim() != "") {
       if (queryParameters.containsKey("api_token")) {
+        _dio = copyDio(dio.options);
+
         queryParameters?.remove('api_token');
         queryParameters?.addAll({'api_token': apiUserToken});
       }
@@ -180,6 +173,26 @@ class APIResource extends IApiResources {
     var result = await _dio.post(url, data: data);
 
     return result.data is String ? json.decode(result.data) : result.data;
+  }
+
+  Dio copyDio(opt) {
+    return Dio(BaseOptions(
+      baseUrl: opt.baseUrl,
+      extra: opt.extra,
+      headers: opt.headers,
+      contentType: opt.contentType,
+      connectTimeout: opt.connectTimeout,
+      followRedirects: opt.followRedirects,
+      maxRedirects: opt.maxRedirects,
+      method: opt.method,
+      receiveDataWhenStatusError: opt.receiveDataWhenStatusError,
+      receiveTimeout: opt.receiveTimeout,
+      requestEncoder: opt.requestEncoder,
+      responseDecoder: opt.responseDecoder,
+      responseType: opt.responseType,
+      sendTimeout: opt.sendTimeout,
+      validateStatus: opt.validateStatus,
+    ));
   }
 
   @override

@@ -79,6 +79,11 @@ void main() {
       // Act
 
       var apiCharge = Charge(IuguClientData.createClient);
+      // try {
+      //   chargeTokenResponse = await apiCharge.create(
+      //       request: chargeRequest,
+      //       apiUserToken: '3d000baf7565027456e5402c9fa1ac64');
+      // } catch (e) {}
 
       chargeTokenResponse = await apiCharge.create(request: chargeRequest);
 
