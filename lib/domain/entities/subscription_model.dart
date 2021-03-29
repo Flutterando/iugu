@@ -4,34 +4,34 @@ import 'data_entry/custom_variables.dart';
 
 class SubscriptionModel {
   String id;
-  bool suspended;
-  String planIdentifier;
-  int priceCents;
-  String currency;
-  SubscriptionFeatures features;
-  Object expiresAt;
-  String createdAt;
-  String updatedAt;
-  String customerName;
-  String customerEmail;
-  Object cycledAt;
-  int creditsMin;
-  Object creditsCycle;
-  String customerId;
-  String planName;
-  String customerRef;
-  String planRef;
-  bool active;
-  Object inTrial;
-  int credits;
-  bool creditsBased;
-  Object recentInvoices;
-  List<SubscriptionSubitem> subitems;
-  List<SubscriptionLog> logs;
-  List<CustomVariables> customVariables;
+  bool? suspended;
+  String? planIdentifier;
+  int? priceCents;
+  String? currency;
+  SubscriptionFeatures? features;
+  Object? expiresAt;
+  String? createdAt;
+  String? updatedAt;
+  String? customerName;
+  String? customerEmail;
+  Object? cycledAt;
+  int? creditsMin;
+  Object? creditsCycle;
+  String? customerId;
+  String? planName;
+  String? customerRef;
+  String? planRef;
+  bool? active;
+  Object? inTrial;
+  int? credits;
+  bool? creditsBased;
+  Object? recentInvoices;
+  List<SubscriptionSubitem>? subitems;
+  List<SubscriptionLog>? logs;
+  List<CustomVariables>? customVariables;
 
   SubscriptionModel({
-    this.id,
+    required this.id,
     this.suspended,
     this.planIdentifier,
     this.priceCents,
@@ -60,32 +60,32 @@ class SubscriptionModel {
   });
 
   SubscriptionModel copyWith({
-    String id,
-    bool suspended,
-    String planIdentifier,
-    int priceCents,
-    String currency,
-    SubscriptionFeatures features,
-    Object expiresAt,
-    String createdAt,
-    String updatedAt,
-    String customerName,
-    String customerEmail,
-    Object cycledAt,
-    int creditsMin,
-    Object creditsCycle,
-    String customerId,
-    String planName,
-    String customerRef,
-    String planRef,
-    bool active,
-    Object inTrial,
-    int credits,
-    bool creditsBased,
-    Object recentInvoices,
-    List<SubscriptionSubitem> subitems,
-    List<SubscriptionLog> logs,
-    List<CustomVariables> customVariables,
+    String? id,
+    bool? suspended,
+    String? planIdentifier,
+    int? priceCents,
+    String? currency,
+    SubscriptionFeatures? features,
+    Object? expiresAt,
+    String? createdAt,
+    String? updatedAt,
+    String? customerName,
+    String? customerEmail,
+    Object? cycledAt,
+    int? creditsMin,
+    Object? creditsCycle,
+    String? customerId,
+    String? planName,
+    String? customerRef,
+    String? planRef,
+    bool? active,
+    Object? inTrial,
+    int? credits,
+    bool? creditsBased,
+    Object? recentInvoices,
+    List<SubscriptionSubitem>? subitems,
+    List<SubscriptionLog>? logs,
+    List<CustomVariables>? customVariables,
   }) {
     return SubscriptionModel(
       id: id ?? this.id,
@@ -142,15 +142,13 @@ class SubscriptionModel {
       'credits': credits,
       'credits_based': creditsBased,
       'recent_invoices': recentInvoices,
-      'subitems': subitems?.map((x) => x?.toMap())?.toList(),
-      'logs': logs?.map((x) => x?.toMap())?.toList(),
-      'custom_variables': customVariables?.map((x) => x?.toMap())?.toList(),
+      'subitems': subitems?.map((x) => x.toMap()).toList(),
+      'logs': logs?.map((x) => x.toMap()).toList(),
+      'custom_variables': customVariables?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory SubscriptionModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return SubscriptionModel(
       id: map['id'],
       suspended: map['suspended'],
@@ -175,19 +173,15 @@ class SubscriptionModel {
       credits: map['credits'],
       creditsBased: map['credits_based'],
       recentInvoices: map['recent_invoices'],
-      subitems: List<SubscriptionSubitem>.from(
-          map['subitems']?.map((x) => SubscriptionSubitem.fromMap(x))),
-      logs: List<SubscriptionLog>.from(
-          map['logs']?.map((x) => SubscriptionLog.fromMap(x))),
-      customVariables: List<CustomVariables>.from(
-          map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
+      subitems: List<SubscriptionSubitem>.from(map['subitems']?.map((x) => SubscriptionSubitem.fromMap(x))),
+      logs: List<SubscriptionLog>.from(map['logs']?.map((x) => SubscriptionLog.fromMap(x))),
+      customVariables: List<CustomVariables>.from(map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SubscriptionModel.fromJson(String source) =>
-      SubscriptionModel.fromMap(json.decode(source));
+  factory SubscriptionModel.fromJson(String source) => SubscriptionModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -198,66 +192,18 @@ class SubscriptionModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is SubscriptionModel &&
-        o.id == id &&
-        o.suspended == suspended &&
-        o.planIdentifier == planIdentifier &&
-        o.priceCents == priceCents &&
-        o.currency == currency &&
-        o.features == features &&
-        o.expiresAt == expiresAt &&
-        o.createdAt == createdAt &&
-        o.updatedAt == updatedAt &&
-        o.customerName == customerName &&
-        o.customerEmail == customerEmail &&
-        o.cycledAt == cycledAt &&
-        o.creditsMin == creditsMin &&
-        o.creditsCycle == creditsCycle &&
-        o.customerId == customerId &&
-        o.planName == planName &&
-        o.customerRef == customerRef &&
-        o.planRef == planRef &&
-        o.active == active &&
-        o.inTrial == inTrial &&
-        o.credits == credits &&
-        o.creditsBased == creditsBased &&
-        o.recentInvoices == recentInvoices;
+    return o is SubscriptionModel && o.id == id && o.suspended == suspended && o.planIdentifier == planIdentifier && o.priceCents == priceCents && o.currency == currency && o.features == features && o.expiresAt == expiresAt && o.createdAt == createdAt && o.updatedAt == updatedAt && o.customerName == customerName && o.customerEmail == customerEmail && o.cycledAt == cycledAt && o.creditsMin == creditsMin && o.creditsCycle == creditsCycle && o.customerId == customerId && o.planName == planName && o.customerRef == customerRef && o.planRef == planRef && o.active == active && o.inTrial == inTrial && o.credits == credits && o.creditsBased == creditsBased && o.recentInvoices == recentInvoices;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        suspended.hashCode ^
-        planIdentifier.hashCode ^
-        priceCents.hashCode ^
-        currency.hashCode ^
-        features.hashCode ^
-        expiresAt.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode ^
-        customerName.hashCode ^
-        customerEmail.hashCode ^
-        cycledAt.hashCode ^
-        creditsMin.hashCode ^
-        creditsCycle.hashCode ^
-        customerId.hashCode ^
-        planName.hashCode ^
-        customerRef.hashCode ^
-        planRef.hashCode ^
-        active.hashCode ^
-        inTrial.hashCode ^
-        credits.hashCode ^
-        creditsBased.hashCode ^
-        recentInvoices.hashCode ^
-        subitems.hashCode ^
-        logs.hashCode ^
-        customVariables.hashCode;
+    return id.hashCode ^ suspended.hashCode ^ planIdentifier.hashCode ^ priceCents.hashCode ^ currency.hashCode ^ features.hashCode ^ expiresAt.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode ^ customerName.hashCode ^ customerEmail.hashCode ^ cycledAt.hashCode ^ creditsMin.hashCode ^ creditsCycle.hashCode ^ customerId.hashCode ^ planName.hashCode ^ customerRef.hashCode ^ planRef.hashCode ^ active.hashCode ^ inTrial.hashCode ^ credits.hashCode ^ creditsBased.hashCode ^ recentInvoices.hashCode ^ subitems.hashCode ^ logs.hashCode ^ customVariables.hashCode;
   }
 }
 
 class Feat {
-  String name;
-  int value;
+  String? name;
+  int? value;
 
   Feat({
     this.name,
@@ -265,8 +211,8 @@ class Feat {
   });
 
   Feat copyWith({
-    String name,
-    int value,
+    String? name,
+    int? value,
   }) {
     return Feat(
       name: name ?? this.name,
@@ -282,8 +228,6 @@ class Feat {
   }
 
   factory Feat.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Feat(
       name: map['name'],
       value: map['value'],
@@ -309,14 +253,14 @@ class Feat {
 }
 
 class SubscriptionFeatures {
-  Feat feat;
+  Feat? feat;
 
   SubscriptionFeatures({
     this.feat,
   });
 
   SubscriptionFeatures copyWith({
-    Feat feat,
+    Feat? feat,
   }) {
     return SubscriptionFeatures(
       feat: feat ?? this.feat,
@@ -330,17 +274,14 @@ class SubscriptionFeatures {
   }
 
   factory SubscriptionFeatures.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return SubscriptionFeatures(
-      feat: Feat.fromMap(map['feat']),
+      feat: (map.isNotEmpty && (map['feat'] as Map).isNotEmpty) ? Feat.fromMap(map['feat']) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SubscriptionFeatures.fromJson(String source) =>
-      SubscriptionFeatures.fromMap(json.decode(source));
+  factory SubscriptionFeatures.fromJson(String source) => SubscriptionFeatures.fromMap(json.decode(source));
 
   @override
   String toString() => 'SubscriptionFeatures(feat: $feat)';
@@ -357,14 +298,14 @@ class SubscriptionFeatures {
 }
 
 class SubscriptionSubitem {
-  String id;
-  String description;
-  int quantity;
-  int priceCents;
-  String price;
-  String total;
-  bool recurrent;
-  bool destroy;
+  String? id;
+  String? description;
+  int? quantity;
+  int? priceCents;
+  String? price;
+  String? total;
+  bool? recurrent;
+  bool? destroy;
 
   SubscriptionSubitem({
     this.id,
@@ -378,14 +319,14 @@ class SubscriptionSubitem {
   });
 
   SubscriptionSubitem copyWith({
-    String id,
-    String description,
-    int quantity,
-    int priceCents,
-    String price,
-    String total,
-    bool recurrent,
-    bool destroy,
+    String? id,
+    String? description,
+    int? quantity,
+    int? priceCents,
+    String? price,
+    String? total,
+    bool? recurrent,
+    bool? destroy,
   }) {
     return SubscriptionSubitem(
       id: id ?? this.id,
@@ -413,8 +354,6 @@ class SubscriptionSubitem {
   }
 
   factory SubscriptionSubitem.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return SubscriptionSubitem(
       id: map['id'],
       description: map['description'],
@@ -429,8 +368,7 @@ class SubscriptionSubitem {
 
   String toJson() => json.encode(toMap());
 
-  factory SubscriptionSubitem.fromJson(String source) =>
-      SubscriptionSubitem.fromMap(json.decode(source));
+  factory SubscriptionSubitem.fromJson(String source) => SubscriptionSubitem.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -441,35 +379,20 @@ class SubscriptionSubitem {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is SubscriptionSubitem &&
-        o.id == id &&
-        o.description == description &&
-        o.quantity == quantity &&
-        o.priceCents == priceCents &&
-        o.price == price &&
-        o.total == total &&
-        o.recurrent == recurrent &&
-        o.destroy == destroy;
+    return o is SubscriptionSubitem && o.id == id && o.description == description && o.quantity == quantity && o.priceCents == priceCents && o.price == price && o.total == total && o.recurrent == recurrent && o.destroy == destroy;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        description.hashCode ^
-        quantity.hashCode ^
-        priceCents.hashCode ^
-        price.hashCode ^
-        total.hashCode ^
-        recurrent.hashCode ^
-        destroy.hashCode;
+    return id.hashCode ^ description.hashCode ^ quantity.hashCode ^ priceCents.hashCode ^ price.hashCode ^ total.hashCode ^ recurrent.hashCode ^ destroy.hashCode;
   }
 }
 
 class SubscriptionLog {
-  String id;
-  String description;
-  String notes;
-  String createdAt;
+  String? id;
+  String? description;
+  String? notes;
+  String? createdAt;
 
   SubscriptionLog({
     this.id,
@@ -479,10 +402,10 @@ class SubscriptionLog {
   });
 
   SubscriptionLog copyWith({
-    String id,
-    String description,
-    String notes,
-    String createdat,
+    String? id,
+    String? description,
+    String? notes,
+    String? createdat,
   }) {
     return SubscriptionLog(
       id: id ?? this.id,
@@ -502,8 +425,6 @@ class SubscriptionLog {
   }
 
   factory SubscriptionLog.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return SubscriptionLog(
       id: map['id'],
       description: map['description'],
@@ -514,8 +435,7 @@ class SubscriptionLog {
 
   String toJson() => json.encode(toMap());
 
-  factory SubscriptionLog.fromJson(String source) =>
-      SubscriptionLog.fromMap(json.decode(source));
+  factory SubscriptionLog.fromJson(String source) => SubscriptionLog.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -526,18 +446,11 @@ class SubscriptionLog {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is SubscriptionLog &&
-        o.id == id &&
-        o.description == description &&
-        o.notes == notes &&
-        o.createdAt == createdAt;
+    return o is SubscriptionLog && o.id == id && o.description == description && o.notes == notes && o.createdAt == createdAt;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        description.hashCode ^
-        notes.hashCode ^
-        createdAt.hashCode;
+    return id.hashCode ^ description.hashCode ^ notes.hashCode ^ createdAt.hashCode;
   }
 }

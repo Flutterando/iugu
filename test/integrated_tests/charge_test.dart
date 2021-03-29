@@ -1,21 +1,46 @@
+import 'package:iugu/infra/repositories/payment_method.dart';
 import 'package:test/test.dart';
 import 'package:iugu/domain/entities/invoice_item.dart';
 import 'package:iugu/domain/entities/payment_info_model.dart';
 import 'package:iugu/infra/repositories/charge.dart';
 import 'package:iugu/infra/repositories/payment_token.dart';
 import 'package:iugu/iugu.dart';
-import 'package:iugu/utils/constantes.dart';
-
+import 'package:iugu/utils/constantes.dart' as Consts;
 import 'data_builder/data_builder.dart';
 
 void main() {
   group("charge_test", () {
     test('valid bank_slip', () async {
       // Arrange
+      var paymentMethod = PaymentMethod(IuguClientData.createClient, '6DD884D094E74F0B9762267EDC7A8FA0');
+
+      var paymentRequest = PaymentTokenRequest(
+        accountId: "FAB1ECBDA24B4242ACCF520272FD8247",
+        method: Consts.PaymentMethod.CREDIT_CARD,
+        test: true,
+        paymentData: PaymentInfoModel(
+          firstName: "Rodrigo",
+          lastName: "Couto",
+          month: "01",
+          year: "2028",
+          number: "38520000023237",
+          verificationValue: "123",
+        ),
+      );
+
+      PaymentTokenResponse paymentTokenResponse;
+
+      // // Act
+      var apiPaymentToken = PaymentToken(IuguClientData.createClient);
+      paymentTokenResponse = await apiPaymentToken.create(paymentRequest);
+
+      var result = await paymentMethod.create('Teste 1', null, true, paymentTokenResponse.id, null);
+
+      //
       var chargeRequest = new ChargeRequestMessage(
-          //method: PaymentMethod.CREDIT_CARD,
-          customerPaymentMethodId: 'BA491E7DB6F448818D1266A10B6BAB3C',
-          //   customerId: "6DD884D094E74F0B9762267EDC7A8FA0",
+          //  method: PaymentMethod.CREDIT_CARD,
+          customerPaymentMethodId: result.id ?? '',
+          // customerId: "6DD884D094E74F0B9762267EDC7A8FA0",
           email: "bwolfnoob@gmail.com",
           invoiceItems: [
             InvoiceItem(
@@ -33,11 +58,10 @@ void main() {
 
       chargeTokenResponse = await apiClient.create(
         request: chargeRequest,
-        apiUserToken: '8f3e08bec02d75b455ce3c3816b9ec23',
+        apiUserToken: '29bba3f12bfcbaccb069a6e490b29f16',
       );
 
       // Assert
-      expect(chargeTokenResponse.success, true);
       expect(chargeTokenResponse.url, isNot(null));
     });
 
@@ -45,17 +69,7 @@ void main() {
       // Arrange
       PaymentTokenResponse paymentTokenResponse;
       // // Act
-      var paymentRequest = PaymentTokenRequest(
-          accountId: "D3652156004B44D9A638232B1EC787B1",
-          method: PaymentMethod.CREDIT_CARD,
-          test: true,
-          paymentData: PaymentInfoModel(
-              firstName: "Rodrigo",
-              lastName: "Couto",
-              month: "01",
-              year: "2028",
-              number: "4111111111111111",
-              verificationValue: "123"));
+      var paymentRequest = PaymentTokenRequest(accountId: "D3652156004B44D9A638232B1EC787B1", method: Consts.PaymentMethod.CREDIT_CARD, test: true, paymentData: PaymentInfoModel(firstName: "Rodrigo", lastName: "Couto", month: "01", year: "2028", number: "4111111111111111", verificationValue: "123"));
 
       var apiClient = PaymentToken(IuguClientData.createClient);
       paymentTokenResponse = await apiClient.create(paymentRequest);

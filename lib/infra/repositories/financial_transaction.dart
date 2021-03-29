@@ -6,11 +6,10 @@ import 'api_resource.dart';
 /// Cobrança Direta
 /// Podemos efetuar uma cobrança direta de um valor, utilizando um token de cartão de crédito, uma forma de pagamento de cliente ou gerando um boleto bancário.
 class FinancialTransaction extends IDisposable {
-  APIResource apiResource;
+  late APIResource apiResource;
 
   FinancialTransaction(IuguClient client) {
-    apiResource =
-        APIResource(client.properties.dio, "/financial_transaction_requests");
+    apiResource = APIResource(client.properties.dio, "/financial_transaction_requests");
   }
 
   @override
@@ -30,20 +29,16 @@ class FinancialTransaction extends IDisposable {
   /// </summary>
   /// <param name="customApiToken">api token customizado</param>
   /// <returns></returns>
-  Future<FinancialTransactionResponse> getAllTransactionsSubAccounts(
-      String apiUserToken) async {
-    var result = await apiResource.getById(
-        id: null, partOfUrl: null, apiUserToken: apiUserToken);
+  Future<FinancialTransactionResponse> getAllTransactionsSubAccounts(String apiUserToken) async {
+    var result = await apiResource.getById(apiUserToken: apiUserToken);
     return FinancialTransactionResponse.fromMap(result);
   }
 
   /// Simular um adiantamento de transações para a conta principal configurada
   /// <param name="transactionsIDs">String contendo os Ids no formato (transactions[]=1&transactions[]=2)</param>
   /// <returns>FinancialTransactionResponse com taxas e informações como se fosse executar o adiantamento</returns>
-  Future<FinancialTransactionResponse> getSimulAdvanceTransactions(
-      String transactionsIDs) async {
-    var result = await apiResource.getById(
-        id: "$transactionsIDs", partOfUrl: "advance_simulation");
+  Future<FinancialTransactionResponse> getSimulAdvanceTransactions(String transactionsIDs) async {
+    var result = await apiResource.getById(id: "$transactionsIDs", partOfUrl: "advance_simulation");
     return FinancialTransactionResponse.fromMap(result);
   }
 
@@ -51,12 +46,8 @@ class FinancialTransaction extends IDisposable {
   /// <param name="transactionsIDs">String contendo os Ids no formato (transactions[]=1&transactions[]=2)</param>
   /// <param name="customApiToken">api token customizado</param>
   /// <returns>FinancialTransactionResponse com taxas e informações como se fosse executar o adiantamento</returns>
-  Future<FinancialTransactionResponse> getSimulAdvanceTransactionsSubAccounts(
-      String transactionsIDs, String apiUserToken) async {
-    var result = await apiResource.getById(
-        id: "$transactionsIDs",
-        partOfUrl: "advance_simulation",
-        apiUserToken: apiUserToken);
+  Future<FinancialTransactionResponse> getSimulAdvanceTransactionsSubAccounts(String transactionsIDs, String apiUserToken) async {
+    var result = await apiResource.getById(id: "$transactionsIDs", partOfUrl: "advance_simulation", apiUserToken: apiUserToken);
     return FinancialTransactionResponse.fromMap(result);
   }
 
@@ -68,12 +59,8 @@ class FinancialTransaction extends IDisposable {
   /// Faz um pedido de adiantamento para de transações para a conta principal
   /// <param name="transactionsIDs">String contendo os Ids no formato (transactions[]=1&transactions[]=2)</param>
   /// <returns>FinancialTransactionResponse com taxas e informações </returns>
-  Future<FinancialTransactionResponse> postAdvanceTransactionsSubAccounts(
-      String transactionsIDs, String apiUserToken) async {
-    var result = await apiResource.post(
-        data: "$transactionsIDs",
-        partOfUrl: "advance",
-        apiUserToken: apiUserToken);
+  Future<FinancialTransactionResponse> postAdvanceTransactionsSubAccounts(String transactionsIDs, String apiUserToken) async {
+    var result = await apiResource.post(data: "$transactionsIDs", partOfUrl: "advance", apiUserToken: apiUserToken);
     return FinancialTransactionResponse.fromMap(result);
   }
 }

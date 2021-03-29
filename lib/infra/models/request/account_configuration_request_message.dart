@@ -31,35 +31,35 @@ class AccountConfigurationRequestMessage {
   String autoAdvanceOption;
 
   /// Configurações de Boleto Bancário
-  BankSlipOptions bankSlipOptions;
+  BankSlipOptions? bankSlipOptions;
 
   /// Configurações de Cartão de Crédito
-  CreditCardOptions creditCardOptions;
+  CreditCardOptions? creditCardOptions;
 
   AccountConfigurationRequestMessage({
-    this.commissionPercent,
-    this.autoWithdraw,
-    this.fines,
-    this.perDayInterest,
-    this.latePaymentFine,
-    this.autoAdvance,
-    this.autoAdvanceType,
-    this.autoAdvanceOption,
+    this.commissionPercent = 0,
+    this.autoWithdraw = false,
+    this.fines = false,
+    this.perDayInterest = false,
+    this.latePaymentFine = 0.0,
+    this.autoAdvance = false,
+    this.autoAdvanceType = '',
+    this.autoAdvanceOption = '',
     this.bankSlipOptions,
     this.creditCardOptions,
   });
 
   AccountConfigurationRequestMessage copyWith({
-    int commissionPercent,
-    bool autoWithdraw,
-    bool fines,
-    bool perDayInterest,
-    double latePaymentFine,
-    bool autoAdvance,
-    String autoAdvanceType,
-    String autoAdvanceOption,
-    BankSlipOptions bankSlipOptions,
-    CreditCardOptions creditCardOptions,
+    int? commissionPercent,
+    bool? autoWithdraw,
+    bool? fines,
+    bool? perDayInterest,
+    double? latePaymentFine,
+    bool? autoAdvance,
+    String? autoAdvanceType,
+    String? autoAdvanceOption,
+    BankSlipOptions? bankSlipOptions,
+    CreditCardOptions? creditCardOptions,
   }) {
     return AccountConfigurationRequestMessage(
       commissionPercent: commissionPercent ?? this.commissionPercent,
@@ -91,8 +91,6 @@ class AccountConfigurationRequestMessage {
   }
 
   factory AccountConfigurationRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AccountConfigurationRequestMessage(
       commissionPercent: map['commission_percent'],
       autoWithdraw: map['auto_withdraw'],
@@ -109,8 +107,7 @@ class AccountConfigurationRequestMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory AccountConfigurationRequestMessage.fromJson(String source) =>
-      AccountConfigurationRequestMessage.fromMap(json.decode(source));
+  factory AccountConfigurationRequestMessage.fromJson(String source) => AccountConfigurationRequestMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -121,31 +118,12 @@ class AccountConfigurationRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is AccountConfigurationRequestMessage &&
-        o.commissionPercent == commissionPercent &&
-        o.autoWithdraw == autoWithdraw &&
-        o.fines == fines &&
-        o.perDayInterest == perDayInterest &&
-        o.latePaymentFine == latePaymentFine &&
-        o.autoAdvance == autoAdvance &&
-        o.autoAdvanceType == autoAdvanceType &&
-        o.autoAdvanceOption == autoAdvanceOption &&
-        o.bankSlipOptions == bankSlipOptions &&
-        o.creditCardOptions == creditCardOptions;
+    return o is AccountConfigurationRequestMessage && o.commissionPercent == commissionPercent && o.autoWithdraw == autoWithdraw && o.fines == fines && o.perDayInterest == perDayInterest && o.latePaymentFine == latePaymentFine && o.autoAdvance == autoAdvance && o.autoAdvanceType == autoAdvanceType && o.autoAdvanceOption == autoAdvanceOption && o.bankSlipOptions == bankSlipOptions && o.creditCardOptions == creditCardOptions;
   }
 
   @override
   int get hashCode {
-    return commissionPercent.hashCode ^
-        autoWithdraw.hashCode ^
-        fines.hashCode ^
-        perDayInterest.hashCode ^
-        latePaymentFine.hashCode ^
-        autoAdvance.hashCode ^
-        autoAdvanceType.hashCode ^
-        autoAdvanceOption.hashCode ^
-        bankSlipOptions.hashCode ^
-        creditCardOptions.hashCode;
+    return commissionPercent.hashCode ^ autoWithdraw.hashCode ^ fines.hashCode ^ perDayInterest.hashCode ^ latePaymentFine.hashCode ^ autoAdvance.hashCode ^ autoAdvanceType.hashCode ^ autoAdvanceOption.hashCode ^ bankSlipOptions.hashCode ^ creditCardOptions.hashCode;
   }
 }
 
@@ -160,15 +138,15 @@ class BankSlipOptions {
   bool reprintExtraDueDays;
 
   BankSlipOptions({
-    this.active,
-    this.extraDueDays,
-    this.reprintExtraDueDays,
+    this.active = false,
+    this.extraDueDays = 0,
+    this.reprintExtraDueDays = false,
   });
 
   BankSlipOptions copyWith({
-    bool active,
-    int extraDueDays,
-    bool reprintExtraDueDays,
+    bool? active,
+    int? extraDueDays,
+    bool? reprintExtraDueDays,
   }) {
     return BankSlipOptions(
       active: active ?? this.active,
@@ -186,8 +164,6 @@ class BankSlipOptions {
   }
 
   factory BankSlipOptions.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return BankSlipOptions(
       active: map['active'],
       extraDueDays: map['extra_due'],
@@ -197,26 +173,20 @@ class BankSlipOptions {
 
   String toJson() => json.encode(toMap());
 
-  factory BankSlipOptions.fromJson(String source) =>
-      BankSlipOptions.fromMap(json.decode(source));
+  factory BankSlipOptions.fromJson(String source) => BankSlipOptions.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'BankSlipOptions(active: $active, extraDueDays: $extraDueDays, reprintExtraDueDays: $reprintExtraDueDays)';
+  String toString() => 'BankSlipOptions(active: $active, extraDueDays: $extraDueDays, reprintExtraDueDays: $reprintExtraDueDays)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is BankSlipOptions &&
-        o.active == active &&
-        o.extraDueDays == extraDueDays &&
-        o.reprintExtraDueDays == reprintExtraDueDays;
+    return o is BankSlipOptions && o.active == active && o.extraDueDays == extraDueDays && o.reprintExtraDueDays == reprintExtraDueDays;
   }
 
   @override
-  int get hashCode =>
-      active.hashCode ^ extraDueDays.hashCode ^ reprintExtraDueDays.hashCode;
+  int get hashCode => active.hashCode ^ extraDueDays.hashCode ^ reprintExtraDueDays.hashCode;
 }
 
 class CreditCardOptions {
@@ -242,33 +212,31 @@ class CreditCardOptions {
   bool twoStepTransaction;
 
   CreditCardOptions({
-    this.active,
-    this.softDescriptor,
-    this.installments,
-    this.installmentsPassInterest,
-    this.maxInstallments,
-    this.maxInstallmentsWithoutInterest,
-    this.twoStepTransaction,
+    this.active = false,
+    this.softDescriptor = '',
+    this.installments = false,
+    this.installmentsPassInterest = false,
+    this.maxInstallments = 0,
+    this.maxInstallmentsWithoutInterest = 0,
+    this.twoStepTransaction = false,
   });
 
   CreditCardOptions copyWith({
-    bool active,
-    String softDescriptor,
-    bool installments,
-    bool installmentsPassInterest,
-    int maxInstallments,
-    int maxInstallmentsWithoutInterest,
-    bool twoStepTransaction,
+    bool? active,
+    String? softDescriptor,
+    bool? installments,
+    bool? installmentsPassInterest,
+    int? maxInstallments,
+    int? maxInstallmentsWithoutInterest,
+    bool? twoStepTransaction,
   }) {
     return CreditCardOptions(
       active: active ?? this.active,
       softDescriptor: softDescriptor ?? this.softDescriptor,
       installments: installments ?? this.installments,
-      installmentsPassInterest:
-          installmentsPassInterest ?? this.installmentsPassInterest,
+      installmentsPassInterest: installmentsPassInterest ?? this.installmentsPassInterest,
       maxInstallments: maxInstallments ?? this.maxInstallments,
-      maxInstallmentsWithoutInterest:
-          maxInstallmentsWithoutInterest ?? this.maxInstallmentsWithoutInterest,
+      maxInstallmentsWithoutInterest: maxInstallmentsWithoutInterest ?? this.maxInstallmentsWithoutInterest,
       twoStepTransaction: twoStepTransaction ?? this.twoStepTransaction,
     );
   }
@@ -286,8 +254,6 @@ class CreditCardOptions {
   }
 
   factory CreditCardOptions.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return CreditCardOptions(
       active: map['active'],
       softDescriptor: map['soft_descriptor'],
@@ -301,8 +267,7 @@ class CreditCardOptions {
 
   String toJson() => json.encode(toMap());
 
-  factory CreditCardOptions.fromJson(String source) =>
-      CreditCardOptions.fromMap(json.decode(source));
+  factory CreditCardOptions.fromJson(String source) => CreditCardOptions.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -313,24 +278,11 @@ class CreditCardOptions {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is CreditCardOptions &&
-        o.active == active &&
-        o.softDescriptor == softDescriptor &&
-        o.installments == installments &&
-        o.installmentsPassInterest == installmentsPassInterest &&
-        o.maxInstallments == maxInstallments &&
-        o.maxInstallmentsWithoutInterest == maxInstallmentsWithoutInterest &&
-        o.twoStepTransaction == twoStepTransaction;
+    return o is CreditCardOptions && o.active == active && o.softDescriptor == softDescriptor && o.installments == installments && o.installmentsPassInterest == installmentsPassInterest && o.maxInstallments == maxInstallments && o.maxInstallmentsWithoutInterest == maxInstallmentsWithoutInterest && o.twoStepTransaction == twoStepTransaction;
   }
 
   @override
   int get hashCode {
-    return active.hashCode ^
-        softDescriptor.hashCode ^
-        installments.hashCode ^
-        installmentsPassInterest.hashCode ^
-        maxInstallments.hashCode ^
-        maxInstallmentsWithoutInterest.hashCode ^
-        twoStepTransaction.hashCode;
+    return active.hashCode ^ softDescriptor.hashCode ^ installments.hashCode ^ installmentsPassInterest.hashCode ^ maxInstallments.hashCode ^ maxInstallmentsWithoutInterest.hashCode ^ twoStepTransaction.hashCode;
   }
 }

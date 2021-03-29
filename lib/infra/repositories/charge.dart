@@ -6,7 +6,7 @@ import 'api_resource.dart';
 /// Cobrança Direta
 /// Podemos efetuar uma cobrança direta de um valor, utilizando um token de cartão de crédito, uma forma de pagamento de cliente ou gerando um boleto bancário.
 class Charge extends IDisposable {
-  APIResource apiResource;
+  late APIResource apiResource;
 
   Charge(IuguClient client) {
     apiResource = APIResource(client.properties.dio, "/charge");
@@ -22,8 +22,8 @@ class Charge extends IDisposable {
   /// <param name="customApiToken">Token customizado/param>
   /// <returns>Uma cobrança do tipo boleto</returns>
   Future<ChargeResponseMessage> create({
-    ChargeRequestMessage request,
-    String apiUserToken,
+    required ChargeRequestMessage request,
+    String apiUserToken = '',
   }) async {
     var result = await apiResource.post(
       data: request.toMap(),

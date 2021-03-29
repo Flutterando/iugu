@@ -2,14 +2,14 @@ import 'dart:convert';
 
 class FinancialTransactionRequestMessage {
   ///  Variáveis Personalizadas
-  List<TransactionsRequest> transactions;
+  List<TransactionsRequest>? transactions;
 
   FinancialTransactionRequestMessage({
     this.transactions,
   });
 
   FinancialTransactionRequestMessage copyWith({
-    List<TransactionsRequest> transactions,
+    List<TransactionsRequest>? transactions,
   }) {
     return FinancialTransactionRequestMessage(
       transactions: transactions ?? this.transactions,
@@ -18,27 +18,22 @@ class FinancialTransactionRequestMessage {
 
   Map<String, dynamic> toMap() {
     return {
-      'transactions': transactions?.map((x) => x?.toMap())?.toList(),
+      'transactions': transactions?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory FinancialTransactionRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return FinancialTransactionRequestMessage(
-      transactions: List<TransactionsRequest>.from(
-          map['transactions']?.map((x) => TransactionsRequest.fromMap(x))),
+      transactions: List<TransactionsRequest>.from(map['transactions']?.map((x) => TransactionsRequest.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory FinancialTransactionRequestMessage.fromJson(String source) =>
-      FinancialTransactionRequestMessage.fromMap(json.decode(source));
+  factory FinancialTransactionRequestMessage.fromJson(String source) => FinancialTransactionRequestMessage.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'FinancialTransactionRequestMessage(transactions: $transactions)';
+  String toString() => 'FinancialTransactionRequestMessage(transactions: $transactions)';
 
   @override
   bool operator ==(Object o) {
@@ -52,14 +47,14 @@ class FinancialTransactionRequestMessage {
 }
 
 class TransactionsRequest {
-  int id;
+  int? id;
 
   TransactionsRequest({
     this.id,
   });
 
   TransactionsRequest copyWith({
-    int id,
+    int? id,
   }) {
     return TransactionsRequest(
       id: id ?? this.id,
@@ -73,8 +68,6 @@ class TransactionsRequest {
   }
 
   factory TransactionsRequest.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return TransactionsRequest(
       id: map['id'],
     );
@@ -82,8 +75,7 @@ class TransactionsRequest {
 
   String toJson() => json.encode(toMap());
 
-  factory TransactionsRequest.fromJson(String source) =>
-      TransactionsRequest.fromMap(json.decode(source));
+  factory TransactionsRequest.fromJson(String source) => TransactionsRequest.fromMap(json.decode(source));
 
   @override
   String toString() => 'Transactions(id: $id)';

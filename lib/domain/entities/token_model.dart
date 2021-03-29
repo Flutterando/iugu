@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class TokenModel {
-  String id;
-  String method;
+  String? id;
+  String? method;
 
   TokenModel({
     this.id,
@@ -10,8 +10,8 @@ class TokenModel {
   });
 
   TokenModel copyWith({
-    String id,
-    String method,
+    String? id,
+    String? method,
   }) {
     return TokenModel(
       id: id ?? this.id,
@@ -27,8 +27,6 @@ class TokenModel {
   }
 
   factory TokenModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return TokenModel(
       id: map['id'],
       method: map['method'],
@@ -37,8 +35,7 @@ class TokenModel {
 
   String toJson() => json.encode(toMap());
 
-  factory TokenModel.fromJson(String source) =>
-      TokenModel.fromMap(json.decode(source));
+  factory TokenModel.fromJson(String source) => TokenModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'TokenModel(id: $id, method: $method)';

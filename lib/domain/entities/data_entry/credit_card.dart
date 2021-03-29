@@ -2,22 +2,22 @@ import 'dart:convert';
 
 class CreditCard {
   /// Número do Cartão de Crédito
-  int number;
+  int? number;
 
   /// CVV do Cartão de Crédito
-  int verificationValue;
+  int? verificationValue;
 
   /// Nome do Cliente como está no Cartão
-  String firstName;
+  String? firstName;
 
   /// Sobrenome do Cliente como está no Cartão
-  String lastName;
+  String? lastName;
 
   /// Mês de Vencimento no Formato MM (Ex: 01, 02, 12)
-  int month;
+  int? month;
 
   /// Ano de Vencimento no Formato YYYY (2014, 2015, 2016)
-  int year;
+  int? year;
 
   CreditCard({
     this.number,
@@ -29,12 +29,12 @@ class CreditCard {
   });
 
   CreditCard copyWith({
-    int number,
-    int verificationValue,
-    String firstName,
-    String lastName,
-    int month,
-    int year,
+    int? number,
+    int? verificationValue,
+    String? firstName,
+    String? lastName,
+    int? month,
+    int? year,
   }) {
     return CreditCard(
       number: number ?? this.number,
@@ -58,8 +58,6 @@ class CreditCard {
   }
 
   factory CreditCard.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return CreditCard(
       number: map['number'],
       verificationValue: map['verification_value'],
@@ -72,8 +70,7 @@ class CreditCard {
 
   String toJson() => json.encode(toMap());
 
-  factory CreditCard.fromJson(String source) =>
-      CreditCard.fromMap(json.decode(source));
+  factory CreditCard.fromJson(String source) => CreditCard.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -84,22 +81,11 @@ class CreditCard {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is CreditCard &&
-        o.number == number &&
-        o.verificationValue == verificationValue &&
-        o.firstName == firstName &&
-        o.lastName == lastName &&
-        o.month == month &&
-        o.year == year;
+    return o is CreditCard && o.number == number && o.verificationValue == verificationValue && o.firstName == firstName && o.lastName == lastName && o.month == month && o.year == year;
   }
 
   @override
   int get hashCode {
-    return number.hashCode ^
-        verificationValue.hashCode ^
-        firstName.hashCode ^
-        lastName.hashCode ^
-        month.hashCode ^
-        year.hashCode;
+    return number.hashCode ^ verificationValue.hashCode ^ firstName.hashCode ^ lastName.hashCode ^ month.hashCode ^ year.hashCode;
   }
 }

@@ -5,22 +5,22 @@ import 'address_model.dart';
 /// Modelo que representa os dados do cliente que efetua o pagamento
 class PayerModel {
   /// CPF ou CNPJ do Cliente
-  String cpfOrCnpj;
+  String? cpfOrCnpj;
 
   /// Nome (utilizado como sacado em caso de pagamentos em boleto)
-  String name;
+  String? name;
 
   /// Prefixo do Telefone (Ex: 11 para São Paulo)
-  String phonePrefix;
+  String? phonePrefix;
 
   /// Telefone
-  String phone;
+  String? phone;
 
   /// E-mail do Cliente
-  String email;
+  String? email;
 
   /// Endereço do Cliente (utilizado em caso de pagamento em boleto)
-  AddressModel address;
+  AddressModel? address;
 
   PayerModel({
     this.cpfOrCnpj,
@@ -32,12 +32,12 @@ class PayerModel {
   });
 
   PayerModel copyWith({
-    String cpfOrCnpj,
-    String name,
-    String phonePrefix,
-    String phone,
-    String email,
-    AddressModel address,
+    String? cpfOrCnpj,
+    String? name,
+    String? phonePrefix,
+    String? phone,
+    String? email,
+    AddressModel? address,
   }) {
     return PayerModel(
       cpfOrCnpj: cpfOrCnpj ?? this.cpfOrCnpj,
@@ -61,8 +61,6 @@ class PayerModel {
   }
 
   factory PayerModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PayerModel(
       cpfOrCnpj: map['cpf_or_cnpj'],
       name: map['name'],
@@ -75,8 +73,7 @@ class PayerModel {
 
   String toJson() => json.encode(toMap());
 
-  factory PayerModel.fromJson(String source) =>
-      PayerModel.fromMap(json.decode(source));
+  factory PayerModel.fromJson(String source) => PayerModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -87,22 +84,11 @@ class PayerModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PayerModel &&
-        o.cpfOrCnpj == cpfOrCnpj &&
-        o.name == name &&
-        o.phonePrefix == phonePrefix &&
-        o.phone == phone &&
-        o.email == email &&
-        o.address == address;
+    return o is PayerModel && o.cpfOrCnpj == cpfOrCnpj && o.name == name && o.phonePrefix == phonePrefix && o.phone == phone && o.email == email && o.address == address;
   }
 
   @override
   int get hashCode {
-    return cpfOrCnpj.hashCode ^
-        name.hashCode ^
-        phonePrefix.hashCode ^
-        phone.hashCode ^
-        email.hashCode ^
-        address.hashCode;
+    return cpfOrCnpj.hashCode ^ name.hashCode ^ phonePrefix.hashCode ^ phone.hashCode ^ email.hashCode ^ address.hashCode;
   }
 }

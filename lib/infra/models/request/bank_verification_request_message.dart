@@ -20,19 +20,19 @@ class BankVerificationRequestMessage {
   bool automaticValidation;
 
   BankVerificationRequestMessage({
-    this.bankNumber,
-    this.bankAgency,
-    this.accountType,
-    this.bankAccountNumber,
-    this.automaticValidation,
+    this.bankNumber = '',
+    this.bankAgency = '',
+    this.accountType = '',
+    this.bankAccountNumber = '',
+    this.automaticValidation = false,
   });
 
   BankVerificationRequestMessage copyWith({
-    String bankNumber,
-    String bankAgency,
-    String accountType,
-    String bankAccountNumber,
-    bool automaticValidation,
+    String? bankNumber,
+    String? bankAgency,
+    String? accountType,
+    String? bankAccountNumber,
+    bool? automaticValidation,
   }) {
     return BankVerificationRequestMessage(
       bankNumber: bankNumber ?? this.bankNumber,
@@ -54,8 +54,6 @@ class BankVerificationRequestMessage {
   }
 
   factory BankVerificationRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return BankVerificationRequestMessage(
       bankNumber: map['bank'],
       bankAgency: map['agency'],
@@ -67,8 +65,7 @@ class BankVerificationRequestMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory BankVerificationRequestMessage.fromJson(String source) =>
-      BankVerificationRequestMessage.fromMap(json.decode(source));
+  factory BankVerificationRequestMessage.fromJson(String source) => BankVerificationRequestMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -79,20 +76,11 @@ class BankVerificationRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is BankVerificationRequestMessage &&
-        o.bankNumber == bankNumber &&
-        o.bankAgency == bankAgency &&
-        o.accountType == accountType &&
-        o.bankAccountNumber == bankAccountNumber &&
-        o.automaticValidation == automaticValidation;
+    return o is BankVerificationRequestMessage && o.bankNumber == bankNumber && o.bankAgency == bankAgency && o.accountType == accountType && o.bankAccountNumber == bankAccountNumber && o.automaticValidation == automaticValidation;
   }
 
   @override
   int get hashCode {
-    return bankNumber.hashCode ^
-        bankAgency.hashCode ^
-        accountType.hashCode ^
-        bankAccountNumber.hashCode ^
-        automaticValidation.hashCode;
+    return bankNumber.hashCode ^ bankAgency.hashCode ^ accountType.hashCode ^ bankAccountNumber.hashCode ^ automaticValidation.hashCode;
   }
 }

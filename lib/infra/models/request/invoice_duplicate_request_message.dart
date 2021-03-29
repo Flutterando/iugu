@@ -3,16 +3,16 @@ import 'package:iugu/domain/entities/invoice_model.dart';
 
 class InvoiceDuplicateRequestMessage {
   /// Nova data de expiração (Formato: 'DD/MM/AAAA’).
-  String newDueDate;
+  String? newDueDate;
 
   /// Adicione, altere ou remova itens a nova fatura.
-  List<Item> invoiceItems;
+  List<Item>? invoiceItems;
 
   /// Ignora o envio do e-mail de cobrança da nova fatura.
-  bool ignoreDueEmail;
+  bool? ignoreDueEmail;
 
   /// Ignora o envio do e-mail de cancelamento da fatura atual.
-  bool ignoreCanceledEmail;
+  bool? ignoreCanceledEmail;
 
   InvoiceDuplicateRequestMessage({
     this.newDueDate,
@@ -22,10 +22,10 @@ class InvoiceDuplicateRequestMessage {
   });
 
   InvoiceDuplicateRequestMessage copyWith({
-    String newDueDate,
-    List<Item> invoiceItems,
-    bool ignoreDueEmail,
-    bool ignoreCanceledEmail,
+    String? newDueDate,
+    List<Item>? invoiceItems,
+    bool? ignoreDueEmail,
+    bool? ignoreCanceledEmail,
   }) {
     return InvoiceDuplicateRequestMessage(
       newDueDate: newDueDate ?? this.newDueDate,
@@ -38,15 +38,13 @@ class InvoiceDuplicateRequestMessage {
   Map<String, dynamic> toMap() {
     return {
       'due_date': newDueDate,
-      'items': invoiceItems?.map((x) => x?.toMap())?.toList(),
+      'items': invoiceItems?.map((x) => x.toMap()).toList(),
       'ignore_due_email': ignoreDueEmail,
       'ignore_canceled_email': ignoreCanceledEmail,
     }..removeWhere((key, value) => value == null);
   }
 
   factory InvoiceDuplicateRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return InvoiceDuplicateRequestMessage(
       newDueDate: map['due_date'],
       invoiceItems: List<Item>.from(map['items']?.map((x) => Item.fromMap(x))),
@@ -57,8 +55,7 @@ class InvoiceDuplicateRequestMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory InvoiceDuplicateRequestMessage.fromJson(String source) =>
-      InvoiceDuplicateRequestMessage.fromMap(json.decode(source));
+  factory InvoiceDuplicateRequestMessage.fromJson(String source) => InvoiceDuplicateRequestMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -69,17 +66,11 @@ class InvoiceDuplicateRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is InvoiceDuplicateRequestMessage &&
-        o.newDueDate == newDueDate &&
-        o.ignoreDueEmail == ignoreDueEmail &&
-        o.ignoreCanceledEmail == ignoreCanceledEmail;
+    return o is InvoiceDuplicateRequestMessage && o.newDueDate == newDueDate && o.ignoreDueEmail == ignoreDueEmail && o.ignoreCanceledEmail == ignoreCanceledEmail;
   }
 
   @override
   int get hashCode {
-    return newDueDate.hashCode ^
-        invoiceItems.hashCode ^
-        ignoreDueEmail.hashCode ^
-        ignoreCanceledEmail.hashCode;
+    return newDueDate.hashCode ^ invoiceItems.hashCode ^ ignoreDueEmail.hashCode ^ ignoreCanceledEmail.hashCode;
   }
 }

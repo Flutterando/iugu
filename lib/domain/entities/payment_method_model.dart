@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 class PaymentMethodModel {
-  String id;
-  String description;
-  String itemType;
-  PaymentMethodData data;
+  String? id;
+  String? description;
+  String? itemType;
+  PaymentMethodData? data;
 
   PaymentMethodModel({
     this.id,
@@ -14,10 +14,10 @@ class PaymentMethodModel {
   });
 
   PaymentMethodModel copyWith({
-    String id,
-    String description,
-    String itemType,
-    PaymentMethodData data,
+    String? id,
+    String? description,
+    String? itemType,
+    PaymentMethodData? data,
   }) {
     return PaymentMethodModel(
       id: id ?? this.id,
@@ -37,8 +37,6 @@ class PaymentMethodModel {
   }
 
   factory PaymentMethodModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PaymentMethodModel(
       id: map['id'],
       description: map['description'],
@@ -49,8 +47,7 @@ class PaymentMethodModel {
 
   String toJson() => json.encode(toMap());
 
-  factory PaymentMethodModel.fromJson(String source) =>
-      PaymentMethodModel.fromMap(json.decode(source));
+  factory PaymentMethodModel.fromJson(String source) => PaymentMethodModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -61,26 +58,19 @@ class PaymentMethodModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PaymentMethodModel &&
-        o.id == id &&
-        o.description == description &&
-        o.itemType == itemType &&
-        o.data == data;
+    return o is PaymentMethodModel && o.id == id && o.description == description && o.itemType == itemType && o.data == data;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        description.hashCode ^
-        itemType.hashCode ^
-        data.hashCode;
+    return id.hashCode ^ description.hashCode ^ itemType.hashCode ^ data.hashCode;
   }
 }
 
 class PaymentMethodData {
-  String token;
-  String displayNumber;
-  String brand;
+  String? token;
+  String? displayNumber;
+  String? brand;
 
   PaymentMethodData({
     this.token,
@@ -89,9 +79,9 @@ class PaymentMethodData {
   });
 
   PaymentMethodData copyWith({
-    String token,
-    String displayNumber,
-    String brand,
+    String? token,
+    String? displayNumber,
+    String? brand,
   }) {
     return PaymentMethodData(
       token: token ?? this.token,
@@ -109,8 +99,6 @@ class PaymentMethodData {
   }
 
   factory PaymentMethodData.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PaymentMethodData(
       token: map['token'],
       displayNumber: map['display_number'],
@@ -120,21 +108,16 @@ class PaymentMethodData {
 
   String toJson() => json.encode(toMap());
 
-  factory PaymentMethodData.fromJson(String source) =>
-      PaymentMethodData.fromMap(json.decode(source));
+  factory PaymentMethodData.fromJson(String source) => PaymentMethodData.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'PaymentMethodData(token: $token, display_number: $displayNumber, brand: $brand)';
+  String toString() => 'PaymentMethodData(token: $token, display_number: $displayNumber, brand: $brand)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PaymentMethodData &&
-        o.token == token &&
-        o.displayNumber == displayNumber &&
-        o.brand == brand;
+    return o is PaymentMethodData && o.token == token && o.displayNumber == displayNumber && o.brand == brand;
   }
 
   @override

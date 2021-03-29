@@ -20,15 +20,15 @@ class InvoiceItem {
   int priceCents;
 
   InvoiceItem({
-    this.description,
-    this.quantity,
-    this.priceCents,
+    this.description = '',
+    this.quantity = 0,
+    this.priceCents = 0,
   });
 
   InvoiceItem copyWith({
-    String description,
-    int quantity,
-    int priceCents,
+    String? description,
+    int? quantity,
+    int? priceCents,
   }) {
     return InvoiceItem(
       description: description ?? this.description,
@@ -46,8 +46,6 @@ class InvoiceItem {
   }
 
   factory InvoiceItem.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return InvoiceItem(
       description: map['description'],
       quantity: map['quantity'],
@@ -57,24 +55,18 @@ class InvoiceItem {
 
   String toJson() => json.encode(toMap());
 
-  factory InvoiceItem.fromJson(String source) =>
-      InvoiceItem.fromMap(json.decode(source));
+  factory InvoiceItem.fromJson(String source) => InvoiceItem.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'InvoiceItem(description: $description, quantity: $quantity, priceCents: $priceCents)';
+  String toString() => 'InvoiceItem(description: $description, quantity: $quantity, priceCents: $priceCents)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is InvoiceItem &&
-        o.description == description &&
-        o.quantity == quantity &&
-        o.priceCents == priceCents;
+    return o is InvoiceItem && o.description == description && o.quantity == quantity && o.priceCents == priceCents;
   }
 
   @override
-  int get hashCode =>
-      description.hashCode ^ quantity.hashCode ^ priceCents.hashCode;
+  int get hashCode => description.hashCode ^ quantity.hashCode ^ priceCents.hashCode;
 }

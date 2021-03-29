@@ -4,15 +4,15 @@ import 'package:iugu/domain/entities/data_entry/custom_variables.dart';
 
 class CustomersModel {
   int totalItems;
-  List<CustomerModel> items;
+  List<CustomerModel>? items;
   CustomersModel({
-    this.totalItems,
+    this.totalItems = 0,
     this.items,
   });
 
   CustomersModel copyWith({
-    int totalItems,
-    List<CustomerModel> items,
+    int? totalItems,
+    List<CustomerModel>? items,
   }) {
     return CustomersModel(
       totalItems: totalItems ?? this.totalItems,
@@ -23,24 +23,20 @@ class CustomersModel {
   Map<String, dynamic> toMap() {
     return {
       'total_items': totalItems,
-      'items': items?.map((x) => x?.toMap())?.toList(),
+      'items': items?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory CustomersModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return CustomersModel(
-      totalItems: map['total_items'],
-      items: List<CustomerModel>.from(
-          map['items']?.map((x) => CustomerModel.fromMap(x))),
+      totalItems: map['total_items'] ?? map['totalItems'],
+      items: List<CustomerModel>.from(map['items']?.map((x) => CustomerModel.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CustomersModel.fromJson(String source) =>
-      CustomersModel.fromMap(json.decode(source));
+  factory CustomersModel.fromJson(String source) => CustomersModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'CustomersModel(totalItems: $totalItems, items: $items)';
@@ -57,17 +53,17 @@ class CustomersModel {
 }
 
 class CustomerModel {
-  String id;
-  String email;
-  String name;
-  String notes;
-  String createdAt;
-  String updatedAt;
-  List<CustomVariables> customVariables;
-  String zipCode;
-  int number;
-  String complement;
-  String cpfCnpj;
+  String? id;
+  String? email;
+  String? name;
+  String? notes;
+  String? createdAt;
+  String? updatedAt;
+  List<CustomVariables>? customVariables;
+  String? zipCode;
+  int? number;
+  String? complement;
+  String? cpfCnpj;
   CustomerModel({
     this.id,
     this.email,
@@ -83,17 +79,17 @@ class CustomerModel {
   });
 
   CustomerModel copyWith({
-    String id,
-    String email,
-    String name,
-    String notes,
-    String createdAt,
-    String updatedAt,
-    List<Object> customVariables,
-    String zipCode,
-    int number,
-    String complement,
-    String cpfCnpj,
+    String? id,
+    String? email,
+    String? name,
+    String? notes,
+    String? createdAt,
+    String? updatedAt,
+    List<CustomVariables>? customVariables,
+    String? zipCode,
+    int? number,
+    String? complement,
+    String? cpfCnpj,
   }) {
     return CustomerModel(
       id: id ?? this.id,
@@ -118,7 +114,7 @@ class CustomerModel {
       'notes': notes,
       'created_at': createdAt,
       'updated_at': updatedAt,
-      'custom_variables': customVariables?.map((x) => x.toJson())?.toList(),
+      'custom_variables': customVariables?.map((x) => x.toJson()).toList(),
       'zip_code': zipCode,
       'number': number,
       'complement': complement,
@@ -127,8 +123,6 @@ class CustomerModel {
   }
 
   factory CustomerModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return CustomerModel(
       id: map['id'],
       email: map['email'],
@@ -136,11 +130,12 @@ class CustomerModel {
       notes: map['notes'],
       createdAt: map['created_at'],
       updatedAt: map['updated_at'],
-      customVariables: List<CustomVariables>.from(
-          map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
+      customVariables: List<CustomVariables>.from(map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
       zipCode: map['zip_code'],
       number: map['number'] != null
-          ? map['number'] is String ? int.parse(map['number']) : map['number']
+          ? map['number'] is String
+              ? int.parse(map['number'])
+              : map['number']
           : null,
       complement: map['complement'],
       cpfCnpj: map['cpf_cnpj'],
@@ -149,8 +144,7 @@ class CustomerModel {
 
   String toJson() => json.encode(toMap());
 
-  factory CustomerModel.fromJson(String source) =>
-      CustomerModel.fromMap(json.decode(source));
+  factory CustomerModel.fromJson(String source) => CustomerModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -161,31 +155,11 @@ class CustomerModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is CustomerModel &&
-        o.id == id &&
-        o.email == email &&
-        o.name == name &&
-        o.notes == notes &&
-        o.createdAt == createdAt &&
-        o.updatedAt == updatedAt &&
-        o.zipCode == zipCode &&
-        o.number == number &&
-        o.complement == complement &&
-        o.cpfCnpj == cpfCnpj;
+    return o is CustomerModel && o.id == id && o.email == email && o.name == name && o.notes == notes && o.createdAt == createdAt && o.updatedAt == updatedAt && o.zipCode == zipCode && o.number == number && o.complement == complement && o.cpfCnpj == cpfCnpj;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        email.hashCode ^
-        name.hashCode ^
-        notes.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode ^
-        customVariables.hashCode ^
-        zipCode.hashCode ^
-        number.hashCode ^
-        complement.hashCode ^
-        cpfCnpj.hashCode;
+    return id.hashCode ^ email.hashCode ^ name.hashCode ^ notes.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode ^ customVariables.hashCode ^ zipCode.hashCode ^ number.hashCode ^ complement.hashCode ^ cpfCnpj.hashCode;
   }
 }

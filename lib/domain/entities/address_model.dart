@@ -24,23 +24,23 @@ class AddressModel {
   String district;
 
   AddressModel({
-    this.street,
-    this.number,
-    this.city,
-    this.state,
-    this.country,
-    this.zipCode,
-    this.district,
+    this.street = '',
+    this.number = '',
+    this.city = '',
+    this.state = '',
+    this.country = '',
+    this.zipCode = '',
+    this.district = '',
   });
 
   AddressModel copyWith({
-    String street,
-    String number,
-    String city,
-    String state,
-    String country,
-    String zipCode,
-    String district,
+    String? street,
+    String? number,
+    String? city,
+    String? state,
+    String? country,
+    String? zipCode,
+    String? district,
   }) {
     return AddressModel(
       street: street ?? this.street,
@@ -66,8 +66,6 @@ class AddressModel {
   }
 
   factory AddressModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AddressModel(
       street: map['street'],
       number: map['number'],
@@ -81,8 +79,7 @@ class AddressModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AddressModel.fromJson(String source) =>
-      AddressModel.fromMap(json.decode(source));
+  factory AddressModel.fromJson(String source) => AddressModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -93,24 +90,11 @@ class AddressModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is AddressModel &&
-        o.street == street &&
-        o.number == number &&
-        o.city == city &&
-        o.state == state &&
-        o.country == country &&
-        o.zipCode == zipCode &&
-        o.district == district;
+    return o is AddressModel && o.street == street && o.number == number && o.city == city && o.state == state && o.country == country && o.zipCode == zipCode && o.district == district;
   }
 
   @override
   int get hashCode {
-    return street.hashCode ^
-        number.hashCode ^
-        city.hashCode ^
-        state.hashCode ^
-        country.hashCode ^
-        zipCode.hashCode ^
-        district.hashCode;
+    return street.hashCode ^ number.hashCode ^ city.hashCode ^ state.hashCode ^ country.hashCode ^ zipCode.hashCode ^ district.hashCode;
   }
 }

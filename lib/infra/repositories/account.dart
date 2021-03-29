@@ -12,7 +12,7 @@ import 'package:iugu/utils/constantes.dart';
 
 /// Api de operações em contas
 class Account extends IDisposable {
-  APIResource apiResource;
+  late APIResource apiResource;
 
   Account(Dio dio) {
     apiResource = APIResource(dio, "/accounts");
@@ -25,14 +25,8 @@ class Account extends IDisposable {
   /// <param name="userToken"> User API Token</param>
   /// <param name="accountId">Id da conta a ser validada</param>
   /// <returns>Resposta da API de validação da conta</returns>
-  Future<VerifyAccountResponseMessage> verifyUnderAccount(
-      VerifyAccountRequestMessage accountData,
-      String accountId,
-      String userToken) async {
-    var result = await apiResource.post(
-        data: accountData.toMap(),
-        partOfUrl: "/$accountId/request_verification",
-        apiUserToken: userToken);
+  Future<VerifyAccountResponseMessage> verifyUnderAccount(VerifyAccountRequestMessage accountData, String accountId, String userToken) async {
+    var result = await apiResource.post(data: accountData.toMap(), partOfUrl: "/$accountId/request_verification", apiUserToken: userToken);
     return VerifyAccountResponseMessage.fromMap(result);
   }
 
@@ -40,10 +34,8 @@ class Account extends IDisposable {
   /// <param name="accountId">Id da Conta</param>
   /// <param name="userToken">Token de Usuário</param>
   /// <returns></returns>
-  Future<GetAccountResponseMessage> getById(
-      String accountId, String userToken) async {
-    var result =
-        await apiResource.getById(id: accountId, apiUserToken: userToken);
+  Future<GetAccountResponseMessage> getById(String accountId, String userToken) async {
+    var result = await apiResource.getById(id: accountId, apiUserToken: userToken);
     return GetAccountResponseMessage.fromMap(result);
   }
 
@@ -52,10 +44,11 @@ class Account extends IDisposable {
   /// <param name="amount">Valor da retirada</param>
   /// <param name="customUserApiToken">Token customizado do usuário, utilizado em marketplaces</param>
   /// <returns>Resposta da API depedido de saque</returns>
-  Future<AccountRequestWithdrawResponse> requestWithdraw(
-      String targetAccountId, double amount, String customUserApiToken) async {
+  Future<AccountRequestWithdrawResponse> requestWithdraw(String targetAccountId, double amount, String customUserApiToken) async {
     var result = await apiResource.post(
-      data: {"amount": amount},
+      data: {
+        "amount": amount
+      },
       partOfUrl: "/$targetAccountId/request_withdraw",
       apiUserToken: customUserApiToken,
     );
@@ -67,19 +60,15 @@ class Account extends IDisposable {
   /// <param name="customUserApiToken">User token customizado da Api</param>
   /// <returns>Resposta da API depedido de saque</returns>
   Future<AccountRequestWithdrawResponse> requestWithdrawAll({
-    String targetAccountId,
-    String customUserApiToken,
+    required String targetAccountId,
+    required String customUserApiToken,
   }) async {
     var _resultAccountBalance = await apiResource.getById(id: targetAccountId);
-    var _accountBalanceValue =
-        GetAccountResponseMessage.fromMap(_resultAccountBalance);
-    var _convertedValue = double.parse(_accountBalanceValue.balance
-        .replaceAll(CurrencySymbol.BRL, '')
-        .replaceAll(",", "."));
-    var result = await apiResource.post(
-        data: {"amount": _convertedValue},
-        partOfUrl: "/$targetAccountId/request_withdraw",
-        apiUserToken: customUserApiToken);
+    var _accountBalanceValue = GetAccountResponseMessage.fromMap(_resultAccountBalance);
+    var _convertedValue = double.parse(_accountBalanceValue.balance.replaceAll(CurrencySymbol.BRL, '').replaceAll(",", "."));
+    var result = await apiResource.post(data: {
+      "amount": _convertedValue
+    }, partOfUrl: "/$targetAccountId/request_withdraw", apiUserToken: customUserApiToken);
     return AccountRequestWithdrawResponse.fromMap(result);
   }
 
@@ -87,9 +76,7 @@ class Account extends IDisposable {
   /// <param name="request">Configurações</param>
   /// <param name="accountApiToken">Live Api Token da conta</param>
   /// <returns></returns>
-  Future<GetAccountResponseMessage> configureAccount(
-      AccountConfigurationRequestMessage request,
-      String accountApiToken) async {
+  Future<GetAccountResponseMessage> configureAccount(AccountConfigurationRequestMessage request, String accountApiToken) async {
     var result = await apiResource.post(
       data: request.toMap(),
       partOfUrl: "/configuration",

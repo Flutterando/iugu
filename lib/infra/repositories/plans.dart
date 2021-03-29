@@ -7,8 +7,7 @@ import 'api_resource.dart';
 class Plans extends IDisposable {
   final APIResource apiResource;
 
-  Plans(IuguClient client)
-      : apiResource = APIResource(client.properties.dio, "/plans");
+  Plans(IuguClient client) : apiResource = APIResource(client.properties.dio, "/plans");
 
   //limit (opcional)	Máximo de registros retornados
   //start (opcional)	Quantos registros pular do início da pesquisa (muito utilizado para paginação)
@@ -19,32 +18,25 @@ class Plans extends IDisposable {
   //sortBy (opcional)	Um hash sendo a chave o nome do campo para ordenação e o valor sendo DESC ou ASC para descendente e ascendente, respectivamente
   //customer_id (opcional)	ID do Cliente
   Future<PaggedResponseMessage<PlanModel>> getAll({
-    String customApiToken,
+    String customApiToken = '',
     String filter = "?limit=1000",
   }) async {
     //  var queryStringFilter = filter?.ToQueryStringUrl();
-    var retorno = await apiResource.getById(
-        partOfUrl: filter, apiUserToken: customApiToken);
+    var retorno = await apiResource.getById(partOfUrl: filter, apiUserToken: customApiToken);
 
     return PaggedResponseMessage<PlanModel>(
       totalItems: retorno["totalItems"],
-      items:
-          (retorno["items"] as List).map((e) => PlanModel.fromMap(e)).toList(),
+      items: (retorno["items"] as List).map((e) => PlanModel.fromMap(e)).toList(),
     );
   }
 
-  Future<PlanModel> get({String id, String customApiToken}) async {
-    var result =
-        await apiResource.getById(id: id, apiUserToken: customApiToken);
+  Future<PlanModel> get({required String id, String customApiToken = ''}) async {
+    var result = await apiResource.getById(id: id, apiUserToken: customApiToken);
     return PlanModel.fromMap(result);
   }
 
-  Future<PlanModel> getByIdentifier(
-      {String planIdentifier, String customApiToken}) async {
-    var result = await apiResource.getById(
-        id: null,
-        partOfUrl: "/identifier/$planIdentifier",
-        apiUserToken: customApiToken);
+  Future<PlanModel> getByIdentifier({required String planIdentifier, String customApiToken = ''}) async {
+    var result = await apiResource.getById(partOfUrl: "/identifier/$planIdentifier", apiUserToken: customApiToken);
     return PlanModel.fromMap(result);
   }
 
@@ -53,10 +45,8 @@ class Plans extends IDisposable {
   /// </summary>
   /// <param name="plan">todo: describe plan parameter on CreateAsync</param>
   /// <param name="customApiToken">todo: describe customApiToken parameter on CreateAsync</param>
-  Future<PlanModel> create(
-      {PlanRequestMessage plan, String customApiToken}) async {
-    var result = await apiResource.post(
-        data: plan.toMap(), apiUserToken: customApiToken);
+  Future<PlanModel> create({required PlanRequestMessage plan, String customApiToken = ''}) async {
+    var result = await apiResource.post(data: plan.toMap(), apiUserToken: customApiToken);
 
     return PlanModel.fromMap(result);
   }

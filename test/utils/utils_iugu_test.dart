@@ -4,47 +4,28 @@ import 'package:iugu/utils/utils_iugu.dart';
 void main() {
   group("validateAccountID", () {
     test('valid', () {
-      var result =
-          UtilsIugu().validateAccountID("2978ace8-1f93-4c24-abc5-e3cd575983d4");
+      var result = UtilsIugu().validateAccountID("2978ace8-1f93-4c24-abc5-e3cd575983d4");
       expect(result, true);
     });
     test('invalid', () {
       expect(UtilsIugu().validateAccountID(""), false);
     });
-    test('invalid with null', () {
-      expect(UtilsIugu().validateAccountID(null), false);
-    });
 
     test('invalid with wrong size of caracters at 1 segment', () {
-      expect(
-          UtilsIugu()
-              .validateAccountID("2978ace8a-1f93-4c24-abc5-e3cd575983d4"),
-          false);
+      expect(UtilsIugu().validateAccountID("2978ace8a-1f93-4c24-abc5-e3cd575983d4"), false);
     });
     test('invalid with wrong size of caracters at 2 segment', () {
-      expect(
-          UtilsIugu()
-              .validateAccountID("2978ace8-1f932-4c24-abc5-e3cd575983d4"),
-          false);
+      expect(UtilsIugu().validateAccountID("2978ace8-1f932-4c24-abc5-e3cd575983d4"), false);
     });
     test('invalid with wrong size of caracters at 3 segment', () {
-      expect(
-          UtilsIugu()
-              .validateAccountID("2978ace8-1f93-4c245-abc5-e3cd575983d4"),
-          false);
+      expect(UtilsIugu().validateAccountID("2978ace8-1f93-4c245-abc5-e3cd575983d4"), false);
     });
 
     test('invalid with wrong size of caracters at 4 segment', () {
-      expect(
-          UtilsIugu()
-              .validateAccountID("2978ace8-1f93-4c24-abc55-e3cd575983d4"),
-          false);
+      expect(UtilsIugu().validateAccountID("2978ace8-1f93-4c24-abc55-e3cd575983d4"), false);
     });
     test('invalid with wrong size of caracters at 5 segment', () {
-      expect(
-          UtilsIugu()
-              .validateAccountID("2978ace8-1f93-4c24-abc5-e3cd575983d45"),
-          false);
+      expect(UtilsIugu().validateAccountID("2978ace8-1f93-4c24-abc5-e3cd575983d45"), false);
     });
   });
 
@@ -60,10 +41,7 @@ void main() {
       var result = UtilsIugu().validateCVV("elo", "123");
       expect(result, true);
     });
-    test("With Cvv null", () {
-      var result = UtilsIugu().validateCVV("elo", null);
-      expect(result, false);
-    });
+
     test("With Cvv Greater then 3", () {
       var result = UtilsIugu().validateCVV("elo", "1233");
       expect(result, false);
@@ -79,10 +57,7 @@ void main() {
       var result = UtilsIugu().validateCVV("visa", "123");
       expect(result, true);
     });
-    test("With Cvv null", () {
-      var result = UtilsIugu().validateCVV("visa", null);
-      expect(result, false);
-    });
+
     test("With Cvv Greater then 3", () {
       var result = UtilsIugu().validateCVV("visa", "1233");
       expect(result, false);
@@ -99,10 +74,7 @@ void main() {
       var result = UtilsIugu().validateCVV("mastercard", "123");
       expect(result, true);
     });
-    test("With Cvv null", () {
-      var result = UtilsIugu().validateCVV("mastercard", null);
-      expect(result, false);
-    });
+
     test("With Cvv Greater then 3", () {
       var result = UtilsIugu().validateCVV("mastercard", "1233");
       expect(result, false);
@@ -118,10 +90,7 @@ void main() {
       var result = UtilsIugu().validateCVV("amex", "1234");
       expect(result, true);
     });
-    test("With Cvv null", () {
-      var result = UtilsIugu().validateCVV("amex", null);
-      expect(result, false);
-    });
+
     test("With Cvv Greater then 4", () {
       var result = UtilsIugu().validateCVV("amex", "12335");
       expect(result, false);
@@ -138,10 +107,7 @@ void main() {
       var result = UtilsIugu().validateCVV("diners", "123");
       expect(result, true);
     });
-    test("With Cvv null", () {
-      var result = UtilsIugu().validateCVV("diners", null);
-      expect(result, false);
-    });
+
     test("With Cvv Greater then 3", () {
       var result = UtilsIugu().validateCVV("diners", "1233");
       expect(result, false);

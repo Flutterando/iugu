@@ -4,31 +4,31 @@ import 'package:iugu/domain/entities/plan_models_list.dart';
 
 class PlanRequestMessage {
   /// Nome do Plano
-  String name;
+  String? name;
 
   /// Identificador do Plano
-  String uniqueIdentifier;
+  String? uniqueIdentifier;
 
   /// Ciclo do Plano (Número inteiro maior que 0)
-  int cycle;
+  int? cycle;
 
   /// Tipo de Interval ("weeks" ou "months")
-  String intervalType;
+  String? intervalType;
 
   /// Moeda do Preço (Somente "BRL" por enquanto)
-  String currencyTypeName;
+  String? currencyTypeName;
 
   /// Preço do Plano em Centavos
-  int valueInCents;
+  int? valueInCents;
 
   /// Método de pagamento que será disponibilizado para as Faturas pertencentes a Assinaturas deste Plano ('all', 'credit_card' ou 'bank_slip')
-  String paymentMethod;
+  String? paymentMethod;
 
   /// Preços do Plano
-  List<PlanPrice> prices;
+  List<PlanPrice>? prices;
 
   /// Funcionalidades do Plano
-  List<PlanFeature> features;
+  List<PlanFeature>? features;
 
   PlanRequestMessage({
     this.name,
@@ -86,15 +86,15 @@ class PlanRequestMessage {
   // }
 
   PlanRequestMessage copyWith({
-    String name,
-    String uniqueIdentifier,
-    int cycle,
-    String intervalType,
-    String currencyTypeName,
-    int valueInCents,
-    String paymentMethod,
-    List<PlanPrice> prices,
-    List<PlanFeature> features,
+    String? name,
+    String? uniqueIdentifier,
+    int? cycle,
+    String? intervalType,
+    String? currencyTypeName,
+    int? valueInCents,
+    String? paymentMethod,
+    List<PlanPrice>? prices,
+    List<PlanFeature>? features,
   }) {
     return PlanRequestMessage(
       name: name ?? this.name,
@@ -118,14 +118,12 @@ class PlanRequestMessage {
       'currency': currencyTypeName,
       'value_cents': valueInCents,
       'payable_with': paymentMethod,
-      'prices': prices?.map((x) => x?.toMap())?.toList(),
-      'features': features?.map((x) => x?.toMap())?.toList(),
+      'prices': prices?.map((x) => x.toMap()).toList(),
+      'features': features?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory PlanRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PlanRequestMessage(
       name: map['name'],
       uniqueIdentifier: map['identifier'],
@@ -134,17 +132,14 @@ class PlanRequestMessage {
       currencyTypeName: map['currency'],
       valueInCents: map['value_cents'],
       paymentMethod: map['payable_with'],
-      prices:
-          List<PlanPrice>.from(map['prices']?.map((x) => PlanPrice.fromMap(x))),
-      features: List<PlanFeature>.from(
-          map['features']?.map((x) => PlanFeature.fromMap(x))),
+      prices: List<PlanPrice>.from(map['prices']?.map((x) => PlanPrice.fromMap(x))),
+      features: List<PlanFeature>.from(map['features']?.map((x) => PlanFeature.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PlanRequestMessage.fromJson(String source) =>
-      PlanRequestMessage.fromMap(json.decode(source));
+  factory PlanRequestMessage.fromJson(String source) => PlanRequestMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -155,26 +150,11 @@ class PlanRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PlanRequestMessage &&
-        o.name == name &&
-        o.uniqueIdentifier == uniqueIdentifier &&
-        o.cycle == cycle &&
-        o.intervalType == intervalType &&
-        o.currencyTypeName == currencyTypeName &&
-        o.valueInCents == valueInCents &&
-        o.paymentMethod == paymentMethod;
+    return o is PlanRequestMessage && o.name == name && o.uniqueIdentifier == uniqueIdentifier && o.cycle == cycle && o.intervalType == intervalType && o.currencyTypeName == currencyTypeName && o.valueInCents == valueInCents && o.paymentMethod == paymentMethod;
   }
 
   @override
   int get hashCode {
-    return name.hashCode ^
-        uniqueIdentifier.hashCode ^
-        cycle.hashCode ^
-        intervalType.hashCode ^
-        currencyTypeName.hashCode ^
-        valueInCents.hashCode ^
-        paymentMethod.hashCode ^
-        prices.hashCode ^
-        features.hashCode;
+    return name.hashCode ^ uniqueIdentifier.hashCode ^ cycle.hashCode ^ intervalType.hashCode ^ currencyTypeName.hashCode ^ valueInCents.hashCode ^ paymentMethod.hashCode ^ prices.hashCode ^ features.hashCode;
   }
 }

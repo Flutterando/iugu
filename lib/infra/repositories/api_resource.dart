@@ -10,15 +10,17 @@ class APIResource extends IApiResources {
   APIResource(this.dio, this.baseURI);
 
   @override
-  Future<Map<String, dynamic>> delete({String id, String apiUserToken}) async {
+  Future<Map<String, dynamic>> delete({String id = '', String apiUserToken = ''}) async {
     Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
-    if (apiUserToken != null && apiUserToken.trim() != "") {
+    if (apiUserToken.trim() != '') {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
-        queryParameters?.remove('api_token');
-        queryParameters?.addAll({'api_token': apiUserToken});
+        queryParameters.remove('api_token');
+        queryParameters.addAll({
+          'api_token': apiUserToken
+        });
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -26,7 +28,7 @@ class APIResource extends IApiResources {
 
     var url = '$baseURI';
 
-    if (id != null) {
+    if (id.isNotEmpty) {
       url += "/$id";
     }
 
@@ -43,18 +45,20 @@ class APIResource extends IApiResources {
 
   @override
   Future<Map<String, dynamic>> getById({
-    String id,
-    String partOfUrl,
-    String apiUserToken,
+    String id = '',
+    String partOfUrl = '',
+    String apiUserToken = '',
   }) async {
     Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
-    if (apiUserToken != null && apiUserToken.trim() != "") {
+    if (apiUserToken.isNotEmpty) {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
-        queryParameters?.remove('api_token');
-        queryParameters?.addAll({'api_token': apiUserToken});
+        queryParameters.remove('api_token');
+        queryParameters.addAll({
+          'api_token': apiUserToken
+        });
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -62,11 +66,11 @@ class APIResource extends IApiResources {
 
     var url = "$baseURI";
 
-    if (partOfUrl != null) {
+    if (partOfUrl.isNotEmpty) {
       url += '$partOfUrl';
     }
 
-    if (id != null) {
+    if (id.isNotEmpty) {
       url += "/$id";
     }
 
@@ -77,18 +81,20 @@ class APIResource extends IApiResources {
 
   @override
   Future<List<dynamic>> getAll({
-    String partOfUrl,
-    String apiUserToken,
+    String partOfUrl = '',
+    String apiUserToken = '',
   }) async {
     Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
-    if (apiUserToken != null && apiUserToken.trim() != "") {
+    if (apiUserToken.isNotEmpty) {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
 
-        queryParameters?.remove('api_token');
-        queryParameters?.addAll({'api_token': apiUserToken});
+        queryParameters.remove('api_token');
+        queryParameters.addAll({
+          'api_token': apiUserToken
+        });
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -96,7 +102,7 @@ class APIResource extends IApiResources {
 
     var url = "$baseURI";
 
-    if (partOfUrl != null) {
+    if (partOfUrl.isNotEmpty) {
       url += '$partOfUrl';
     }
 
@@ -107,31 +113,33 @@ class APIResource extends IApiResources {
 
   @override
   Future<Map<String, dynamic>> put({
-    String id,
-    String partOfUrl,
-    Map<String, dynamic> data,
-    String apiUserToken,
+    String id = '',
+    String partOfUrl = '',
+    Map<String, dynamic>? data,
+    String apiUserToken = '',
   }) async {
     Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
-    if (apiUserToken != null && apiUserToken.trim() != "") {
+    if (apiUserToken.isNotEmpty) {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
 
-        queryParameters?.remove('api_token');
-        queryParameters?.addAll({'api_token': apiUserToken});
+        queryParameters.remove('api_token');
+        queryParameters.addAll({
+          'api_token': apiUserToken
+        });
       }
 
       _dio.options.queryParameters = queryParameters;
     }
 
     var url = "$baseURI";
-    if (partOfUrl != null) {
+    if (partOfUrl.isNotEmpty) {
       url += '/$partOfUrl';
     }
 
-    if (id != null) {
+    if (id.isNotEmpty) {
       url += "/$id";
     }
 
@@ -146,19 +154,20 @@ class APIResource extends IApiResources {
   @override
   Future<Map<String, dynamic>> post({
     dynamic data,
-    String partOfUrl,
-    String apiUserToken,
+    String partOfUrl = '',
+    String? apiUserToken,
   }) async {
     Dio _dio = dio;
-    Map<String, dynamic> queryParameters =
-        dio.options.queryParameters.map((key, value) => MapEntry(key, value));
+    Map<String, dynamic> queryParameters = dio.options.queryParameters.map((key, value) => MapEntry(key, value));
 
-    if (apiUserToken != null && apiUserToken.trim() != "") {
+    if (apiUserToken?.isNotEmpty ?? false) {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
 
-        queryParameters?.remove('api_token');
-        queryParameters?.addAll({'api_token': apiUserToken});
+        queryParameters.remove('api_token');
+        queryParameters.addAll({
+          'api_token': apiUserToken
+        });
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -166,13 +175,17 @@ class APIResource extends IApiResources {
 
     var url = "$baseURI";
 
-    if (partOfUrl != null) {
+    if (partOfUrl.isNotEmpty) {
       url += '$partOfUrl';
     }
 
-    var result = await _dio.post(url, data: data);
-
-    return result.data is String ? json.decode(result.data) : result.data;
+    try {
+      var result = await _dio.post(url, data: data);
+      return result.data is String ? json.decode(result.data) : result.data;
+    } on DioError catch (e) {
+      print(e.response);
+      rethrow;
+    }
   }
 
   Dio copyDio(opt) {

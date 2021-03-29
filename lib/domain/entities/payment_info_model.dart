@@ -3,22 +3,22 @@ import 'dart:convert';
 /// Modelo que contém informações de pagamento
 class PaymentInfoModel {
   /// Número do Cartão de Crédito
-  String number;
+  String? number;
 
   /// CVV do Cartão de Crédito
-  String verificationValue;
+  String? verificationValue;
 
   /// Nome do Cliente como está no Cartão
-  String firstName;
+  String? firstName;
 
   /// Sobrenome do Cliente como está no Cartão
-  String lastName;
+  String? lastName;
 
   /// Mês de Vencimento no Formato MM (Ex: 01, 02, 12)
-  String month;
+  String? month;
 
   /// Ano de Vencimento no Formato YYYY (2014, 2015, 2016)
-  String year;
+  String? year;
 
   PaymentInfoModel({
     this.number,
@@ -30,12 +30,12 @@ class PaymentInfoModel {
   });
 
   PaymentInfoModel copyWith({
-    String number,
-    String verificationValue,
-    String firstName,
-    String lastName,
-    String month,
-    String year,
+    String? number,
+    String? verificationValue,
+    String? firstName,
+    String? lastName,
+    String? month,
+    String? year,
   }) {
     return PaymentInfoModel(
       number: number ?? this.number,
@@ -59,8 +59,6 @@ class PaymentInfoModel {
   }
 
   factory PaymentInfoModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PaymentInfoModel(
       number: map['number'],
       verificationValue: map['verificationValue'],
@@ -73,8 +71,7 @@ class PaymentInfoModel {
 
   String toJson() => json.encode(toMap());
 
-  factory PaymentInfoModel.fromJson(String source) =>
-      PaymentInfoModel.fromMap(json.decode(source));
+  factory PaymentInfoModel.fromJson(String source) => PaymentInfoModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -85,22 +82,11 @@ class PaymentInfoModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PaymentInfoModel &&
-        o.number == number &&
-        o.verificationValue == verificationValue &&
-        o.firstName == firstName &&
-        o.lastName == lastName &&
-        o.month == month &&
-        o.year == year;
+    return o is PaymentInfoModel && o.number == number && o.verificationValue == verificationValue && o.firstName == firstName && o.lastName == lastName && o.month == month && o.year == year;
   }
 
   @override
   int get hashCode {
-    return number.hashCode ^
-        verificationValue.hashCode ^
-        firstName.hashCode ^
-        lastName.hashCode ^
-        month.hashCode ^
-        year.hashCode;
+    return number.hashCode ^ verificationValue.hashCode ^ firstName.hashCode ^ lastName.hashCode ^ month.hashCode ^ year.hashCode;
   }
 }

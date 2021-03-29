@@ -6,13 +6,13 @@ class MarketplaceAccountsResponse {
   List<MarketPlaceAccountItem> accounts;
 
   MarketplaceAccountsResponse({
-    this.totalItems,
-    this.accounts,
+    required this.totalItems,
+    required this.accounts,
   });
 
   MarketplaceAccountsResponse copyWith({
-    int totalItems,
-    List<MarketPlaceAccountItem> accounts,
+    int? totalItems,
+    List<MarketPlaceAccountItem>? accounts,
   }) {
     return MarketplaceAccountsResponse(
       totalItems: totalItems ?? this.totalItems,
@@ -23,28 +23,23 @@ class MarketplaceAccountsResponse {
   Map<String, dynamic> toMap() {
     return {
       'totalItems': totalItems,
-      'items': accounts?.map((x) => x?.toMap())?.toList(),
+      'items': accounts.map((x) => x.toMap()).toList(),
     };
   }
 
   factory MarketplaceAccountsResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return MarketplaceAccountsResponse(
       totalItems: map['totalItems'],
-      accounts: List<MarketPlaceAccountItem>.from(
-          map['items']?.map((x) => MarketPlaceAccountItem.fromMap(x))),
+      accounts: List<MarketPlaceAccountItem>.from(map['items']?.map((x) => MarketPlaceAccountItem.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory MarketplaceAccountsResponse.fromJson(String source) =>
-      MarketplaceAccountsResponse.fromMap(json.decode(source));
+  factory MarketplaceAccountsResponse.fromJson(String source) => MarketplaceAccountsResponse.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'MarketplaceAccoutsResponse(totalItems: $totalItems, accounts: $accounts)';
+  String toString() => 'MarketplaceAccoutsResponse(totalItems: $totalItems, accounts: $accounts)';
 
   @override
   bool operator ==(Object o) {
@@ -63,15 +58,15 @@ class MarketPlaceAccountItem {
   bool verified;
 
   MarketPlaceAccountItem({
-    this.id,
-    this.name,
-    this.verified,
+    required this.id,
+    required this.name,
+    this.verified = false,
   });
 
   MarketPlaceAccountItem copyWith({
-    String id,
-    String name,
-    bool verified,
+    String? id,
+    String? name,
+    bool? verified,
   }) {
     return MarketPlaceAccountItem(
       id: id ?? this.id,
@@ -89,8 +84,6 @@ class MarketPlaceAccountItem {
   }
 
   factory MarketPlaceAccountItem.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return MarketPlaceAccountItem(
       id: map['id'],
       name: map['name'],
@@ -100,21 +93,16 @@ class MarketPlaceAccountItem {
 
   String toJson() => json.encode(toMap());
 
-  factory MarketPlaceAccountItem.fromJson(String source) =>
-      MarketPlaceAccountItem.fromMap(json.decode(source));
+  factory MarketPlaceAccountItem.fromJson(String source) => MarketPlaceAccountItem.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'MarketPlaceAccountItem(id: $id, name: $name, verified: $verified)';
+  String toString() => 'MarketPlaceAccountItem(id: $id, name: $name, verified: $verified)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is MarketPlaceAccountItem &&
-        o.id == id &&
-        o.name == name &&
-        o.verified == verified;
+    return o is MarketPlaceAccountItem && o.id == id && o.name == name && o.verified == verified;
   }
 
   @override

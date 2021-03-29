@@ -5,7 +5,7 @@ import 'package:iugu/domain/entities/payer_model.dart';
 
 class ChargeRequestMessage {
   /// Método de Pagamento (Atualmente só suporta bank_slip, que é o boleto) - Opicional se enviar o Token
-  String method;
+  String? method;
 
   /// ID do Token. Em caso de Marketplace, é possível enviar um token criado pela conta mestre - Opicional caso method seja bank_slip
   String token;
@@ -27,79 +27,57 @@ class ChargeRequestMessage {
   int months;
 
   /// Valor dos Descontos em centavos. Funciona apenas para Cobranças Diretas criadas com Itens - Opcional
-  int discountCents;
+  int? discountCents;
 
   /// Itens da Fatura que será gerada - Opcional caso seja enviado um invoice_id
-  List<InvoiceItem> invoiceItems;
+  List<InvoiceItem>? invoiceItems;
 
   /// Informações do Cliente para o Anti Fraude ou Boleto
   /// Necessário caso sua conta necessite de anti fraude ou para informações do boleto
-  PayerModel payerCustomer;
+  PayerModel? payerCustomer;
 
   //Se true, restringe o método de pagamento da cobrança para o definido em method, que no caso será apenas bank_slip.
   bool restrictPaymentMethod;
 
   ///Define o prazo em dias para o pagamento do boleto. Caso não seja enviado, aplica-se o prazo padrão de 3 dias corridos.
-  int bankSlipExtraDays;
+  int? bankSlipExtraDays;
 
   ///Por padrão, a fatura é cancelada caso haja falha na cobrança, a não ser que este parâmetro seja enviado como "true". Obs: Funcionalidade disponível apenas para faturas criadas no momento da cobrança.
   bool keepDunning;
 
   ChargeRequestMessage({
     this.method,
-    this.token,
-    this.customerPaymentMethodId,
-    this.restrictPaymentMethod,
-    this.customerId,
-    this.invoiceId,
-    this.email,
-    this.months,
+    this.token = '',
+    this.customerPaymentMethodId = '',
+    this.restrictPaymentMethod = false,
+    this.customerId = '',
+    this.invoiceId = '',
+    this.email = '',
+    this.months = 1,
     this.discountCents,
     this.invoiceItems,
     this.payerCustomer,
     this.bankSlipExtraDays,
-    this.keepDunning,
+    this.keepDunning = false,
   });
 
-  Map<String, dynamic> toMap() {
-    // if (customerPaymentMethodId == null) {
-    //   return {
-    //     'method': method,
-    //     'customer_id': customerId,
-    //     'invoice_id': invoiceId,
-    //     'email': email,
-    //     'months': months,
-    //     'discount_cents': discountCents,
-    //     'items': invoiceItems?.map((x) => x?.toMap())?.toList(),
-    //     'payer': payerCustomer?.toMap(),
-    //     'restrict_payment_method': restrictPaymentMethod,
-    //     'bank_slip_extra_days': bankSlipExtraDays,
-    //     'keep_dunning': keepDunning,
-    //   };
-    // }
-
-    var a = {
-      'method': method,
-      'token': token,
-      'customer_payment_method_id': customerPaymentMethodId,
-      'customer_id': customerId,
-      'invoice_id': invoiceId,
-      'email': email,
-      'months': months,
-      'discount_cents': discountCents,
-      'items': invoiceItems?.map((x) => x?.toMap())?.toList(),
-      'payer': payerCustomer?.toMap(),
-      'restrict_payment_method': restrictPaymentMethod,
-      'bank_slip_extra_days': bankSlipExtraDays,
-      'keep_dunning': keepDunning,
-    }..removeWhere((key, value) => value == null);
-
-    return a;
-  }
+  Map<String, dynamic> toMap() => {
+        'method': method,
+        'token': token,
+        'customer_payment_method_id': customerPaymentMethodId,
+        'customer_id': customerId,
+        'invoice_id': invoiceId,
+        'email': email,
+        'months': months,
+        'discount_cents': discountCents,
+        'items': invoiceItems?.map((x) => x.toMap()).toList(),
+        'payer': payerCustomer?.toMap(),
+        'restrict_payment_method': restrictPaymentMethod,
+        'bank_slip_extra_days': bankSlipExtraDays,
+        'keep_dunning': keepDunning,
+      }..removeWhere((key, value) => value == null || value == '');
 
   factory ChargeRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return ChargeRequestMessage(
       method: map['method'],
       token: map['token'],
@@ -109,8 +87,7 @@ class ChargeRequestMessage {
       email: map['email'],
       months: map['months'],
       discountCents: map['discount_cents'],
-      invoiceItems: List<InvoiceItem>.from(
-          map['items']?.map((x) => InvoiceItem.fromMap(x))),
+      invoiceItems: List<InvoiceItem>.from(map['items']?.map((x) => InvoiceItem.fromMap(x))),
       payerCustomer: PayerModel.fromMap(map['payer']),
       restrictPaymentMethod: map['restrict_payment_method'],
       bankSlipExtraDays: map['bank_slip_extra_days'],
@@ -120,8 +97,7 @@ class ChargeRequestMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory ChargeRequestMessage.fromJson(String source) =>
-      ChargeRequestMessage.fromMap(json.decode(source));
+  factory ChargeRequestMessage.fromJson(String source) => ChargeRequestMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -132,29 +108,11 @@ class ChargeRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is ChargeRequestMessage &&
-        o.method == method &&
-        o.token == token &&
-        o.customerPaymentMethodId == customerPaymentMethodId &&
-        o.customerId == customerId &&
-        o.invoiceId == invoiceId &&
-        o.email == email &&
-        o.months == months &&
-        o.discountCents == discountCents &&
-        o.payerCustomer == payerCustomer;
+    return o is ChargeRequestMessage && o.method == method && o.token == token && o.customerPaymentMethodId == customerPaymentMethodId && o.customerId == customerId && o.invoiceId == invoiceId && o.email == email && o.months == months && o.discountCents == discountCents && o.payerCustomer == payerCustomer;
   }
 
   @override
   int get hashCode {
-    return method.hashCode ^
-        token.hashCode ^
-        customerPaymentMethodId.hashCode ^
-        customerId.hashCode ^
-        invoiceId.hashCode ^
-        email.hashCode ^
-        months.hashCode ^
-        discountCents.hashCode ^
-        invoiceItems.hashCode ^
-        payerCustomer.hashCode;
+    return method.hashCode ^ token.hashCode ^ customerPaymentMethodId.hashCode ^ customerId.hashCode ^ invoiceId.hashCode ^ email.hashCode ^ months.hashCode ^ discountCents.hashCode ^ invoiceItems.hashCode ^ payerCustomer.hashCode;
   }
 }

@@ -12,11 +12,11 @@ class GetAccountResponseMessage {
 
   /// Data de criação
   //[JsonProperty("created_at")]
-  DateTime createdAt;
+  DateTime? createdAt;
 
   /// Data da ultima atualização
   //[JsonProperty("updated_at")]
-  DateTime updatedAt;
+  DateTime? updatedAt;
 
   /// Pode receber pagamentos
   //[JsonProperty("can_receive")]
@@ -32,7 +32,7 @@ class GetAccountResponseMessage {
 
   /// Dados enviados na última requisição de verificação
   //[JsonProperty("last_verification_request_data")]
-  AccountModel lastAccountVerificationRequestData;
+  AccountModel? lastAccountVerificationRequestData;
 
   /// Descrição do motivo de rejeição da verificação da conta, caso contrário é nulo
   //[JsonProperty("last_verification_request_feedback")]
@@ -52,7 +52,7 @@ class GetAccountResponseMessage {
 
   /// Último saque
   //[JsonProperty("last_withdraw")]
-  WithdrawModel lastWithdraw;
+  WithdrawModel? lastWithdraw;
 
   /// Total de assinantes
   //[JsonProperty("total_subscriptions")]
@@ -119,72 +119,72 @@ class GetAccountResponseMessage {
   String clientSmallLogoUrl;
 
   /// Informações extras da conta, baseadas em chave valor
-  List<Information> extraInformations;
+  List<Information>? extraInformations;
 
   GetAccountResponseMessage({
-    this.accountId,
-    this.name,
+    this.accountId = '',
+    this.name = '',
     this.createdAt,
     this.updatedAt,
-    this.canReceive,
-    this.isVerified,
-    this.lastAccountVerificationRequestStatus,
+    this.canReceive = false,
+    this.isVerified = false,
+    this.lastAccountVerificationRequestStatus = '',
     this.lastAccountVerificationRequestData,
-    this.lastAccountVerificationRequestDataFeedback,
-    this.changePlanType,
-    this.subscriptionsTrialPeriod,
-    this.disableEmails,
+    this.lastAccountVerificationRequestDataFeedback = '',
+    this.changePlanType = 0,
+    this.subscriptionsTrialPeriod = 0,
+    this.disableEmails = false,
     this.lastWithdraw,
-    this.totalSubscriptions,
-    this.replyToEmail,
-    this.runningInTestMode,
-    this.isMarketplace,
-    this.enableAutoWithdraw,
-    this.balance,
-    this.protectedBalance,
-    this.payableBalance,
-    this.receivableBalance,
-    this.commissionBalance,
-    this.lastMonthVolume,
-    this.currentVolume,
-    this.taxesPaidLastMonth,
-    this.taxesPaidMonth,
-    this.clientLogoUrl,
-    this.clientSmallLogoUrl,
+    this.totalSubscriptions = 0,
+    this.replyToEmail = '',
+    this.runningInTestMode = false,
+    this.isMarketplace = false,
+    this.enableAutoWithdraw = false,
+    this.balance = '',
+    this.protectedBalance = '',
+    this.payableBalance = '',
+    this.receivableBalance = '',
+    this.commissionBalance = '',
+    this.lastMonthVolume = '',
+    this.currentVolume = '',
+    this.taxesPaidLastMonth = '',
+    this.taxesPaidMonth = '',
+    this.clientLogoUrl = '',
+    this.clientSmallLogoUrl = '',
     this.extraInformations,
   });
 
   GetAccountResponseMessage copyWith({
-    String accountId,
-    String name,
-    DateTime createdAt,
-    DateTime updatedAt,
-    bool canReceive,
-    bool isVerified,
-    String lastAccountVerificationRequestStatus,
-    AccountModel lastAccountVerificationRequestData,
-    String lastAccountVerificationRequestDataFeedback,
-    int changePlanType,
-    int subscriptionsTrialPeriod,
-    bool disableEmails,
-    WithdrawModel lastWithdraw,
-    int totalSubscriptions,
-    String replyToEmail,
-    bool runningInTestMode,
-    bool isMarketplace,
-    bool enableAutoWithdraw,
-    String balance,
-    String protectedBalance,
-    String payableBalance,
-    String receivableBalance,
-    String commissionBalance,
-    String lastMonthVolume,
-    String currentVolume,
-    String taxesPaidLastMonth,
-    String taxesPaidMonth,
-    String clientLogoUrl,
-    String clientSmallLogoUrl,
-    List<Information> extraInformations,
+    String? accountId,
+    String? name,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    bool? canReceive,
+    bool? isVerified,
+    String? lastAccountVerificationRequestStatus,
+    AccountModel? lastAccountVerificationRequestData,
+    String? lastAccountVerificationRequestDataFeedback,
+    int? changePlanType,
+    int? subscriptionsTrialPeriod,
+    bool? disableEmails,
+    WithdrawModel? lastWithdraw,
+    int? totalSubscriptions,
+    String? replyToEmail,
+    bool? runningInTestMode,
+    bool? isMarketplace,
+    bool? enableAutoWithdraw,
+    String? balance,
+    String? protectedBalance,
+    String? payableBalance,
+    String? receivableBalance,
+    String? commissionBalance,
+    String? lastMonthVolume,
+    String? currentVolume,
+    String? taxesPaidLastMonth,
+    String? taxesPaidMonth,
+    String? clientLogoUrl,
+    String? clientSmallLogoUrl,
+    List<Information>? extraInformations,
   }) {
     return GetAccountResponseMessage(
       accountId: accountId ?? this.accountId,
@@ -193,17 +193,11 @@ class GetAccountResponseMessage {
       updatedAt: updatedAt ?? this.updatedAt,
       canReceive: canReceive ?? this.canReceive,
       isVerified: isVerified ?? this.isVerified,
-      lastAccountVerificationRequestStatus:
-          lastAccountVerificationRequestStatus ??
-              this.lastAccountVerificationRequestStatus,
-      lastAccountVerificationRequestData: lastAccountVerificationRequestData ??
-          this.lastAccountVerificationRequestData,
-      lastAccountVerificationRequestDataFeedback:
-          lastAccountVerificationRequestDataFeedback ??
-              this.lastAccountVerificationRequestDataFeedback,
+      lastAccountVerificationRequestStatus: lastAccountVerificationRequestStatus ?? this.lastAccountVerificationRequestStatus,
+      lastAccountVerificationRequestData: lastAccountVerificationRequestData ?? this.lastAccountVerificationRequestData,
+      lastAccountVerificationRequestDataFeedback: lastAccountVerificationRequestDataFeedback ?? this.lastAccountVerificationRequestDataFeedback,
       changePlanType: changePlanType ?? this.changePlanType,
-      subscriptionsTrialPeriod:
-          subscriptionsTrialPeriod ?? this.subscriptionsTrialPeriod,
+      subscriptionsTrialPeriod: subscriptionsTrialPeriod ?? this.subscriptionsTrialPeriod,
       disableEmails: disableEmails ?? this.disableEmails,
       lastWithdraw: lastWithdraw ?? this.lastWithdraw,
       totalSubscriptions: totalSubscriptions ?? this.totalSubscriptions,
@@ -235,10 +229,8 @@ class GetAccountResponseMessage {
       'can_receive': canReceive,
       'is_verified': isVerified,
       'last_verification_request_status': lastAccountVerificationRequestStatus,
-      'last_verification_request_data':
-          lastAccountVerificationRequestData?.toMap(),
-      'last_verification_request_feedback':
-          lastAccountVerificationRequestDataFeedback,
+      'last_verification_request_data': lastAccountVerificationRequestData?.toMap(),
+      'last_verification_request_feedback': lastAccountVerificationRequestDataFeedback,
       'change_plan_type': changePlanType,
       'subscriptions_trial_period': subscriptionsTrialPeriod,
       'disable_emails': disableEmails,
@@ -259,38 +251,25 @@ class GetAccountResponseMessage {
       'taxes_paid_this_month': taxesPaidMonth,
       'custom_logo_url': clientLogoUrl,
       'custom_logo_small_url': clientSmallLogoUrl,
-      'informations': extraInformations?.map((x) => x?.toMap())?.toList(),
+      'informations': extraInformations?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory GetAccountResponseMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return GetAccountResponseMessage(
       accountId: map['id'],
       name: map['name'],
-      createdAt: map['created_at'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['created_at'])
-          : null,
-      updatedAt: map['updated_at'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['updated_at'])
-          : null,
+      createdAt: map['created_at'] != null ? DateTime.fromMillisecondsSinceEpoch(map['created_at']) : null,
+      updatedAt: map['updated_at'] != null ? DateTime.fromMillisecondsSinceEpoch(map['updated_at']) : null,
       canReceive: map['can_receive'],
       isVerified: map['is_verified'],
-      lastAccountVerificationRequestStatus:
-          map['last_verification_request_status'],
-      lastAccountVerificationRequestData:
-          map['last_verification_request_data'] == null
-              ? null
-              : AccountModel.fromMap(map['last_verification_request_data']),
-      lastAccountVerificationRequestDataFeedback:
-          map['last_verification_request_feedback'],
+      lastAccountVerificationRequestStatus: map['last_verification_request_status'],
+      lastAccountVerificationRequestData: map['last_verification_request_data'] == null ? null : AccountModel.fromMap(map['last_verification_request_data']),
+      lastAccountVerificationRequestDataFeedback: map['last_verification_request_feedback'],
       changePlanType: map['change_plan_type'],
       subscriptionsTrialPeriod: map['subscriptions_trial_period'],
       disableEmails: map['disable_emails'],
-      lastWithdraw: map['last_withdraw'] == null
-          ? null
-          : WithdrawModel.fromMap(map['last_withdraw']),
+      lastWithdraw: map['last_withdraw'] == null ? null : WithdrawModel.fromMap(map['last_withdraw']),
       totalSubscriptions: map['total_subscriptions'],
       replyToEmail: map['reply_to'],
       runningInTestMode: map['webapp_on_test_mode'],
@@ -307,17 +286,13 @@ class GetAccountResponseMessage {
       taxesPaidMonth: map['taxes_paid_this_month'],
       clientLogoUrl: map['custom_logo_url'],
       clientSmallLogoUrl: map['custom_logo_small_url'],
-      extraInformations: map['informations'] == null
-          ? null
-          : List<Information>.from(
-              map['informations']?.map((x) => Information.fromMap(x))),
+      extraInformations: map['informations'] == null ? null : List<Information>.from(map['informations']?.map((x) => Information.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory GetAccountResponseMessage.fromJson(String source) =>
-      GetAccountResponseMessage.fromMap(json.decode(source));
+  factory GetAccountResponseMessage.fromJson(String source) => GetAccountResponseMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -328,73 +303,12 @@ class GetAccountResponseMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is GetAccountResponseMessage &&
-        o.accountId == accountId &&
-        o.name == name &&
-        o.createdAt == createdAt &&
-        o.updatedAt == updatedAt &&
-        o.canReceive == canReceive &&
-        o.isVerified == isVerified &&
-        o.lastAccountVerificationRequestStatus ==
-            lastAccountVerificationRequestStatus &&
-        o.lastAccountVerificationRequestData ==
-            lastAccountVerificationRequestData &&
-        o.lastAccountVerificationRequestDataFeedback ==
-            lastAccountVerificationRequestDataFeedback &&
-        o.changePlanType == changePlanType &&
-        o.subscriptionsTrialPeriod == subscriptionsTrialPeriod &&
-        o.disableEmails == disableEmails &&
-        o.lastWithdraw == lastWithdraw &&
-        o.totalSubscriptions == totalSubscriptions &&
-        o.replyToEmail == replyToEmail &&
-        o.runningInTestMode == runningInTestMode &&
-        o.isMarketplace == isMarketplace &&
-        o.enableAutoWithdraw == enableAutoWithdraw &&
-        o.balance == balance &&
-        o.protectedBalance == protectedBalance &&
-        o.payableBalance == payableBalance &&
-        o.receivableBalance == receivableBalance &&
-        o.commissionBalance == commissionBalance &&
-        o.lastMonthVolume == lastMonthVolume &&
-        o.currentVolume == currentVolume &&
-        o.taxesPaidLastMonth == taxesPaidLastMonth &&
-        o.taxesPaidMonth == taxesPaidMonth &&
-        o.clientLogoUrl == clientLogoUrl &&
-        o.clientSmallLogoUrl == clientSmallLogoUrl;
+    return o is GetAccountResponseMessage && o.accountId == accountId && o.name == name && o.createdAt == createdAt && o.updatedAt == updatedAt && o.canReceive == canReceive && o.isVerified == isVerified && o.lastAccountVerificationRequestStatus == lastAccountVerificationRequestStatus && o.lastAccountVerificationRequestData == lastAccountVerificationRequestData && o.lastAccountVerificationRequestDataFeedback == lastAccountVerificationRequestDataFeedback && o.changePlanType == changePlanType && o.subscriptionsTrialPeriod == subscriptionsTrialPeriod && o.disableEmails == disableEmails && o.lastWithdraw == lastWithdraw && o.totalSubscriptions == totalSubscriptions && o.replyToEmail == replyToEmail && o.runningInTestMode == runningInTestMode && o.isMarketplace == isMarketplace && o.enableAutoWithdraw == enableAutoWithdraw && o.balance == balance && o.protectedBalance == protectedBalance && o.payableBalance == payableBalance && o.receivableBalance == receivableBalance && o.commissionBalance == commissionBalance && o.lastMonthVolume == lastMonthVolume && o.currentVolume == currentVolume && o.taxesPaidLastMonth == taxesPaidLastMonth && o.taxesPaidMonth == taxesPaidMonth && o.clientLogoUrl == clientLogoUrl && o.clientSmallLogoUrl == clientSmallLogoUrl;
   }
 
   @override
   int get hashCode {
-    return accountId.hashCode ^
-        name.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode ^
-        canReceive.hashCode ^
-        isVerified.hashCode ^
-        lastAccountVerificationRequestStatus.hashCode ^
-        lastAccountVerificationRequestData.hashCode ^
-        lastAccountVerificationRequestDataFeedback.hashCode ^
-        changePlanType.hashCode ^
-        subscriptionsTrialPeriod.hashCode ^
-        disableEmails.hashCode ^
-        lastWithdraw.hashCode ^
-        totalSubscriptions.hashCode ^
-        replyToEmail.hashCode ^
-        runningInTestMode.hashCode ^
-        isMarketplace.hashCode ^
-        enableAutoWithdraw.hashCode ^
-        balance.hashCode ^
-        protectedBalance.hashCode ^
-        payableBalance.hashCode ^
-        receivableBalance.hashCode ^
-        commissionBalance.hashCode ^
-        lastMonthVolume.hashCode ^
-        currentVolume.hashCode ^
-        taxesPaidLastMonth.hashCode ^
-        taxesPaidMonth.hashCode ^
-        clientLogoUrl.hashCode ^
-        clientSmallLogoUrl.hashCode ^
-        extraInformations.hashCode;
+    return accountId.hashCode ^ name.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode ^ canReceive.hashCode ^ isVerified.hashCode ^ lastAccountVerificationRequestStatus.hashCode ^ lastAccountVerificationRequestData.hashCode ^ lastAccountVerificationRequestDataFeedback.hashCode ^ changePlanType.hashCode ^ subscriptionsTrialPeriod.hashCode ^ disableEmails.hashCode ^ lastWithdraw.hashCode ^ totalSubscriptions.hashCode ^ replyToEmail.hashCode ^ runningInTestMode.hashCode ^ isMarketplace.hashCode ^ enableAutoWithdraw.hashCode ^ balance.hashCode ^ protectedBalance.hashCode ^ payableBalance.hashCode ^ receivableBalance.hashCode ^ commissionBalance.hashCode ^ lastMonthVolume.hashCode ^ currentVolume.hashCode ^ taxesPaidLastMonth.hashCode ^ taxesPaidMonth.hashCode ^ clientLogoUrl.hashCode ^ clientSmallLogoUrl.hashCode ^ extraInformations.hashCode;
   }
 }
 
@@ -437,31 +351,31 @@ class WithdrawModel {
   String updatedAt;
 
   WithdrawModel({
-    this.id,
-    this.accountId,
-    this.amount,
-    this.bank,
-    this.bankAgency,
-    this.accountType,
-    this.bankAccountNumber,
-    this.createdAt,
-    this.feedback,
-    this.status,
-    this.updatedAt,
+    this.id = '',
+    this.accountId = '',
+    this.amount = '',
+    this.bank = '',
+    this.bankAgency = '',
+    this.accountType = '',
+    this.bankAccountNumber = '',
+    this.createdAt = '',
+    this.feedback = '',
+    this.status = '',
+    this.updatedAt = '',
   });
 
   WithdrawModel copyWith({
-    String id,
-    String accountId,
-    String amount,
-    String bank,
-    String bankAgency,
-    String accountType,
-    String bankAccountNumber,
-    String createdAt,
-    String feedback,
-    String status,
-    String updatedAt,
+    String? id,
+    String? accountId,
+    String? amount,
+    String? bank,
+    String? bankAgency,
+    String? accountType,
+    String? bankAccountNumber,
+    String? createdAt,
+    String? feedback,
+    String? status,
+    String? updatedAt,
   }) {
     return WithdrawModel(
       id: id ?? this.id,
@@ -495,8 +409,6 @@ class WithdrawModel {
   }
 
   factory WithdrawModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return WithdrawModel(
       id: map['id'],
       accountId: map['account_id'],
@@ -514,8 +426,7 @@ class WithdrawModel {
 
   String toJson() => json.encode(toMap());
 
-  factory WithdrawModel.fromJson(String source) =>
-      WithdrawModel.fromMap(json.decode(source));
+  factory WithdrawModel.fromJson(String source) => WithdrawModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -526,33 +437,12 @@ class WithdrawModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is WithdrawModel &&
-        o.id == id &&
-        o.accountId == accountId &&
-        o.amount == amount &&
-        o.bank == bank &&
-        o.bankAgency == bankAgency &&
-        o.accountType == accountType &&
-        o.bankAccountNumber == bankAccountNumber &&
-        o.createdAt == createdAt &&
-        o.feedback == feedback &&
-        o.status == status &&
-        o.updatedAt == updatedAt;
+    return o is WithdrawModel && o.id == id && o.accountId == accountId && o.amount == amount && o.bank == bank && o.bankAgency == bankAgency && o.accountType == accountType && o.bankAccountNumber == bankAccountNumber && o.createdAt == createdAt && o.feedback == feedback && o.status == status && o.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        accountId.hashCode ^
-        amount.hashCode ^
-        bank.hashCode ^
-        bankAgency.hashCode ^
-        accountType.hashCode ^
-        bankAccountNumber.hashCode ^
-        createdAt.hashCode ^
-        feedback.hashCode ^
-        status.hashCode ^
-        updatedAt.hashCode;
+    return id.hashCode ^ accountId.hashCode ^ amount.hashCode ^ bank.hashCode ^ bankAgency.hashCode ^ accountType.hashCode ^ bankAccountNumber.hashCode ^ createdAt.hashCode ^ feedback.hashCode ^ status.hashCode ^ updatedAt.hashCode;
   }
 }
 
@@ -565,13 +455,13 @@ class Information {
   String value;
 
   Information({
-    this.key,
-    this.value,
+    required this.key,
+    required this.value,
   });
 
   Information copyWith({
-    String key,
-    String value,
+    String? key,
+    String? value,
   }) {
     return Information(
       key: key ?? this.key,
@@ -587,8 +477,6 @@ class Information {
   }
 
   factory Information.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Information(
       key: map['key'],
       value: map['value'],
@@ -597,8 +485,7 @@ class Information {
 
   String toJson() => json.encode(toMap());
 
-  factory Information.fromJson(String source) =>
-      Information.fromMap(json.decode(source));
+  factory Information.fromJson(String source) => Information.fromMap(json.decode(source));
 
   @override
   String toString() => 'Information(key: $key, value: $value)';

@@ -7,21 +7,23 @@ class PaymentTokenResponse {
   /// Método de Pagamento (atualmente somente credit_card)
   String method;
 
-  ExtraInfo extraInfo;
+  ExtraInfo? extraInfo;
 
   PaymentTokenResponse({
-    this.id,
-    this.method,
+    required this.id,
+    required this.method,
     this.extraInfo,
   });
 
   PaymentTokenResponse copyWith({
-    String id,
-    String method,
+    String? id,
+    String? method,
+    ExtraInfo? extraInfo,
   }) {
     return PaymentTokenResponse(
       id: id ?? this.id,
       method: method ?? this.method,
+      extraInfo: extraInfo ?? this.extraInfo,
     );
   }
 
@@ -29,23 +31,17 @@ class PaymentTokenResponse {
     return {
       'id': id,
       'method': method,
-      'extra_info': extraInfo.toMap(),
+      'extra_info': extraInfo?.toMap(),
     };
   }
 
   factory PaymentTokenResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return PaymentTokenResponse(
-        id: map['id'],
-        method: map['method'],
-        extraInfo: ExtraInfo.fromMap(map['extra_info']));
+    return PaymentTokenResponse(id: map['id'], method: map['method'], extraInfo: ExtraInfo.fromMap(map['extra_info']));
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PaymentTokenResponse.fromJson(String source) =>
-      PaymentTokenResponse.fromMap(json.decode(source));
+  factory PaymentTokenResponse.fromJson(String source) => PaymentTokenResponse.fromMap(json.decode(source));
 
   @override
   String toString() => 'PaymentTokenResponse(id: $id, method: $method)';
@@ -63,12 +59,12 @@ class PaymentTokenResponse {
 
 class ExtraInfo {
   ExtraInfo({
-    this.bin,
-    this.year,
-    this.month,
-    this.brand,
-    this.holderName,
-    this.displayNumber,
+    required this.bin,
+    required this.year,
+    required this.month,
+    required this.brand,
+    required this.holderName,
+    required this.displayNumber,
   });
 
   final String bin;
@@ -79,12 +75,12 @@ class ExtraInfo {
   final String displayNumber;
 
   ExtraInfo copyWith({
-    String bin,
-    int year,
-    int month,
-    String brand,
-    String holderName,
-    String displayNumber,
+    String? bin,
+    int? year,
+    int? month,
+    String? brand,
+    String? holderName,
+    String? displayNumber,
   }) =>
       ExtraInfo(
         bin: bin ?? this.bin,

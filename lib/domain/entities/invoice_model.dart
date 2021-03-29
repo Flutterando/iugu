@@ -5,43 +5,43 @@ import 'data_entry/logs.dart';
 class InvoiceModel {
   String id;
   String dueDate;
-  String currency;
-  Object discountCents;
-  String email;
-  int itemsTotalCents;
-  Object notificationUrl;
-  Object returnUrl;
-  String status;
-  Object taxCents;
-  String updatedAt;
-  int totalCents;
-  String totalPaid;
-  int totalPaidCents;
-  Object paidAt;
-  int paidCents;
-  String paid;
-  String secureId;
-  String secureUrl;
-  Object customerId;
-  Object userId;
-  String total;
-  String taxesPaid;
-  Object interest;
-  Object discount;
-  String createdAt;
-  Object refundable;
-  Object installments;
-  BankSlip bankSlip;
-  List<Item> items;
-  List<Variable> variables;
-  List<CustomVariables> customVariables;
-  bool earlyPaymentDiscount;
-  List<EarlyPaymentDiscounts> earlyPaymentDiscounts;
-  List<Logs> logs;
+  String? currency;
+  Object? discountCents;
+  String? email;
+  int? itemsTotalCents;
+  Object? notificationUrl;
+  Object? returnUrl;
+  String? status;
+  Object? taxCents;
+  String? updatedAt;
+  int? totalCents;
+  String? totalPaid;
+  int? totalPaidCents;
+  Object? paidAt;
+  int? paidCents;
+  String? paid;
+  String? secureId;
+  String? secureUrl;
+  Object? customerId;
+  Object? userId;
+  String? total;
+  String? taxesPaid;
+  Object? interest;
+  Object? discount;
+  String? createdAt;
+  Object? refundable;
+  Object? installments;
+  BankSlip? bankSlip;
+  List<Item>? items;
+  List<Variable>? variables;
+  List<CustomVariables>? customVariables;
+  bool? earlyPaymentDiscount;
+  List<EarlyPaymentDiscounts>? earlyPaymentDiscounts;
+  List<Logs>? logs;
 
   InvoiceModel({
-    this.id,
-    this.dueDate,
+    required this.id,
+    this.dueDate = '',
     this.currency,
     this.discountCents,
     this.email,
@@ -78,41 +78,41 @@ class InvoiceModel {
   });
 
   InvoiceModel copyWith({
-    String id,
-    String dueDate,
-    String currency,
-    Object discountCents,
-    String email,
-    int itemsTotalCents,
-    Object notificationUrl,
-    Object returnUrl,
-    String status,
-    Object taxCents,
-    String updatedAt,
-    int totalCents,
-    String totalPaid,
-    int totalPaidCents,
-    Object paidAt,
-    int paidCents,
-    String paid,
-    String secureId,
-    String secureUrl,
-    Object customerId,
-    Object userId,
-    String total,
-    String taxesPaid,
-    Object interest,
-    Object discount,
-    String createdAt,
-    Object refundable,
-    Object installments,
-    BankSlip bankSlip,
-    List<Item> items,
-    List<Variable> variables,
-    List<CustomVariables> customVariables,
-    bool earlyPaymentDiscount,
-    List<EarlyPaymentDiscounts> earlyPaymentDiscounts,
-    List<Logs> logs,
+    String? id,
+    String? dueDate,
+    String? currency,
+    Object? discountCents,
+    String? email,
+    int? itemsTotalCents,
+    Object? notificationUrl,
+    Object? returnUrl,
+    String? status,
+    Object? taxCents,
+    String? updatedAt,
+    int? totalCents,
+    String? totalPaid,
+    int? totalPaidCents,
+    Object? paidAt,
+    int? paidCents,
+    String? paid,
+    String? secureId,
+    String? secureUrl,
+    Object? customerId,
+    Object? userId,
+    String? total,
+    String? taxesPaid,
+    Object? interest,
+    Object? discount,
+    String? createdAt,
+    Object? refundable,
+    Object? installments,
+    BankSlip? bankSlip,
+    List<Item>? items,
+    List<Variable>? variables,
+    List<CustomVariables>? customVariables,
+    bool? earlyPaymentDiscount,
+    List<EarlyPaymentDiscounts>? earlyPaymentDiscounts,
+    List<Logs>? logs,
   }) {
     return InvoiceModel(
       id: id ?? this.id,
@@ -148,8 +148,7 @@ class InvoiceModel {
       variables: variables ?? this.variables,
       customVariables: customVariables ?? this.customVariables,
       earlyPaymentDiscount: earlyPaymentDiscount ?? this.earlyPaymentDiscount,
-      earlyPaymentDiscounts:
-          earlyPaymentDiscounts ?? this.earlyPaymentDiscounts,
+      earlyPaymentDiscounts: earlyPaymentDiscounts ?? this.earlyPaymentDiscounts,
       logs: logs ?? this.logs,
     );
   }
@@ -185,19 +184,16 @@ class InvoiceModel {
       'refundable': refundable,
       'installments': installments,
       'bank_slip': bankSlip,
-      'items': items?.map((x) => x?.toMap())?.toList(),
-      'variables': variables?.map((x) => x?.toMap())?.toList(),
-      'custom_variables': customVariables?.map((x) => x?.toMap())?.toList(),
+      'items': items?.map((x) => x.toMap()).toList(),
+      'variables': variables?.map((x) => x.toMap()).toList(),
+      'custom_variables': customVariables?.map((x) => x.toMap()).toList(),
       'early_payment_discount': earlyPaymentDiscount,
-      'early_payment_discounts':
-          earlyPaymentDiscounts?.map((x) => x?.toMap())?.toList(),
-      'logs': logs?.map((x) => x?.toMap())?.toList(),
+      'early_payment_discounts': earlyPaymentDiscounts?.map((x) => x.toMap()).toList(),
+      'logs': logs?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory InvoiceModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return InvoiceModel(
       id: map['id'],
       dueDate: map['due_date'],
@@ -227,24 +223,19 @@ class InvoiceModel {
       createdAt: map['created_at'],
       refundable: map['refundable'],
       installments: map['installments'],
-      bankSlip: BankSlip.fromMap(map['bank_slip']),
+      bankSlip: map['bank_slip'] != null ? BankSlip.fromMap(map['bank_slip']) : null,
       items: List<Item>.from(map['items']?.map((x) => Item.fromMap(x))),
-      variables: List<Variable>.from(
-          map['variables']?.map((x) => Variable.fromMap(x))),
-      customVariables: List<CustomVariables>.from(
-          map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
+      variables: List<Variable>.from(map['variables']?.map((x) => Variable.fromMap(x))),
+      customVariables: List<CustomVariables>.from(map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
       earlyPaymentDiscount: map['early_payment_discount'],
-      earlyPaymentDiscounts: List<EarlyPaymentDiscounts>.from(
-          map['early_payment_discounts']
-              ?.map((x) => EarlyPaymentDiscounts.fromMap(x))),
+      earlyPaymentDiscounts: List<EarlyPaymentDiscounts>.from(map['early_payment_discounts']?.map((x) => EarlyPaymentDiscounts.fromMap(x))),
       logs: List<Logs>.from(map['logs']?.map((x) => Logs.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory InvoiceModel.fromJson(String source) =>
-      InvoiceModel.fromMap(json.decode(source));
+  factory InvoiceModel.fromJson(String source) => InvoiceModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -255,76 +246,12 @@ class InvoiceModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is InvoiceModel &&
-        o.id == id &&
-        o.dueDate == dueDate &&
-        o.currency == currency &&
-        o.discountCents == discountCents &&
-        o.email == email &&
-        o.itemsTotalCents == itemsTotalCents &&
-        o.notificationUrl == notificationUrl &&
-        o.returnUrl == returnUrl &&
-        o.status == status &&
-        o.taxCents == taxCents &&
-        o.updatedAt == updatedAt &&
-        o.totalCents == totalCents &&
-        o.totalPaid == totalPaid &&
-        o.totalPaidCents == totalPaidCents &&
-        o.paidAt == paidAt &&
-        o.paidCents == paidCents &&
-        o.paid == paid &&
-        o.secureId == secureId &&
-        o.secureUrl == secureUrl &&
-        o.customerId == customerId &&
-        o.userId == userId &&
-        o.total == total &&
-        o.taxesPaid == taxesPaid &&
-        o.interest == interest &&
-        o.discount == discount &&
-        o.createdAt == createdAt &&
-        o.refundable == refundable &&
-        o.installments == installments &&
-        o.bankSlip == bankSlip &&
-        o.earlyPaymentDiscount == earlyPaymentDiscount;
+    return o is InvoiceModel && o.id == id && o.dueDate == dueDate && o.currency == currency && o.discountCents == discountCents && o.email == email && o.itemsTotalCents == itemsTotalCents && o.notificationUrl == notificationUrl && o.returnUrl == returnUrl && o.status == status && o.taxCents == taxCents && o.updatedAt == updatedAt && o.totalCents == totalCents && o.totalPaid == totalPaid && o.totalPaidCents == totalPaidCents && o.paidAt == paidAt && o.paidCents == paidCents && o.paid == paid && o.secureId == secureId && o.secureUrl == secureUrl && o.customerId == customerId && o.userId == userId && o.total == total && o.taxesPaid == taxesPaid && o.interest == interest && o.discount == discount && o.createdAt == createdAt && o.refundable == refundable && o.installments == installments && o.bankSlip == bankSlip && o.earlyPaymentDiscount == earlyPaymentDiscount;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        dueDate.hashCode ^
-        currency.hashCode ^
-        discountCents.hashCode ^
-        email.hashCode ^
-        itemsTotalCents.hashCode ^
-        notificationUrl.hashCode ^
-        returnUrl.hashCode ^
-        status.hashCode ^
-        taxCents.hashCode ^
-        updatedAt.hashCode ^
-        totalCents.hashCode ^
-        totalPaid.hashCode ^
-        totalPaidCents.hashCode ^
-        paidAt.hashCode ^
-        paidCents.hashCode ^
-        paid.hashCode ^
-        secureId.hashCode ^
-        secureUrl.hashCode ^
-        customerId.hashCode ^
-        userId.hashCode ^
-        total.hashCode ^
-        taxesPaid.hashCode ^
-        interest.hashCode ^
-        discount.hashCode ^
-        createdAt.hashCode ^
-        refundable.hashCode ^
-        installments.hashCode ^
-        bankSlip.hashCode ^
-        items.hashCode ^
-        variables.hashCode ^
-        customVariables.hashCode ^
-        earlyPaymentDiscount.hashCode ^
-        earlyPaymentDiscounts.hashCode ^
-        logs.hashCode;
+    return id.hashCode ^ dueDate.hashCode ^ currency.hashCode ^ discountCents.hashCode ^ email.hashCode ^ itemsTotalCents.hashCode ^ notificationUrl.hashCode ^ returnUrl.hashCode ^ status.hashCode ^ taxCents.hashCode ^ updatedAt.hashCode ^ totalCents.hashCode ^ totalPaid.hashCode ^ totalPaidCents.hashCode ^ paidAt.hashCode ^ paidCents.hashCode ^ paid.hashCode ^ secureId.hashCode ^ secureUrl.hashCode ^ customerId.hashCode ^ userId.hashCode ^ total.hashCode ^ taxesPaid.hashCode ^ interest.hashCode ^ discount.hashCode ^ createdAt.hashCode ^ refundable.hashCode ^ installments.hashCode ^ bankSlip.hashCode ^ items.hashCode ^ variables.hashCode ^ customVariables.hashCode ^ earlyPaymentDiscount.hashCode ^ earlyPaymentDiscounts.hashCode ^ logs.hashCode;
   }
 }
 
@@ -334,15 +261,15 @@ class BankSlip {
   String barcode;
 
   BankSlip({
-    this.digitableLine,
-    this.barcodeData,
-    this.barcode,
+    this.digitableLine = '',
+    this.barcodeData = '',
+    this.barcode = '',
   });
 
   BankSlip copyWith({
-    String digitableLine,
-    String barcodeData,
-    String barcode,
+    String? digitableLine,
+    String? barcodeData,
+    String? barcode,
   }) {
     return BankSlip(
       digitableLine: digitableLine ?? this.digitableLine,
@@ -360,8 +287,6 @@ class BankSlip {
   }
 
   factory BankSlip.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return BankSlip(
       digitableLine: map['digitable_line'],
       barcodeData: map['barcode_data'],
@@ -371,37 +296,31 @@ class BankSlip {
 
   String toJson() => json.encode(toMap());
 
-  factory BankSlip.fromJson(String source) =>
-      BankSlip.fromMap(json.decode(source));
+  factory BankSlip.fromJson(String source) => BankSlip.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'BankSlip(digitable_line: $digitableLine, barcode_data: $barcodeData, barcode: $barcode)';
+  String toString() => 'BankSlip(digitable_line: $digitableLine, barcode_data: $barcodeData, barcode: $barcode)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is BankSlip &&
-        o.digitableLine == digitableLine &&
-        o.barcodeData == barcodeData &&
-        o.barcode == barcode;
+    return o is BankSlip && o.digitableLine == digitableLine && o.barcodeData == barcodeData && o.barcode == barcode;
   }
 
   @override
-  int get hashCode =>
-      digitableLine.hashCode ^ barcodeData.hashCode ^ barcode.hashCode;
+  int get hashCode => digitableLine.hashCode ^ barcodeData.hashCode ^ barcode.hashCode;
 }
 
 class Item {
-  String id;
-  String description;
-  int priceCents;
-  int quantity;
-  String createdAt;
-  String updatedAt;
-  String price;
-  bool destroy;
+  String? id;
+  String? description;
+  int? priceCents;
+  int? quantity;
+  String? createdAt;
+  String? updatedAt;
+  String? price;
+  bool? destroy;
 
   Item({
     this.id,
@@ -415,14 +334,14 @@ class Item {
   });
 
   Item copyWith({
-    String id,
-    String description,
-    int priceCents,
-    int quantity,
-    String createdAt,
-    String updatedAt,
-    String price,
-    bool destroy,
+    String? id,
+    String? description,
+    int? priceCents,
+    int? quantity,
+    String? createdAt,
+    String? updatedAt,
+    String? price,
+    bool? destroy,
   }) {
     return Item(
       id: id ?? this.id,
@@ -450,8 +369,6 @@ class Item {
   }
 
   factory Item.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Item(
       id: map['id'],
       description: map['description'],
@@ -477,34 +394,19 @@ class Item {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Item &&
-        o.id == id &&
-        o.description == description &&
-        o.priceCents == priceCents &&
-        o.quantity == quantity &&
-        o.createdAt == createdAt &&
-        o.updatedAt == updatedAt &&
-        o.price == price &&
-        o.destroy == destroy;
+    return o is Item && o.id == id && o.description == description && o.priceCents == priceCents && o.quantity == quantity && o.createdAt == createdAt && o.updatedAt == updatedAt && o.price == price && o.destroy == destroy;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        description.hashCode ^
-        priceCents.hashCode ^
-        quantity.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode ^
-        price.hashCode ^
-        destroy.hashCode;
+    return id.hashCode ^ description.hashCode ^ priceCents.hashCode ^ quantity.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode ^ price.hashCode ^ destroy.hashCode;
   }
 }
 
 class Variable {
-  String id;
-  String variable;
-  String value;
+  String? id;
+  String? variable;
+  String? value;
 
   Variable({
     this.id,
@@ -513,9 +415,9 @@ class Variable {
   });
 
   Variable copyWith({
-    String id,
-    String variable,
-    String value,
+    String? id,
+    String? variable,
+    String? value,
   }) {
     return Variable(
       id: id ?? this.id,
@@ -533,8 +435,6 @@ class Variable {
   }
 
   factory Variable.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Variable(
       id: map['id'],
       variable: map['variable'],
@@ -544,8 +444,7 @@ class Variable {
 
   String toJson() => json.encode(toMap());
 
-  factory Variable.fromJson(String source) =>
-      Variable.fromMap(json.decode(source));
+  factory Variable.fromJson(String source) => Variable.fromMap(json.decode(source));
 
   @override
   String toString() => 'Variable(id: $id, variable: $variable, value: $value)';
@@ -554,10 +453,7 @@ class Variable {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Variable &&
-        o.id == id &&
-        o.variable == variable &&
-        o.value == value;
+    return o is Variable && o.id == id && o.variable == variable && o.value == value;
   }
 
   @override
@@ -565,9 +461,9 @@ class Variable {
 }
 
 class InvoiceListModel {
-  Facets facets;
-  int totalItems;
-  List<InvoiceModel> items;
+  Facets? facets;
+  int? totalItems;
+  List<InvoiceModel>? items;
 
   InvoiceListModel({
     this.facets,
@@ -576,9 +472,9 @@ class InvoiceListModel {
   });
 
   InvoiceListModel copyWith({
-    Facets facets,
-    int totalItems,
-    List<InvoiceModel> items,
+    Facets? facets,
+    int? totalItems,
+    List<InvoiceModel>? items,
   }) {
     return InvoiceListModel(
       facets: facets ?? this.facets,
@@ -591,37 +487,30 @@ class InvoiceListModel {
     return {
       'facets': facets?.toMap(),
       'totalItems': totalItems,
-      'items': items?.map((x) => x?.toMap())?.toList(),
+      'items': items?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory InvoiceListModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return InvoiceListModel(
       facets: Facets.fromMap(map['facets']),
       totalItems: map['totalItems'],
-      items: List<InvoiceModel>.from(
-          map['items']?.map((x) => InvoiceModel.fromMap(x))),
+      items: List<InvoiceModel>.from(map['items']?.map((x) => InvoiceModel.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory InvoiceListModel.fromJson(String source) =>
-      InvoiceListModel.fromMap(json.decode(source));
+  factory InvoiceListModel.fromJson(String source) => InvoiceListModel.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'InvoiceListModel(facets: $facets, totalItems: $totalItems, items: $items)';
+  String toString() => 'InvoiceListModel(facets: $facets, totalItems: $totalItems, items: $items)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is InvoiceListModel &&
-        o.facets == facets &&
-        o.totalItems == totalItems;
+    return o is InvoiceListModel && o.facets == facets && o.totalItems == totalItems;
   }
 
   @override
@@ -633,13 +522,13 @@ class Term {
   int count;
 
   Term({
-    this.term,
-    this.count,
+    this.term = '',
+    this.count = 0,
   });
 
   Term copyWith({
-    String term,
-    int count,
+    String? term,
+    int? count,
   }) {
     return Term(
       term: term ?? this.term,
@@ -655,8 +544,6 @@ class Term {
   }
 
   factory Term.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Term(
       term: map['term'],
       count: map['count'],
@@ -682,11 +569,11 @@ class Term {
 }
 
 class Status {
-  String type;
-  int missing;
-  int total;
-  int other;
-  List<Term> terms;
+  String? type;
+  int? missing;
+  int? total;
+  int? other;
+  List<Term>? terms;
 
   Status({
     this.type,
@@ -697,11 +584,11 @@ class Status {
   });
 
   Status copyWith({
-    String type,
-    int missing,
-    int total,
-    int other,
-    List<Term> terms,
+    String? type,
+    int? missing,
+    int? total,
+    int? other,
+    List<Term>? terms,
   }) {
     return Status(
       type: type ?? this.type,
@@ -718,13 +605,11 @@ class Status {
       'missing': missing,
       'total': total,
       'other': other,
-      'terms': terms?.map((x) => x?.toMap())?.toList(),
+      'terms': terms?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory Status.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Status(
       type: map['_type'],
       missing: map['missing'],
@@ -747,32 +632,24 @@ class Status {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Status &&
-        o.type == type &&
-        o.missing == missing &&
-        o.total == total &&
-        o.other == other;
+    return o is Status && o.type == type && o.missing == missing && o.total == total && o.other == other;
   }
 
   @override
   int get hashCode {
-    return type.hashCode ^
-        missing.hashCode ^
-        total.hashCode ^
-        other.hashCode ^
-        terms.hashCode;
+    return type.hashCode ^ missing.hashCode ^ total.hashCode ^ other.hashCode ^ terms.hashCode;
   }
 }
 
 class Facets {
-  Status status;
+  Status? status;
 
   Facets({
     this.status,
   });
 
   Facets copyWith({
-    Status status,
+    Status? status,
   }) {
     return Facets(
       status: status ?? this.status,
@@ -786,8 +663,6 @@ class Facets {
   }
 
   factory Facets.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Facets(
       status: Status.fromMap(map['status']),
     );
@@ -812,8 +687,8 @@ class Facets {
 }
 
 class EarlyPaymentDiscounts {
-  int days;
-  String percent;
+  int? days;
+  String? percent;
 
   EarlyPaymentDiscounts({
     this.days,
@@ -821,8 +696,8 @@ class EarlyPaymentDiscounts {
   });
 
   EarlyPaymentDiscounts copyWith({
-    int days,
-    String percent,
+    int? days,
+    String? percent,
   }) {
     return EarlyPaymentDiscounts(
       days: days ?? this.days,
@@ -838,8 +713,6 @@ class EarlyPaymentDiscounts {
   }
 
   factory EarlyPaymentDiscounts.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return EarlyPaymentDiscounts(
       days: map['days'],
       percent: map['percent'],
@@ -848,8 +721,7 @@ class EarlyPaymentDiscounts {
 
   String toJson() => json.encode(toMap());
 
-  factory EarlyPaymentDiscounts.fromJson(String source) =>
-      EarlyPaymentDiscounts.fromMap(json.decode(source));
+  factory EarlyPaymentDiscounts.fromJson(String source) => EarlyPaymentDiscounts.fromMap(json.decode(source));
 
   @override
   String toString() => 'EarlyPaymentDiscounts(days: $days, percent: $percent)';

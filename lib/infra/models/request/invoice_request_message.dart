@@ -7,69 +7,69 @@ import 'package:iugu/domain/entities/payer_model.dart';
 
 class InvoiceRequestMessage {
   /// E-Mail do cliente
-  String email;
+  String? email;
 
   /// Data de Expiração (DD/MM/AAAA)
-  String dueDate;
+  String? dueDate;
 
   ///  Itens da Fatura
-  List<Item> items;
+  List<Item>? items;
 
   /// Informações do Cliente para o Anti Fraude ou Boleto
-  PayerModel payer;
+  PayerModel? payer;
 
   /// (opcional) Cliente é redirecionado para essa URL após efetuar o pagamento da Fatura pela página de Fatura da Iugu
-  String returnUrl;
+  String? returnUrl;
 
   /// (opcional) Cliente é redirecionado para essa URL se a Fatura que estiver acessando estiver expirada
-  String expiredUrl;
+  String? expiredUrl;
 
   /// (opcional) URL chamada para todas as notificações de Fatura, assim como os webhooks (Gatilhos) são chamados
-  String notificationUrl;
+  String? notificationUrl;
 
   /// (opcional) Valor dos Impostos em centavos
-  int taxCents;
+  int? taxCents;
 
   /// (opcional) Booleano para Habilitar ou Desabilitar multa por atraso de pagamento
-  bool enableLateFine;
+  bool? enableLateFine;
 
   /// (opcional) Determine a multa a ser cobrada para pagamentos efetuados após a data de vencimento
-  String latePaymentFine;
+  String? latePaymentFine;
 
   /// (opcional) Booleano que determina se cobra ou não juros por dia de atraso. 1% ao mês pro rata.
-  bool enableProportionalDailyTax;
+  bool? enableProportionalDailyTax;
 
   /// (opcional) Valor dos Descontos em centavos
-  int discountCents;
+  int? discountCents;
 
   /// (opcional) ID do Cliente
-  String customerId;
+  String? customerId;
 
   /// (opcional) Booleano que ignora o envio do e-mail de cobrança
-  bool ignoreDueDateMail;
+  bool? ignoreDueDateMail;
 
   /// (opcional) Amarra esta Fatura com a Assinatura especificada
-  String subscriptionId;
+  String? subscriptionId;
 
   /// (opcional) Método de pagamento que será disponibilizado para esta Fatura (‘all’, ‘credit_card’ ou ‘bank_slip’).
-  String paymentMethod;
+  String? paymentMethod;
 
   /// Obs: Caso esta Fatura esteja atrelada à uma Assinatura, a prioridade é herdar o valor atribuído na Assinatura;
   /// caso esta esteja atribuído o valor ‘all’, o sistema considerará o payable_with da Fatura; se não, o sistema considerará o payable_with da Assinatura.
   /// (opcional) Caso tenha o subscription_id, pode-se enviar o número de créditos a adicionar nessa Assinatura quando a Fatura for paga
-  int credits;
+  int? credits;
 
   /// (opcional) Logs da Fatura
-  List<Logs> logs;
+  List<Logs>? logs;
 
   /// (opcional) Ativa ou desativa o desconto por pagamento antecipado
-  bool enableEarlyPaymentDiscount;
+  bool? enableEarlyPaymentDiscount;
 
   /// (opcional) Quantidade de dias de antecedência para o pagamento receber o desconto
-  List<EarlyPaymentDiscounts> earlyPaymentDiscounts;
+  List<EarlyPaymentDiscounts>? earlyPaymentDiscounts;
 
   /// (opcional) Variáveis Personalizadas
-  List<CustomVariables> customVariables;
+  List<CustomVariables>? customVariables;
 
   InvoiceRequestMessage({
     this.email,
@@ -96,27 +96,27 @@ class InvoiceRequestMessage {
   });
 
   InvoiceRequestMessage copyWith({
-    String email,
-    String dueDate,
-    List<Item> items,
-    PayerModel payer,
-    String returnUrl,
-    String expiredUrl,
-    String notificationUrl,
-    int taxCents,
-    bool enableLateFine,
-    String latePaymentFine,
-    bool enableProportionalDailyTax,
-    int discountCents,
-    String customerId,
-    bool ignoreDueDateMail,
-    String subscriptionId,
-    String paymentMethod,
-    int credits,
-    List<Logs> logs,
-    bool enableEarlyPaymentDiscount,
-    List<EarlyPaymentDiscounts> earlyPaymentDiscounts,
-    List<CustomVariables> customVariables,
+    String? email,
+    String? dueDate,
+    List<Item>? items,
+    PayerModel? payer,
+    String? returnUrl,
+    String? expiredUrl,
+    String? notificationUrl,
+    int? taxCents,
+    bool? enableLateFine,
+    String? latePaymentFine,
+    bool? enableProportionalDailyTax,
+    int? discountCents,
+    String? customerId,
+    bool? ignoreDueDateMail,
+    String? subscriptionId,
+    String? paymentMethod,
+    int? credits,
+    List<Logs>? logs,
+    bool? enableEarlyPaymentDiscount,
+    List<EarlyPaymentDiscounts>? earlyPaymentDiscounts,
+    List<CustomVariables>? customVariables,
   }) {
     return InvoiceRequestMessage(
       email: email ?? this.email,
@@ -129,8 +129,7 @@ class InvoiceRequestMessage {
       taxCents: taxCents ?? this.taxCents,
       enableLateFine: enableLateFine ?? this.enableLateFine,
       latePaymentFine: latePaymentFine ?? this.latePaymentFine,
-      enableProportionalDailyTax:
-          enableProportionalDailyTax ?? this.enableProportionalDailyTax,
+      enableProportionalDailyTax: enableProportionalDailyTax ?? this.enableProportionalDailyTax,
       discountCents: discountCents ?? this.discountCents,
       customerId: customerId ?? this.customerId,
       ignoreDueDateMail: ignoreDueDateMail ?? this.ignoreDueDateMail,
@@ -138,10 +137,8 @@ class InvoiceRequestMessage {
       paymentMethod: paymentMethod ?? this.paymentMethod,
       credits: credits ?? this.credits,
       logs: logs ?? this.logs,
-      enableEarlyPaymentDiscount:
-          enableEarlyPaymentDiscount ?? this.enableEarlyPaymentDiscount,
-      earlyPaymentDiscounts:
-          earlyPaymentDiscounts ?? this.earlyPaymentDiscounts,
+      enableEarlyPaymentDiscount: enableEarlyPaymentDiscount ?? this.enableEarlyPaymentDiscount,
+      earlyPaymentDiscounts: earlyPaymentDiscounts ?? this.earlyPaymentDiscounts,
       customVariables: customVariables ?? this.customVariables,
     );
   }
@@ -150,7 +147,7 @@ class InvoiceRequestMessage {
     return {
       'email': email,
       'due_date': dueDate,
-      'items': items?.map((x) => x?.toMap())?.toList(),
+      'items': items?.map((x) => x.toMap()).toList(),
       'payer': payer?.toMap(),
       'returnUrl': returnUrl,
       'expiredUrl': expiredUrl,
@@ -162,20 +159,17 @@ class InvoiceRequestMessage {
       'discountCents': discountCents,
       'customerId': customerId,
       'ignoreDueDateMail': ignoreDueDateMail,
-      'subscriptionId': subscriptionId,
+      'subscription_id': subscriptionId,
       'paymentMethod': paymentMethod,
       'credits': credits,
-      'logs': logs?.map((x) => x?.toMap())?.toList(),
+      'logs': logs?.map((x) => x.toMap()).toList(),
       'enableEarlyPaymentDiscount': enableEarlyPaymentDiscount,
-      'earlyPaymentDiscounts':
-          earlyPaymentDiscounts?.map((x) => x?.toMap())?.toList(),
-      'customVariables': customVariables?.map((x) => x?.toMap())?.toList(),
+      'earlyPaymentDiscounts': earlyPaymentDiscounts?.map((x) => x.toMap()).toList(),
+      'customVariables': customVariables?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory InvoiceRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return InvoiceRequestMessage(
       email: map['email'],
       dueDate: map['dueDate'],
@@ -196,18 +190,14 @@ class InvoiceRequestMessage {
       credits: map['credits'],
       logs: List<Logs>.from(map['logs']?.map((x) => Logs.fromMap(x))),
       enableEarlyPaymentDiscount: map['enableEarlyPaymentDiscount'],
-      earlyPaymentDiscounts: List<EarlyPaymentDiscounts>.from(
-          map['earlyPaymentDiscounts']
-              ?.map((x) => EarlyPaymentDiscounts.fromMap(x))),
-      customVariables: List<CustomVariables>.from(
-          map['customVariables']?.map((x) => CustomVariables.fromMap(x))),
+      earlyPaymentDiscounts: List<EarlyPaymentDiscounts>.from(map['earlyPaymentDiscounts']?.map((x) => EarlyPaymentDiscounts.fromMap(x))),
+      customVariables: List<CustomVariables>.from(map['customVariables']?.map((x) => CustomVariables.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory InvoiceRequestMessage.fromJson(String source) =>
-      InvoiceRequestMessage.fromMap(json.decode(source));
+  factory InvoiceRequestMessage.fromJson(String source) => InvoiceRequestMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -218,48 +208,11 @@ class InvoiceRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is InvoiceRequestMessage &&
-        o.email == email &&
-        o.dueDate == dueDate &&
-        o.payer == payer &&
-        o.returnUrl == returnUrl &&
-        o.expiredUrl == expiredUrl &&
-        o.notificationUrl == notificationUrl &&
-        o.taxCents == taxCents &&
-        o.enableLateFine == enableLateFine &&
-        o.latePaymentFine == latePaymentFine &&
-        o.enableProportionalDailyTax == enableProportionalDailyTax &&
-        o.discountCents == discountCents &&
-        o.customerId == customerId &&
-        o.ignoreDueDateMail == ignoreDueDateMail &&
-        o.subscriptionId == subscriptionId &&
-        o.paymentMethod == paymentMethod &&
-        o.credits == credits &&
-        o.enableEarlyPaymentDiscount == enableEarlyPaymentDiscount;
+    return o is InvoiceRequestMessage && o.email == email && o.dueDate == dueDate && o.payer == payer && o.returnUrl == returnUrl && o.expiredUrl == expiredUrl && o.notificationUrl == notificationUrl && o.taxCents == taxCents && o.enableLateFine == enableLateFine && o.latePaymentFine == latePaymentFine && o.enableProportionalDailyTax == enableProportionalDailyTax && o.discountCents == discountCents && o.customerId == customerId && o.ignoreDueDateMail == ignoreDueDateMail && o.subscriptionId == subscriptionId && o.paymentMethod == paymentMethod && o.credits == credits && o.enableEarlyPaymentDiscount == enableEarlyPaymentDiscount;
   }
 
   @override
   int get hashCode {
-    return email.hashCode ^
-        dueDate.hashCode ^
-        items.hashCode ^
-        payer.hashCode ^
-        returnUrl.hashCode ^
-        expiredUrl.hashCode ^
-        notificationUrl.hashCode ^
-        taxCents.hashCode ^
-        enableLateFine.hashCode ^
-        latePaymentFine.hashCode ^
-        enableProportionalDailyTax.hashCode ^
-        discountCents.hashCode ^
-        customerId.hashCode ^
-        ignoreDueDateMail.hashCode ^
-        subscriptionId.hashCode ^
-        paymentMethod.hashCode ^
-        credits.hashCode ^
-        logs.hashCode ^
-        enableEarlyPaymentDiscount.hashCode ^
-        earlyPaymentDiscounts.hashCode ^
-        customVariables.hashCode;
+    return email.hashCode ^ dueDate.hashCode ^ items.hashCode ^ payer.hashCode ^ returnUrl.hashCode ^ expiredUrl.hashCode ^ notificationUrl.hashCode ^ taxCents.hashCode ^ enableLateFine.hashCode ^ latePaymentFine.hashCode ^ enableProportionalDailyTax.hashCode ^ discountCents.hashCode ^ customerId.hashCode ^ ignoreDueDateMail.hashCode ^ subscriptionId.hashCode ^ paymentMethod.hashCode ^ credits.hashCode ^ logs.hashCode ^ enableEarlyPaymentDiscount.hashCode ^ earlyPaymentDiscounts.hashCode ^ customVariables.hashCode;
   }
 }

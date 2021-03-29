@@ -20,27 +20,27 @@ class RequestWithdrawResponseMessage {
   BankInfo bankInfo;
 
   RequestWithdrawResponseMessage({
-    this.operationId,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
-    this.reference,
-    this.amount,
-    this.accountName,
-    this.accountId,
-    this.bankInfo,
+    required this.operationId,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.reference,
+    required this.amount,
+    required this.accountName,
+    required this.accountId,
+    required this.bankInfo,
   });
 
   RequestWithdrawResponseMessage copyWith({
-    String operationId,
-    String status,
-    DateTime createdAt,
-    DateTime updatedAt,
-    Object reference,
-    String amount,
-    String accountName,
-    String accountId,
-    BankInfo bankInfo,
+    String? operationId,
+    String? status,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    Object? reference,
+    String? amount,
+    String? accountName,
+    String? accountId,
+    BankInfo? bankInfo,
   }) {
     return RequestWithdrawResponseMessage(
       operationId: operationId ?? this.operationId,
@@ -59,19 +59,17 @@ class RequestWithdrawResponseMessage {
     return {
       'id': operationId,
       'status': status,
-      'created_at': createdAt?.millisecondsSinceEpoch,
-      'updated_at': updatedAt?.millisecondsSinceEpoch,
+      'created_at': createdAt.millisecondsSinceEpoch,
+      'updated_at': updatedAt.millisecondsSinceEpoch,
       'reference': reference,
       'amount': amount,
       'account_name': accountName,
       'account_id': accountId,
-      'bank_address': bankInfo?.toMap(),
+      'bank_address': bankInfo.toMap(),
     };
   }
 
   factory RequestWithdrawResponseMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return RequestWithdrawResponseMessage(
       operationId: map['id'],
       status: map['status'],
@@ -87,8 +85,7 @@ class RequestWithdrawResponseMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory RequestWithdrawResponseMessage.fromJson(String source) =>
-      RequestWithdrawResponseMessage.fromMap(json.decode(source));
+  factory RequestWithdrawResponseMessage.fromJson(String source) => RequestWithdrawResponseMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -99,29 +96,12 @@ class RequestWithdrawResponseMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is RequestWithdrawResponseMessage &&
-        o.operationId == operationId &&
-        o.status == status &&
-        o.createdAt == createdAt &&
-        o.updatedAt == updatedAt &&
-        o.reference == reference &&
-        o.amount == amount &&
-        o.accountName == accountName &&
-        o.accountId == accountId &&
-        o.bankInfo == bankInfo;
+    return o is RequestWithdrawResponseMessage && o.operationId == operationId && o.status == status && o.createdAt == createdAt && o.updatedAt == updatedAt && o.reference == reference && o.amount == amount && o.accountName == accountName && o.accountId == accountId && o.bankInfo == bankInfo;
   }
 
   @override
   int get hashCode {
-    return operationId.hashCode ^
-        status.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode ^
-        reference.hashCode ^
-        amount.hashCode ^
-        accountName.hashCode ^
-        accountId.hashCode ^
-        bankInfo.hashCode;
+    return operationId.hashCode ^ status.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode ^ reference.hashCode ^ amount.hashCode ^ accountName.hashCode ^ accountId.hashCode ^ bankInfo.hashCode;
   }
 }
 
@@ -142,17 +122,17 @@ class BankInfo {
   String accountType;
 
   BankInfo({
-    this.name,
-    this.accountNumber,
-    this.agencyNumber,
-    this.accountType,
+    required this.name,
+    required this.accountNumber,
+    required this.agencyNumber,
+    required this.accountType,
   });
 
   BankInfo copyWith({
-    String name,
-    String accountNumber,
-    String agencyNumber,
-    String accountType,
+    String? name,
+    String? accountNumber,
+    String? agencyNumber,
+    String? accountType,
   }) {
     return BankInfo(
       name: name ?? this.name,
@@ -172,8 +152,6 @@ class BankInfo {
   }
 
   factory BankInfo.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return BankInfo(
       name: map['bank'],
       accountNumber: map['bank_cc'],
@@ -184,8 +162,7 @@ class BankInfo {
 
   String toJson() => json.encode(toMap());
 
-  factory BankInfo.fromJson(String source) =>
-      BankInfo.fromMap(json.decode(source));
+  factory BankInfo.fromJson(String source) => BankInfo.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -196,18 +173,11 @@ class BankInfo {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is BankInfo &&
-        o.name == name &&
-        o.accountNumber == accountNumber &&
-        o.agencyNumber == agencyNumber &&
-        o.accountType == accountType;
+    return o is BankInfo && o.name == name && o.accountNumber == accountNumber && o.agencyNumber == agencyNumber && o.accountType == accountType;
   }
 
   @override
   int get hashCode {
-    return name.hashCode ^
-        accountNumber.hashCode ^
-        agencyNumber.hashCode ^
-        accountType.hashCode;
+    return name.hashCode ^ accountNumber.hashCode ^ agencyNumber.hashCode ^ accountType.hashCode;
   }
 }
