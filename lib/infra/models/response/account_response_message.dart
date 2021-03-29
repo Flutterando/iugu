@@ -11,28 +11,28 @@ class AccountResponseMessage {
   String name;
 
   /// Token de produção
-  String liveApiToken;
+  String? liveApiToken;
 
   /// Token de teste
-  String testApiToken;
+  String? testApiToken;
 
   /// Token do usuário, usado em algumas APIs específicas
   String userToken;
 
   AccountResponseMessage({
-    this.accountId,
-    this.name,
+    required this.accountId,
+    required this.name,
     this.liveApiToken,
     this.testApiToken,
-    this.userToken,
+    this.userToken = '',
   });
 
   AccountResponseMessage copyWith({
-    String accountId,
-    String name,
-    String liveApiToken,
-    String testApiToken,
-    String userToken,
+    String? accountId,
+    String? name,
+    String? liveApiToken,
+    String? testApiToken,
+    String? userToken,
   }) {
     return AccountResponseMessage(
       accountId: accountId ?? this.accountId,
@@ -54,21 +54,18 @@ class AccountResponseMessage {
   }
 
   factory AccountResponseMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AccountResponseMessage(
-      accountId: map['account_id'],
-      name: map['name'],
+      accountId: map['account_id'] ?? '',
+      name: map['name'] ?? '',
       liveApiToken: map['live_api_token'],
       testApiToken: map['test_api_token'],
-      userToken: map['user_token'],
+      userToken: map['user_token'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory AccountResponseMessage.fromJson(String source) =>
-      AccountResponseMessage.fromMap(json.decode(source));
+  factory AccountResponseMessage.fromJson(String source) => AccountResponseMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -79,20 +76,11 @@ class AccountResponseMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is AccountResponseMessage &&
-        o.accountId == accountId &&
-        o.name == name &&
-        o.liveApiToken == liveApiToken &&
-        o.testApiToken == testApiToken &&
-        o.userToken == userToken;
+    return o is AccountResponseMessage && o.accountId == accountId && o.name == name && o.liveApiToken == liveApiToken && o.testApiToken == testApiToken && o.userToken == userToken;
   }
 
   @override
   int get hashCode {
-    return accountId.hashCode ^
-        name.hashCode ^
-        liveApiToken.hashCode ^
-        testApiToken.hashCode ^
-        userToken.hashCode;
+    return accountId.hashCode ^ name.hashCode ^ liveApiToken.hashCode ^ testApiToken.hashCode ^ userToken.hashCode;
   }
 }

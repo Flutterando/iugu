@@ -12,9 +12,9 @@ import 'api_resource.dart';
 /// <see cref="http://support.iugu.com/hc/pt-br/articles/202399728-Como-s%C3%A3o-compostas-as-tarifas-do-marketplace-"/>
 /// </summary>
 class MarketPlace extends IDisposable {
-  APIResource apiResource;
+  late APIResource apiResource;
 
-  MarketPlace(IuguClient client, [Dio dio]) {
+  MarketPlace(IuguClient client, [Dio? dio]) {
     apiResource = APIResource(dio ?? client.properties.dio, "/marketplace");
   }
 
@@ -35,8 +35,7 @@ class MarketPlace extends IDisposable {
   /// </summary>
   /// <param name="underAccount">Informações da conta que se deseja criar</param>
   /// <returns>informações da conta recém criada</returns>
-  Future<AccountResponseMessage> createUnderAccount(
-      {AccountRequestMessage underAccount}) async {
+  Future<AccountResponseMessage> createUnderAccount({required AccountRequestMessage underAccount}) async {
     var result = await apiResource.post(
       data: underAccount.toMap(),
       partOfUrl: "/create_account",
@@ -56,8 +55,7 @@ class MarketPlace extends IDisposable {
   /// <param name="customApiToken">api token customizado</param>
   /// <returns></returns>
 
-  Future<MarketplaceAccountsResponse> getAllSubAccounts(
-      {customApiToken}) async {
+  Future<MarketplaceAccountsResponse> getAllSubAccounts({String customApiToken = ''}) async {
     var result = await apiResource.getById(apiUserToken: customApiToken);
     return MarketplaceAccountsResponse.fromMap(result);
   }
@@ -77,20 +75,16 @@ class MarketPlace extends IDisposable {
   /// <param name="customApiToken">api token customizado</param>
   /// <param name="filter">Opções de filtros e ordenação</param>
   /// <returns></returns>
-  Future<PaggedResponseMessage<MarketPlaceAccountItem>>
-      getAllSubAccountsWithLimit({
+  Future<PaggedResponseMessage<MarketPlaceAccountItem>> getAllSubAccountsWithLimit({
     String filter = "?limit=1000",
-    String customApiToken,
+    String customApiToken = '',
   }) async {
     //  var queryStringFilter = filter?.ToQueryStringUrl();
-    var retorno = await apiResource.getById(
-        partOfUrl: filter, apiUserToken: customApiToken);
+    var retorno = await apiResource.getById(partOfUrl: filter, apiUserToken: customApiToken);
 
     return PaggedResponseMessage<MarketPlaceAccountItem>(
       totalItems: retorno["totalItems"],
-      items: (retorno["items"] as List)
-          .map((e) => MarketPlaceAccountItem.fromMap(e))
-          .toList(),
+      items: (retorno["items"] as List).map((e) => MarketPlaceAccountItem.fromMap(e)).toList(),
     );
 
     // var result =

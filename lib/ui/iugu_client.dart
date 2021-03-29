@@ -1,32 +1,33 @@
 import 'package:dio/dio.dart';
-import 'package:meta/meta.dart';
 
 class IuguClient {
   final IuguProperties properties;
-  IuguClient({@required this.properties});
+  IuguClient({required this.properties});
 }
 
 class IuguProperties {
   final String apiKey;
   final String urlApi;
+  late Dio _dio;
 
-  IuguProperties({@required this.apiKey, @required this.urlApi})
+  IuguProperties({required this.apiKey, required this.urlApi})
       : assert(
-          apiKey != null && apiKey.trim() != "",
+          apiKey.trim() != "",
           "You need to set API Key",
         ),
         assert(
-          urlApi != null && urlApi.trim() != "",
+          urlApi.trim() != "",
           "You need to set a valid url",
         ) {
     _dio = Dio(
       BaseOptions(
         baseUrl: urlApi,
-        queryParameters: {'api_token': apiKey},
+        queryParameters: {
+          'api_token': apiKey
+        },
       ),
     );
   }
 
-  Dio _dio;
   Dio get dio => _dio;
 }

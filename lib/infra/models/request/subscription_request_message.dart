@@ -5,39 +5,39 @@ import 'package:iugu/domain/entities/subscription_model.dart';
 
 class SubscriptionRequestMessage {
   /// ID do Cliente
-  String customerId;
+  String? customerId;
 
   /// Identificador do Plano. Só é enviado para assinaturas que não são credits_based
-  String planId;
+  String? planId;
 
   /// Data de Expiração (Também é a data da próxima cobrança)
-  DateTime expiresAt;
+  DateTime? expiresAt;
 
   /// Apenas Cria a Assinatura se a Cobrança for bem sucedida. Isso só funciona caso o cliente já tenha uma forma de pagamento padrão cadastrada
-  bool onlyOnChargeSuccess;
+  bool? onlyOnChargeSuccess;
 
   /// Método de pagamento que será disponibilizado para as Faturas desta Assinatura (all, credit_card ou bank_slip).
   /// Obs: Dependendo do valor, este atributo será herdado, pois a prioridade é herdar o valor atribuído ao Plano desta Assinatura;
   /// Caso este esteja atribuído o valor ‘all’, o sistema considerará o payable_with da Assinatura; se não, o sistema considerará o payable_with do Plano
-  String payableWith;
+  String? payableWith;
 
   /// É uma assinatura baseada em créditos
-  bool isCreditBased;
+  bool? isCreditBased;
 
   /// Preço em centavos da recarga para assinaturas baseadas em crédito
-  int priceCents;
+  int? priceCents;
 
   /// Quantidade de créditos adicionados a cada ciclo, só enviado para assinaturas credits_based
-  int creditsCycle;
+  int? creditsCycle;
 
   /// Quantidade de créditos que ativa o ciclo, por ex: Efetuar cobrança cada vez que a assinatura tenha apenas 1 crédito sobrando. Esse 1 crédito é o credits_min
-  int creditsMin;
+  int? creditsMin;
 
   /// Itens de Assinatura, sendo que estes podem ser recorrentes ou de cobrança única
-  List<SubscriptionSubitem> subitems;
+  List<SubscriptionSubitem>? subitems;
 
   /// Variáveis Personalizadas
-  List<CustomVariables> customVariables;
+  List<CustomVariables>? customVariables;
 
   SubscriptionRequestMessage({
     this.customerId,
@@ -54,17 +54,17 @@ class SubscriptionRequestMessage {
   });
 
   SubscriptionRequestMessage copyWith({
-    String customerId,
-    String planId,
-    DateTime expiresAt,
-    bool onlyOnChargeSuccess,
-    String payableWith,
-    bool isCreditBased,
-    int priceCents,
-    int creditsCycle,
-    int creditsMin,
-    List<SubscriptionSubitem> subitems,
-    List<CustomVariables> customVariables,
+    String? customerId,
+    String? planId,
+    DateTime? expiresAt,
+    bool? onlyOnChargeSuccess,
+    String? payableWith,
+    bool? isCreditBased,
+    int? priceCents,
+    int? creditsCycle,
+    int? creditsMin,
+    List<SubscriptionSubitem>? subitems,
+    List<CustomVariables>? customVariables,
   }) {
     return SubscriptionRequestMessage(
       customerId: customerId ?? this.customerId,
@@ -92,14 +92,12 @@ class SubscriptionRequestMessage {
       'price_cents': priceCents,
       'credits_cycle': creditsCycle,
       'credits_min': creditsMin,
-      'subitems': subitems?.map((x) => x?.toMap())?.toList(),
-      'custom_variables': customVariables?.map((x) => x?.toMap())?.toList(),
+      'subitems': subitems?.map((x) => x.toMap()).toList(),
+      'custom_variables': customVariables?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory SubscriptionRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return SubscriptionRequestMessage(
       customerId: map['customer_id'],
       planId: map['plan_identifier'],
@@ -110,17 +108,14 @@ class SubscriptionRequestMessage {
       priceCents: map['price_cents'],
       creditsCycle: map['credits_cycle'],
       creditsMin: map['credits_min'],
-      subitems: List<SubscriptionSubitem>.from(
-          map['subitems']?.map((x) => SubscriptionSubitem.fromMap(x))),
-      customVariables: List<CustomVariables>.from(
-          map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
+      subitems: List<SubscriptionSubitem>.from(map['subitems']?.map((x) => SubscriptionSubitem.fromMap(x))),
+      customVariables: List<CustomVariables>.from(map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SubscriptionRequestMessage.fromJson(String source) =>
-      SubscriptionRequestMessage.fromMap(json.decode(source));
+  factory SubscriptionRequestMessage.fromJson(String source) => SubscriptionRequestMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -131,30 +126,11 @@ class SubscriptionRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is SubscriptionRequestMessage &&
-        o.customerId == customerId &&
-        o.planId == planId &&
-        o.expiresAt == expiresAt &&
-        o.onlyOnChargeSuccess == onlyOnChargeSuccess &&
-        o.payableWith == payableWith &&
-        o.isCreditBased == isCreditBased &&
-        o.priceCents == priceCents &&
-        o.creditsCycle == creditsCycle &&
-        o.creditsMin == creditsMin;
+    return o is SubscriptionRequestMessage && o.customerId == customerId && o.planId == planId && o.expiresAt == expiresAt && o.onlyOnChargeSuccess == onlyOnChargeSuccess && o.payableWith == payableWith && o.isCreditBased == isCreditBased && o.priceCents == priceCents && o.creditsCycle == creditsCycle && o.creditsMin == creditsMin;
   }
 
   @override
   int get hashCode {
-    return customerId.hashCode ^
-        planId.hashCode ^
-        expiresAt.hashCode ^
-        onlyOnChargeSuccess.hashCode ^
-        payableWith.hashCode ^
-        isCreditBased.hashCode ^
-        priceCents.hashCode ^
-        creditsCycle.hashCode ^
-        creditsMin.hashCode ^
-        subitems.hashCode ^
-        customVariables.hashCode;
+    return customerId.hashCode ^ planId.hashCode ^ expiresAt.hashCode ^ onlyOnChargeSuccess.hashCode ^ payableWith.hashCode ^ isCreditBased.hashCode ^ priceCents.hashCode ^ creditsCycle.hashCode ^ creditsMin.hashCode ^ subitems.hashCode ^ customVariables.hashCode;
   }
 }

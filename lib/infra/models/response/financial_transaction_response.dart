@@ -10,17 +10,17 @@ class FinancialTransactionResponse {
   Total total;
 
   FinancialTransactionResponse({
-    this.totalItems,
-    this.items,
-    this.transactions,
-    this.total,
+    required this.totalItems,
+    required this.items,
+    required this.transactions,
+    required this.total,
   });
 
   FinancialTransactionResponse copyWith({
-    String totalItems,
-    List<Items> items,
-    List<TransactionsResponse> transactions,
-    Total total,
+    String? totalItems,
+    List<Items>? items,
+    List<TransactionsResponse>? transactions,
+    Total? total,
   }) {
     return FinancialTransactionResponse(
       totalItems: totalItems ?? this.totalItems,
@@ -33,28 +33,24 @@ class FinancialTransactionResponse {
   Map<String, dynamic> toMap() {
     return {
       'totalItems': totalItems,
-      'items': items?.map((x) => x?.toMap())?.toList(),
-      'transactions': transactions?.map((x) => x?.toMap())?.toList(),
-      'total': total?.toMap(),
+      'items': items.map((x) => x.toMap()).toList(),
+      'transactions': transactions.map((x) => x.toMap()).toList(),
+      'total': total.toMap(),
     };
   }
 
   factory FinancialTransactionResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return FinancialTransactionResponse(
       totalItems: map['totalItems'],
       items: List<Items>.from(map['items']?.map((x) => Items.fromMap(x))),
-      transactions: List<TransactionsResponse>.from(
-          map['transactions']?.map((x) => TransactionsResponse.fromMap(x))),
+      transactions: List<TransactionsResponse>.from(map['transactions']?.map((x) => TransactionsResponse.fromMap(x))),
       total: Total.fromMap(map['total']),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory FinancialTransactionResponse.fromJson(String source) =>
-      FinancialTransactionResponse.fromMap(json.decode(source));
+  factory FinancialTransactionResponse.fromJson(String source) => FinancialTransactionResponse.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -65,17 +61,12 @@ class FinancialTransactionResponse {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is FinancialTransactionResponse &&
-        o.totalItems == totalItems &&
-        o.total == total;
+    return o is FinancialTransactionResponse && o.totalItems == totalItems && o.total == total;
   }
 
   @override
   int get hashCode {
-    return totalItems.hashCode ^
-        items.hashCode ^
-        transactions.hashCode ^
-        total.hashCode;
+    return totalItems.hashCode ^ items.hashCode ^ transactions.hashCode ^ total.hashCode;
   }
 }
 
@@ -87,15 +78,15 @@ class Total {
   String receivedValue;
 
   Total({
-    this.advancedValue,
-    this.advanceFee,
-    this.receivedValue,
+    required this.advancedValue,
+    required this.advanceFee,
+    required this.receivedValue,
   });
 
   Total copyWith({
-    String advancedValue,
-    String advanceFee,
-    String receivedValue,
+    String? advancedValue,
+    String? advanceFee,
+    String? receivedValue,
   }) {
     return Total(
       advancedValue: advancedValue ?? this.advancedValue,
@@ -113,8 +104,6 @@ class Total {
   }
 
   factory Total.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Total(
       advancedValue: map['advanced_value'],
       advanceFee: map['advance_fee'],
@@ -127,22 +116,17 @@ class Total {
   factory Total.fromJson(String source) => Total.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'Total(advancedValue: $advancedValue, advanceFee: $advanceFee, receivedValue: $receivedValue)';
+  String toString() => 'Total(advancedValue: $advancedValue, advanceFee: $advanceFee, receivedValue: $receivedValue)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Total &&
-        o.advancedValue == advancedValue &&
-        o.advanceFee == advanceFee &&
-        o.receivedValue == receivedValue;
+    return o is Total && o.advancedValue == advancedValue && o.advanceFee == advanceFee && o.receivedValue == receivedValue;
   }
 
   @override
-  int get hashCode =>
-      advancedValue.hashCode ^ advanceFee.hashCode ^ receivedValue.hashCode;
+  int get hashCode => advancedValue.hashCode ^ advanceFee.hashCode ^ receivedValue.hashCode;
 }
 
 class TransactionsResponse extends Items {
@@ -153,9 +137,9 @@ class TransactionsResponse extends Items {
   String receivedValue;
 
   TransactionsResponse({
-    this.advancedValue,
-    this.advanceFee,
-    this.receivedValue,
+    required this.advancedValue,
+    required this.advanceFee,
+    required this.receivedValue,
   });
 
   Map<String, dynamic> toMap() {
@@ -167,8 +151,6 @@ class TransactionsResponse extends Items {
   }
 
   factory TransactionsResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return TransactionsResponse(
       advancedValue: map['advancedValue'],
       advanceFee: map['advanceFee'],
@@ -178,50 +160,44 @@ class TransactionsResponse extends Items {
 
   String toJson() => json.encode(toMap());
 
-  factory TransactionsResponse.fromJson(String source) =>
-      TransactionsResponse.fromMap(json.decode(source));
+  factory TransactionsResponse.fromJson(String source) => TransactionsResponse.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'Transactions(advancedValue: $advancedValue, advanceFee: $advanceFee, receivedValue: $receivedValue)';
+  String toString() => 'Transactions(advancedValue: $advancedValue, advanceFee: $advanceFee, receivedValue: $receivedValue)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is TransactionsResponse &&
-        o.advancedValue == advancedValue &&
-        o.advanceFee == advanceFee &&
-        o.receivedValue == receivedValue;
+    return o is TransactionsResponse && o.advancedValue == advancedValue && o.advanceFee == advanceFee && o.receivedValue == receivedValue;
   }
 
   @override
-  int get hashCode =>
-      advancedValue.hashCode ^ advanceFee.hashCode ^ receivedValue.hashCode;
+  int get hashCode => advancedValue.hashCode ^ advanceFee.hashCode ^ receivedValue.hashCode;
 }
 
 class Items {
-  String id;
+  String? id;
 
-  String description;
+  String? description;
 
-  String scheduledDate;
+  String? scheduledDate;
 
-  String invoiceId;
+  String? invoiceId;
 
-  String customerRef;
+  String? customerRef;
 
-  String total;
+  String? total;
 
-  String taxes;
+  String? taxes;
 
-  String clientShare;
+  String? clientShare;
 
-  String commission;
+  String? commission;
 
-  String numberOfInstallments;
+  String? numberOfInstallments;
 
-  String installment;
+  String? installment;
 
   Items({
     this.id,
@@ -238,17 +214,17 @@ class Items {
   });
 
   Items copyWith({
-    String id,
-    String description,
-    String scheduledDate,
-    String invoiceId,
-    String customerRef,
-    String total,
-    String taxes,
-    String clientShare,
-    String commission,
-    String numberOfInstallments,
-    String installment,
+    String? id,
+    String? description,
+    String? scheduledDate,
+    String? invoiceId,
+    String? customerRef,
+    String? total,
+    String? taxes,
+    String? clientShare,
+    String? commission,
+    String? numberOfInstallments,
+    String? installment,
   }) {
     return Items(
       id: id ?? this.id,
@@ -282,8 +258,6 @@ class Items {
   }
 
   factory Items.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Items(
       id: map['id'],
       description: map['description'],
@@ -312,32 +286,11 @@ class Items {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Items &&
-        o.id == id &&
-        o.description == description &&
-        o.scheduledDate == scheduledDate &&
-        o.invoiceId == invoiceId &&
-        o.customerRef == customerRef &&
-        o.total == total &&
-        o.taxes == taxes &&
-        o.clientShare == clientShare &&
-        o.commission == commission &&
-        o.numberOfInstallments == numberOfInstallments &&
-        o.installment == installment;
+    return o is Items && o.id == id && o.description == description && o.scheduledDate == scheduledDate && o.invoiceId == invoiceId && o.customerRef == customerRef && o.total == total && o.taxes == taxes && o.clientShare == clientShare && o.commission == commission && o.numberOfInstallments == numberOfInstallments && o.installment == installment;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        description.hashCode ^
-        scheduledDate.hashCode ^
-        invoiceId.hashCode ^
-        customerRef.hashCode ^
-        total.hashCode ^
-        taxes.hashCode ^
-        clientShare.hashCode ^
-        commission.hashCode ^
-        numberOfInstallments.hashCode ^
-        installment.hashCode;
+    return id.hashCode ^ description.hashCode ^ scheduledDate.hashCode ^ invoiceId.hashCode ^ customerRef.hashCode ^ total.hashCode ^ taxes.hashCode ^ clientShare.hashCode ^ commission.hashCode ^ numberOfInstallments.hashCode ^ installment.hashCode;
   }
 }

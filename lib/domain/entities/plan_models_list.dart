@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 class PlanModelsList {
-  int totalItems;
-  List<PlanModel> items;
+  int? totalItems;
+  List<PlanModel>? items;
   PlanModelsList({
     this.totalItems,
     this.items,
   });
 
   PlanModelsList copyWith({
-    int totalItems,
-    List<PlanModel> items,
+    int? totalItems,
+    List<PlanModel>? items,
   }) {
     return PlanModelsList(
       totalItems: totalItems ?? this.totalItems,
@@ -21,24 +21,20 @@ class PlanModelsList {
   Map<String, dynamic> toMap() {
     return {
       'totalItems': totalItems,
-      'items': items?.map((x) => x?.toMap())?.toList(),
+      'items': items?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory PlanModelsList.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PlanModelsList(
       totalItems: map['totalItems'],
-      items:
-          List<PlanModel>.from(map['items']?.map((x) => PlanModel.fromMap(x))),
+      items: List<PlanModel>.from(map['items']?.map((x) => PlanModel.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PlanModelsList.fromJson(String source) =>
-      PlanModelsList.fromMap(json.decode(source));
+  factory PlanModelsList.fromJson(String source) => PlanModelsList.fromMap(json.decode(source));
 
   @override
   String toString() => 'PlanModelsList(totalItems: $totalItems, items: $items)';
@@ -55,20 +51,20 @@ class PlanModelsList {
 }
 
 class PlanModel {
-  String id;
-  String name;
+  String? id;
+  String? name;
   String identifier;
-  int interval;
-  String intervalType;
-  String createdAt;
-  String updatedAt;
-  List<PlanPrice> prices;
-  List<PlanFeature> features;
+  int? interval;
+  String? intervalType;
+  String? createdAt;
+  String? updatedAt;
+  List<PlanPrice>? prices;
+  List<PlanFeature>? features;
 
   PlanModel({
     this.id,
     this.name,
-    this.identifier,
+    required this.identifier,
     this.interval,
     this.intervalType,
     this.createdAt,
@@ -78,15 +74,15 @@ class PlanModel {
   });
 
   PlanModel copyWith({
-    String id,
-    String name,
-    String identifier,
-    int interval,
-    String intervalType,
-    String createdAt,
-    String updatedAt,
-    List<PlanPrice> prices,
-    List<PlanFeature> features,
+    String? id,
+    String? name,
+    String? identifier,
+    int? interval,
+    String? intervalType,
+    String? createdAt,
+    String? updatedAt,
+    List<PlanPrice>? prices,
+    List<PlanFeature>? features,
   }) {
     return PlanModel(
       id: id ?? this.id,
@@ -110,14 +106,12 @@ class PlanModel {
       'interval_type': intervalType,
       'created_at': createdAt,
       'updated_at': updatedAt,
-      'prices': prices?.map((x) => x?.toMap())?.toList(),
-      'features': features?.map((x) => x?.toMap())?.toList(),
+      'prices': prices?.map((x) => x.toMap()).toList(),
+      'features': features?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory PlanModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PlanModel(
       id: map['id'],
       name: map['name'],
@@ -126,17 +120,14 @@ class PlanModel {
       intervalType: map['interval_type'],
       createdAt: map['created_at'],
       updatedAt: map['updated_at'],
-      prices:
-          List<PlanPrice>.from(map['prices']?.map((x) => PlanPrice.fromMap(x))),
-      features: List<PlanFeature>.from(
-          map['features']?.map((x) => PlanFeature.fromMap(x))),
+      prices: List<PlanPrice>.from(map['prices']?.map((x) => PlanPrice.fromMap(x))),
+      features: List<PlanFeature>.from(map['features']?.map((x) => PlanFeature.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PlanModel.fromJson(String source) =>
-      PlanModel.fromMap(json.decode(source));
+  factory PlanModel.fromJson(String source) => PlanModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -147,37 +138,22 @@ class PlanModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PlanModel &&
-        o.id == id &&
-        o.name == name &&
-        o.identifier == identifier &&
-        o.interval == interval &&
-        o.intervalType == intervalType &&
-        o.createdAt == createdAt &&
-        o.updatedAt == updatedAt;
+    return o is PlanModel && o.id == id && o.name == name && o.identifier == identifier && o.interval == interval && o.intervalType == intervalType && o.createdAt == createdAt && o.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        identifier.hashCode ^
-        interval.hashCode ^
-        intervalType.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode ^
-        prices.hashCode ^
-        features.hashCode;
+    return id.hashCode ^ name.hashCode ^ identifier.hashCode ^ interval.hashCode ^ intervalType.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode ^ prices.hashCode ^ features.hashCode;
   }
 }
 
 class PlanPrice {
-  String createdAt;
-  String currency;
-  String id;
-  String planId;
-  String updatedAt;
-  int valueCents;
+  String? createdAt;
+  String? currency;
+  String? id;
+  String? planId;
+  String? updatedAt;
+  int? valueCents;
 
   PlanPrice({
     this.createdAt,
@@ -189,12 +165,12 @@ class PlanPrice {
   });
 
   PlanPrice copyWith({
-    String createdAt,
-    String currency,
-    String id,
-    String planId,
-    String updatedAt,
-    int valueCents,
+    String? createdAt,
+    String? currency,
+    String? id,
+    String? planId,
+    String? updatedAt,
+    int? valueCents,
   }) {
     return PlanPrice(
       createdAt: createdAt ?? this.createdAt,
@@ -218,8 +194,6 @@ class PlanPrice {
   }
 
   factory PlanPrice.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PlanPrice(
       createdAt: map['created_at'],
       currency: map['currency'],
@@ -232,8 +206,7 @@ class PlanPrice {
 
   String toJson() => json.encode(toMap());
 
-  factory PlanPrice.fromJson(String source) =>
-      PlanPrice.fromMap(json.decode(source));
+  factory PlanPrice.fromJson(String source) => PlanPrice.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -244,36 +217,25 @@ class PlanPrice {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PlanPrice &&
-        o.createdAt == createdAt &&
-        o.currency == currency &&
-        o.id == id &&
-        o.planId == planId &&
-        o.updatedAt == updatedAt &&
-        o.valueCents == valueCents;
+    return o is PlanPrice && o.createdAt == createdAt && o.currency == currency && o.id == id && o.planId == planId && o.updatedAt == updatedAt && o.valueCents == valueCents;
   }
 
   @override
   int get hashCode {
-    return createdAt.hashCode ^
-        currency.hashCode ^
-        id.hashCode ^
-        planId.hashCode ^
-        updatedAt.hashCode ^
-        valueCents.hashCode;
+    return createdAt.hashCode ^ currency.hashCode ^ id.hashCode ^ planId.hashCode ^ updatedAt.hashCode ^ valueCents.hashCode;
   }
 }
 
 class PlanFeature {
-  String createdAt;
-  String id;
-  String identifier;
-  Object important;
-  String name;
-  String planId;
-  int position;
-  String updatedAt;
-  int value;
+  String? createdAt;
+  String? id;
+  String? identifier;
+  Object? important;
+  String? name;
+  String? planId;
+  int? position;
+  String? updatedAt;
+  int? value;
 
   PlanFeature({
     this.createdAt,
@@ -288,15 +250,15 @@ class PlanFeature {
   });
 
   PlanFeature copyWith({
-    String createdAt,
-    String id,
-    String identifier,
-    Object important,
-    String name,
-    String planId,
-    int position,
-    String updatedAt,
-    int value,
+    String? createdAt,
+    String? id,
+    String? identifier,
+    Object? important,
+    String? name,
+    String? planId,
+    int? position,
+    String? updatedAt,
+    int? value,
   }) {
     return PlanFeature(
       createdAt: createdAt ?? this.createdAt,
@@ -326,8 +288,6 @@ class PlanFeature {
   }
 
   factory PlanFeature.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PlanFeature(
       createdAt: map['created_at'],
       id: map['id'],
@@ -343,8 +303,7 @@ class PlanFeature {
 
   String toJson() => json.encode(toMap());
 
-  factory PlanFeature.fromJson(String source) =>
-      PlanFeature.fromMap(json.decode(source));
+  factory PlanFeature.fromJson(String source) => PlanFeature.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -355,28 +314,11 @@ class PlanFeature {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PlanFeature &&
-        o.createdAt == createdAt &&
-        o.id == id &&
-        o.identifier == identifier &&
-        o.important == important &&
-        o.name == name &&
-        o.planId == planId &&
-        o.position == position &&
-        o.updatedAt == updatedAt &&
-        o.value == value;
+    return o is PlanFeature && o.createdAt == createdAt && o.id == id && o.identifier == identifier && o.important == important && o.name == name && o.planId == planId && o.position == position && o.updatedAt == updatedAt && o.value == value;
   }
 
   @override
   int get hashCode {
-    return createdAt.hashCode ^
-        id.hashCode ^
-        identifier.hashCode ^
-        important.hashCode ^
-        name.hashCode ^
-        planId.hashCode ^
-        position.hashCode ^
-        updatedAt.hashCode ^
-        value.hashCode;
+    return createdAt.hashCode ^ id.hashCode ^ identifier.hashCode ^ important.hashCode ^ name.hashCode ^ planId.hashCode ^ position.hashCode ^ updatedAt.hashCode ^ value.hashCode;
   }
 }

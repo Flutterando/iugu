@@ -6,13 +6,13 @@ class TransfersReportResponseMessage {
   List<TransferReceivedInfo> transfersReceived;
 
   TransfersReportResponseMessage({
-    this.transfersSent,
-    this.transfersReceived,
+    required this.transfersSent,
+    required this.transfersReceived,
   });
 
   TransfersReportResponseMessage copyWith({
-    List<TransferSentInfo> transfersSent,
-    List<TransferReceivedInfo> transfersReceived,
+    List<TransferSentInfo>? transfersSent,
+    List<TransferReceivedInfo>? transfersReceived,
   }) {
     return TransfersReportResponseMessage(
       transfersSent: transfersSent ?? this.transfersSent,
@@ -22,30 +22,24 @@ class TransfersReportResponseMessage {
 
   Map<String, dynamic> toMap() {
     return {
-      'sent': transfersSent?.map((x) => x?.toMap())?.toList(),
-      'received': transfersReceived?.map((x) => x?.toMap())?.toList(),
+      'sent': transfersSent.map((x) => x.toMap()).toList(),
+      'received': transfersReceived.map((x) => x.toMap()).toList(),
     };
   }
 
   factory TransfersReportResponseMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return TransfersReportResponseMessage(
-      transfersSent: List<TransferSentInfo>.from(
-          map['sent']?.map((x) => TransferSentInfo.fromMap(x))),
-      transfersReceived: List<TransferReceivedInfo>.from(
-          map['received']?.map((x) => TransferReceivedInfo.fromMap(x))),
+      transfersSent: List<TransferSentInfo>.from(map['sent']?.map((x) => TransferSentInfo.fromMap(x))),
+      transfersReceived: List<TransferReceivedInfo>.from(map['received']?.map((x) => TransferReceivedInfo.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory TransfersReportResponseMessage.fromJson(String source) =>
-      TransfersReportResponseMessage.fromMap(json.decode(source));
+  factory TransfersReportResponseMessage.fromJson(String source) => TransfersReportResponseMessage.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'TransfersReportResponseMessage(transfersSent: $transfersSent, transfersReceived: $transfersReceived)';
+  String toString() => 'TransfersReportResponseMessage(transfersSent: $transfersSent, transfersReceived: $transfersReceived)';
 
   @override
   bool operator ==(Object o) {
@@ -70,19 +64,19 @@ class TransferReceivedInfo {
   AccountInfo sender;
 
   TransferReceivedInfo({
-    this.amountInCents,
-    this.amountLocalized,
-    this.createdAt,
-    this.transferId,
-    this.sender,
+    required this.amountInCents,
+    required this.amountLocalized,
+    required this.createdAt,
+    required this.transferId,
+    required this.sender,
   });
 
   TransferReceivedInfo copyWith({
-    int amountInCents,
-    String amountLocalized,
-    DateTime createdAt,
-    String transferId,
-    AccountInfo sender,
+    int? amountInCents,
+    String? amountLocalized,
+    DateTime? createdAt,
+    String? transferId,
+    AccountInfo? sender,
   }) {
     return TransferReceivedInfo(
       amountInCents: amountInCents ?? this.amountInCents,
@@ -97,15 +91,13 @@ class TransferReceivedInfo {
     return {
       'amount_cents': amountInCents,
       'amount_localized': amountLocalized,
-      'created_at': createdAt?.millisecondsSinceEpoch,
+      'created_at': createdAt.millisecondsSinceEpoch,
       'id': transferId,
-      'sender': sender?.toMap(),
+      'sender': sender.toMap(),
     };
   }
 
   factory TransferReceivedInfo.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return TransferReceivedInfo(
       amountInCents: map['amount_cents'],
       amountLocalized: map['amount_localized'],
@@ -117,8 +109,7 @@ class TransferReceivedInfo {
 
   String toJson() => json.encode(toMap());
 
-  factory TransferReceivedInfo.fromJson(String source) =>
-      TransferReceivedInfo.fromMap(json.decode(source));
+  factory TransferReceivedInfo.fromJson(String source) => TransferReceivedInfo.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -129,21 +120,12 @@ class TransferReceivedInfo {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is TransferReceivedInfo &&
-        o.amountInCents == amountInCents &&
-        o.amountLocalized == amountLocalized &&
-        o.createdAt == createdAt &&
-        o.transferId == transferId &&
-        o.sender == sender;
+    return o is TransferReceivedInfo && o.amountInCents == amountInCents && o.amountLocalized == amountLocalized && o.createdAt == createdAt && o.transferId == transferId && o.sender == sender;
   }
 
   @override
   int get hashCode {
-    return amountInCents.hashCode ^
-        amountLocalized.hashCode ^
-        createdAt.hashCode ^
-        transferId.hashCode ^
-        sender.hashCode;
+    return amountInCents.hashCode ^ amountLocalized.hashCode ^ createdAt.hashCode ^ transferId.hashCode ^ sender.hashCode;
   }
 }
 
@@ -159,19 +141,19 @@ class TransferSentInfo {
   AccountInfo receiver;
 
   TransferSentInfo({
-    this.amountInCents,
-    this.amountLocalized,
-    this.createdAt,
-    this.transferId,
-    this.receiver,
+    required this.amountInCents,
+    required this.amountLocalized,
+    required this.createdAt,
+    required this.transferId,
+    required this.receiver,
   });
 
   TransferSentInfo copyWith({
-    int amountInCents,
-    String amountLocalized,
-    DateTime createdAt,
-    String transferId,
-    AccountInfo receiver,
+    int? amountInCents,
+    String? amountLocalized,
+    DateTime? createdAt,
+    String? transferId,
+    AccountInfo? receiver,
   }) {
     return TransferSentInfo(
       amountInCents: amountInCents ?? this.amountInCents,
@@ -186,15 +168,13 @@ class TransferSentInfo {
     return {
       'amount_cents': amountInCents,
       'amount_localized': amountLocalized,
-      'created_at': createdAt?.millisecondsSinceEpoch,
+      'created_at': createdAt.millisecondsSinceEpoch,
       'id': transferId,
-      'receiver': receiver?.toMap(),
+      'receiver': receiver.toMap(),
     };
   }
 
   factory TransferSentInfo.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return TransferSentInfo(
       amountInCents: map['amount_cents'],
       amountLocalized: map['amount_localized'],
@@ -206,8 +186,7 @@ class TransferSentInfo {
 
   String toJson() => json.encode(toMap());
 
-  factory TransferSentInfo.fromJson(String source) =>
-      TransferSentInfo.fromMap(json.decode(source));
+  factory TransferSentInfo.fromJson(String source) => TransferSentInfo.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -218,21 +197,12 @@ class TransferSentInfo {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is TransferSentInfo &&
-        o.amountInCents == amountInCents &&
-        o.amountLocalized == amountLocalized &&
-        o.createdAt == createdAt &&
-        o.transferId == transferId &&
-        o.receiver == receiver;
+    return o is TransferSentInfo && o.amountInCents == amountInCents && o.amountLocalized == amountLocalized && o.createdAt == createdAt && o.transferId == transferId && o.receiver == receiver;
   }
 
   @override
   int get hashCode {
-    return amountInCents.hashCode ^
-        amountLocalized.hashCode ^
-        createdAt.hashCode ^
-        transferId.hashCode ^
-        receiver.hashCode;
+    return amountInCents.hashCode ^ amountLocalized.hashCode ^ createdAt.hashCode ^ transferId.hashCode ^ receiver.hashCode;
   }
 }
 
@@ -241,13 +211,13 @@ class AccountInfo {
   String name;
 
   AccountInfo({
-    this.accountId,
-    this.name,
+    required this.accountId,
+    required this.name,
   });
 
   AccountInfo copyWith({
-    String accountId,
-    String name,
+    String? accountId,
+    String? name,
   }) {
     return AccountInfo(
       accountId: accountId ?? this.accountId,
@@ -263,8 +233,6 @@ class AccountInfo {
   }
 
   factory AccountInfo.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AccountInfo(
       accountId: map['id'],
       name: map['name'],
@@ -273,8 +241,7 @@ class AccountInfo {
 
   String toJson() => json.encode(toMap());
 
-  factory AccountInfo.fromJson(String source) =>
-      AccountInfo.fromMap(json.decode(source));
+  factory AccountInfo.fromJson(String source) => AccountInfo.fromMap(json.decode(source));
 
   @override
   String toString() => 'AccountInfo(accountId: $accountId, name: $name)';

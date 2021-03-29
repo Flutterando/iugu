@@ -3,70 +3,68 @@ import 'dart:convert';
 import 'address_model.dart';
 
 class AccountModel {
-  AddressModel _address;
+  AddressModel? _address;
   String _fullAddress;
 
   /// Valor máximo da venda('Até R$ 100,00', 'Entre R$ 100,00 e R$ 500,00', 'Mais que R$ 500,00')
-  String priceRange;
+  String? priceRange;
 
   /// Vende produtos físicos
-  bool physicalProducts;
+  bool? physicalProducts;
 
   /// Descrição do negócio
-  String businessDescription;
+  String? businessDescription;
 
   /// 'Pessoa Física' ou 'Pessoa Jurídica'
-  String personType;
+  String? personType;
 
   /// Saque automático(Recomendamos que envie 'true')
-  bool acceptAutomaticTransfer;
+  bool? acceptAutomaticTransfer;
 
   /// CNPJ caso Pessoa Jurídica
-  String cnpj;
+  String? cnpj;
 
   /// Nome da Empresa, caso Pessoa Jurídica
-  String companyName;
+  String? companyName;
 
   /// CPF caso Pessoa Física
-  String cpf;
+  String? cpf;
 
   /// Nome caso Pessoa Física
-  String name;
+  String? name;
 
   /// Telefone comercial
-  String phone;
+  String? phone;
 
   /// Nome do Responsável, caso Pessoa Jurídica
-  String respName;
+  String? respName;
 
   /// CPF do Responsável, caso Pessoa Jurídica
-  String respCPF;
+  String? respCPF;
 
   /// Nome da instituição bancária
   /// Suportados : 'Itaú', 'Bradesco', 'Caixa Econômica', 'Banco do Brasil', 'Santander'
-  String bank;
+  String? bank;
 
   /// Agência da Conta
   /// Formatos com validação automática(9999-D, 9999)
-  String bankAgency;
+  String? bankAgency;
 
   /// Tipo da conta: 'Corrente', 'Poupança'
-  String accountType;
+  String? accountType;
 
   /// Número da Conta
   /// Formatos com validação automática(99999999-D, XXX99999999-D onde X é Operação, 	9999999-D, 99999-D)
-  String bankAccountNumber;
+  String? bankAccountNumber;
 
   /// Endreço Completo
-  String get address => _address == null
-      ? _fullAddress
-      : "${_address.street}, ${_address.number} - ${_address.city} - ${_address.state}/${_address.country}";
+  String get address => _address == null ? _fullAddress : "${_address?.street}, ${_address?.number} - ${_address?.city} - ${_address?.state}/${_address?.country}";
 
   /// Cep
-  String get cep => _address?.zipCode;
+  String? get cep => _address?.zipCode;
 
   /// Cidade
-  String get city => _address?.city;
+  String? get city => _address?.city;
 
   /// Estado
   String get state => "${_address?.street} - ${_address?.number}";
@@ -92,35 +90,34 @@ class AccountModel {
     this.bankAccountNumber,
   });
 
-  AccountModel copyWith(
-    AddressModel _address,
-    String _fullAddress, {
-    String priceRange,
-    bool physicalProducts,
-    String businessDescription,
-    String personType,
-    bool acceptAutomaticTransfer,
-    String cnpj,
-    String companyName,
-    String cpf,
-    String name,
-    String phone,
-    String respName,
-    String respCPF,
-    String bank,
-    String bankAgency,
-    String accountType,
-    String bankAccountNumber,
+  AccountModel copyWith({
+    AddressModel? address,
+    String? fullAddress,
+    String? priceRange,
+    bool? physicalProducts,
+    String? businessDescription,
+    String? personType,
+    bool? acceptAutomaticTransfer,
+    String? cnpj,
+    String? companyName,
+    String? cpf,
+    String? name,
+    String? phone,
+    String? respName,
+    String? respCPF,
+    String? bank,
+    String? bankAgency,
+    String? accountType,
+    String? bankAccountNumber,
   }) {
     return AccountModel(
-      _address ?? this._address,
-      _fullAddress ?? this._fullAddress,
+      address ?? this._address,
+      fullAddress ?? this._fullAddress,
       priceRange: priceRange ?? this.priceRange,
       physicalProducts: physicalProducts ?? this.physicalProducts,
       businessDescription: businessDescription ?? this.businessDescription,
       personType: personType ?? this.personType,
-      acceptAutomaticTransfer:
-          acceptAutomaticTransfer ?? this.acceptAutomaticTransfer,
+      acceptAutomaticTransfer: acceptAutomaticTransfer ?? this.acceptAutomaticTransfer,
       cnpj: cnpj ?? this.cnpj,
       companyName: companyName ?? this.companyName,
       cpf: cpf ?? this.cpf,
@@ -159,8 +156,6 @@ class AccountModel {
   }
 
   factory AccountModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AccountModel(
       AddressModel.fromMap(map['_address']),
       map['_fullAddress'],
@@ -185,8 +180,7 @@ class AccountModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AccountModel.fromJson(String source) =>
-      AccountModel.fromMap(json.decode(source));
+  factory AccountModel.fromJson(String source) => AccountModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -197,46 +191,11 @@ class AccountModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is AccountModel &&
-        o._address == _address &&
-        o._fullAddress == _fullAddress &&
-        o.priceRange == priceRange &&
-        o.physicalProducts == physicalProducts &&
-        o.businessDescription == businessDescription &&
-        o.personType == personType &&
-        o.acceptAutomaticTransfer == acceptAutomaticTransfer &&
-        o.cnpj == cnpj &&
-        o.companyName == companyName &&
-        o.cpf == cpf &&
-        o.name == name &&
-        o.phone == phone &&
-        o.respName == respName &&
-        o.respCPF == respCPF &&
-        o.bank == bank &&
-        o.bankAgency == bankAgency &&
-        o.accountType == accountType &&
-        o.bankAccountNumber == bankAccountNumber;
+    return o is AccountModel && o._address == _address && o._fullAddress == _fullAddress && o.priceRange == priceRange && o.physicalProducts == physicalProducts && o.businessDescription == businessDescription && o.personType == personType && o.acceptAutomaticTransfer == acceptAutomaticTransfer && o.cnpj == cnpj && o.companyName == companyName && o.cpf == cpf && o.name == name && o.phone == phone && o.respName == respName && o.respCPF == respCPF && o.bank == bank && o.bankAgency == bankAgency && o.accountType == accountType && o.bankAccountNumber == bankAccountNumber;
   }
 
   @override
   int get hashCode {
-    return _address.hashCode ^
-        _fullAddress.hashCode ^
-        priceRange.hashCode ^
-        physicalProducts.hashCode ^
-        businessDescription.hashCode ^
-        personType.hashCode ^
-        acceptAutomaticTransfer.hashCode ^
-        cnpj.hashCode ^
-        companyName.hashCode ^
-        cpf.hashCode ^
-        name.hashCode ^
-        phone.hashCode ^
-        respName.hashCode ^
-        respCPF.hashCode ^
-        bank.hashCode ^
-        bankAgency.hashCode ^
-        accountType.hashCode ^
-        bankAccountNumber.hashCode;
+    return _address.hashCode ^ _fullAddress.hashCode ^ priceRange.hashCode ^ physicalProducts.hashCode ^ businessDescription.hashCode ^ personType.hashCode ^ acceptAutomaticTransfer.hashCode ^ cnpj.hashCode ^ companyName.hashCode ^ cpf.hashCode ^ name.hashCode ^ phone.hashCode ^ respName.hashCode ^ respCPF.hashCode ^ bank.hashCode ^ bankAgency.hashCode ^ accountType.hashCode ^ bankAccountNumber.hashCode;
   }
 }

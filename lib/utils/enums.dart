@@ -28,7 +28,7 @@ class AvailableBanks extends Enum<int> {
   //   Santander = 033,
   //    HSBC = 399
 
-  const AvailableBanks._internal(int val, {String name}) : super(val, name);
+  const AvailableBanks._internal(int val, {String name = ''}) : super(val, name);
 
   static const CaixaEconomicaFederal = 104;
   static const BancoDoBrasil = 001;
@@ -40,15 +40,7 @@ class AvailableBanks extends Enum<int> {
 
 /// Status da fatura
 
-enum InvoiceAvailableStatus {
-  Paid,
-  Canceled,
-  PartiallyPaid,
-  Pending,
-  Draft,
-  Refunded,
-  Expired
-}
+enum InvoiceAvailableStatus { Paid, Canceled, PartiallyPaid, Pending, Draft, Refunded, Expired }
 
 /// Person type
 enum PersonType {
@@ -130,9 +122,6 @@ abstract class Enum<T> {
   /// if [_name] is a non-null string, then its
   /// used in the result, otherwise not
   toString() {
-    if (this.name == null) {
-      return 'Enum.$runtimeType.$_value';
-    }
     return 'Enum.$runtimeType.$_name:$_value';
   }
 }

@@ -5,11 +5,11 @@ class SimpleResponseMessage {
 
   bool success;
   SimpleResponseMessage({
-    this.success,
+    required this.success,
   });
 
   SimpleResponseMessage copyWith({
-    bool success,
+    bool? success,
   }) {
     return SimpleResponseMessage(
       success: success ?? this.success,
@@ -23,8 +23,6 @@ class SimpleResponseMessage {
   }
 
   factory SimpleResponseMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return SimpleResponseMessage(
       success: map['success'],
     );
@@ -32,8 +30,7 @@ class SimpleResponseMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory SimpleResponseMessage.fromJson(String source) =>
-      SimpleResponseMessage.fromMap(json.decode(source));
+  factory SimpleResponseMessage.fromJson(String source) => SimpleResponseMessage.fromMap(json.decode(source));
 
   @override
   String toString() => 'SimpleResponseMessage(success: $success)';

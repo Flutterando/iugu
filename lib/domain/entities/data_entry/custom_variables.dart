@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 class CustomVariables {
-  String name;
-  String value;
+  String? name;
+  String? value;
   CustomVariables({
     this.name,
     this.value,
   });
 
   CustomVariables copyWith({
-    String name,
-    String value,
+    String? name,
+    String? value,
   }) {
     return CustomVariables(
       name: name ?? this.name,
@@ -26,8 +26,6 @@ class CustomVariables {
   }
 
   factory CustomVariables.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return CustomVariables(
       name: map['name'],
       value: map['value'],
@@ -36,8 +34,7 @@ class CustomVariables {
 
   String toJson() => json.encode(toMap());
 
-  factory CustomVariables.fromJson(String source) =>
-      CustomVariables.fromMap(json.decode(source));
+  factory CustomVariables.fromJson(String source) => CustomVariables.fromMap(json.decode(source));
 
   @override
   String toString() => 'CustomVariables(name: $name, value: $value)';

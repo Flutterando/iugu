@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 class TransferModel {
-  String id;
-  String createdAt;
-  String amountCents;
-  String amountLocalized;
-  Receiver receiver;
+  String? id;
+  String? createdAt;
+  String? amountCents;
+  String? amountLocalized;
+  Receiver? receiver;
 
   TransferModel({
     this.id,
@@ -16,11 +16,11 @@ class TransferModel {
   });
 
   TransferModel copyWith({
-    String id,
-    String createdAt,
-    String amountCents,
-    String amountLocalized,
-    Receiver receiver,
+    String? id,
+    String? createdAt,
+    String? amountCents,
+    String? amountLocalized,
+    Receiver? receiver,
   }) {
     return TransferModel(
       id: id ?? this.id,
@@ -42,8 +42,6 @@ class TransferModel {
   }
 
   factory TransferModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return TransferModel(
       id: map['id'],
       createdAt: map['created_at'],
@@ -55,8 +53,7 @@ class TransferModel {
 
   String toJson() => json.encode(toMap());
 
-  factory TransferModel.fromJson(String source) =>
-      TransferModel.fromMap(json.decode(source));
+  factory TransferModel.fromJson(String source) => TransferModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -67,27 +64,18 @@ class TransferModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is TransferModel &&
-        o.id == id &&
-        o.createdAt == createdAt &&
-        o.amountCents == amountCents &&
-        o.amountLocalized == amountLocalized &&
-        o.receiver == receiver;
+    return o is TransferModel && o.id == id && o.createdAt == createdAt && o.amountCents == amountCents && o.amountLocalized == amountLocalized && o.receiver == receiver;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        createdAt.hashCode ^
-        amountCents.hashCode ^
-        amountLocalized.hashCode ^
-        receiver.hashCode;
+    return id.hashCode ^ createdAt.hashCode ^ amountCents.hashCode ^ amountLocalized.hashCode ^ receiver.hashCode;
   }
 }
 
 class Receiver {
-  String id;
-  String name;
+  String? id;
+  String? name;
 
   Receiver({
     this.id,
@@ -95,8 +83,8 @@ class Receiver {
   });
 
   Receiver copyWith({
-    String id,
-    String name,
+    String? id,
+    String? name,
   }) {
     return Receiver(
       id: id ?? this.id,
@@ -112,8 +100,6 @@ class Receiver {
   }
 
   factory Receiver.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Receiver(
       id: map['id'],
       name: map['name'],
@@ -122,8 +108,7 @@ class Receiver {
 
   String toJson() => json.encode(toMap());
 
-  factory Receiver.fromJson(String source) =>
-      Receiver.fromMap(json.decode(source));
+  factory Receiver.fromJson(String source) => Receiver.fromMap(json.decode(source));
 
   @override
   String toString() => 'Receiver(id: $id, name: $name)';

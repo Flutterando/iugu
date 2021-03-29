@@ -2,10 +2,10 @@ import 'dart:convert';
 
 class Logs {
   /// Descrição da Entrada de Log
-  String description;
+  String? description;
 
   /// Anotações da Entrada de Log
-  String notes;
+  String? notes;
 
   Logs({
     this.description,
@@ -13,8 +13,8 @@ class Logs {
   });
 
   Logs copyWith({
-    String description,
-    String notes,
+    String? description,
+    String? notes,
   }) {
     return Logs(
       description: description ?? this.description,
@@ -30,8 +30,6 @@ class Logs {
   }
 
   factory Logs.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Logs(
       description: map['description'],
       notes: map['notes'],

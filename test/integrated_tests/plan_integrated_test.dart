@@ -20,24 +20,14 @@ void main() {
       // Act
       var apiPlan = Plans(IuguClientData.createClient);
 
-      var planRequest = PlanRequestMessage(
-          name: "$radomPlan-12x",
-          uniqueIdentifier: planId,
-          cycle: 1,
-          intervalType: GenerateCycleType.MONTHLY,
-          valueInCents: 0,
-          paymentMethod: PaymentMethod.BANK_SLIP);
+      var planRequest = PlanRequestMessage(name: "$radomPlan-12x", uniqueIdentifier: planId, cycle: 1, intervalType: GenerateCycleType.MONTHLY, valueInCents: 0, paymentMethod: PaymentMethod.BANK_SLIP);
 
-      var currentPlans = await apiPlan.getAll(
-          customApiToken: "74c265aedbfaea379bc0148fae9b5526");
+      var currentPlans = await apiPlan.getAll(customApiToken: "3d000baf7565027456e5402c9fa1ac64");
       originalCountPlans = currentPlans.totalItems;
-      var response = await apiPlan.create(
-          plan: planRequest,
-          customApiToken: "74c265aedbfaea379bc0148fae9b5526");
+      var response = await apiPlan.create(plan: planRequest, customApiToken: "3d000baf7565027456e5402c9fa1ac64");
 
-      var newPlan =
-          await apiPlan.getByIdentifier(planIdentifier: response.identifier);
-      newCountPlans = newPlan != null ? originalCountPlans + 1 : newCountPlans;
+      var newPlan = await apiPlan.getByIdentifier(planIdentifier: response.identifier);
+      newCountPlans = originalCountPlans + 1;
 
       // Assert
       expect(newCountPlans, greaterThan(originalCountPlans));
@@ -54,14 +44,7 @@ void main() {
       var apiPlan = Plans(IuguClientData.createClient);
 
       plan = await apiPlan.create(
-        plan: PlanRequestMessage(
-            name: "$radomPlan-12x",
-            uniqueIdentifier: planId,
-            cycle: 1,
-            intervalType: GenerateCycleType.MONTHLY,
-            valueInCents: 0,
-            currencyTypeName: "BRL",
-            paymentMethod: PaymentMethod.BANK_SLIP),
+        plan: PlanRequestMessage(name: "$radomPlan-12x", uniqueIdentifier: planId, cycle: 1, intervalType: GenerateCycleType.MONTHLY, valueInCents: 0, currencyTypeName: "BRL", paymentMethod: PaymentMethod.BANK_SLIP),
       );
 
       // Assert

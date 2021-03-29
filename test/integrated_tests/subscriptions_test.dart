@@ -13,11 +13,11 @@ import 'data_builder/data_builder.dart';
 //Assinaturas
 void main() {
   group("subscriptions_test", () {
-    Plans _planApi;
-    Subscription _subscriptionApi;
-    Customer _customerApi;
-    PlanModel _createdPlan;
-    CustomerModel _createdCustomer;
+    late Plans _planApi;
+    late Subscription _subscriptionApi;
+    late Customer _customerApi;
+    late PlanModel _createdPlan;
+    late CustomerModel _createdCustomer;
 
     setUp(() async {
       _planApi = Plans(IuguClientData.createClient);
@@ -25,15 +25,7 @@ void main() {
       _customerApi = Customer(IuguClientData.createClient);
 
       var radomPlan = Uuid().v1();
-      _createdPlan = await _planApi.create(
-          plan: PlanRequestMessage(
-              name: "$radomPlan-12x",
-              uniqueIdentifier: "$radomPlan-Plan",
-              cycle: 1,
-              intervalType: "months",
-              valueInCents: 0,
-              currencyTypeName: "BRL",
-              paymentMethod: PaymentMethod.BANK_SLIP));
+      _createdPlan = await _planApi.create(plan: PlanRequestMessage(name: "$radomPlan-12x", uniqueIdentifier: "$radomPlan-Plan", cycle: 1, intervalType: "months", valueInCents: 0, currencyTypeName: "BRL", paymentMethod: PaymentMethod.BANK_SLIP));
 
       var customer = CustomerRequestMessage(
         email: "anyemail@email.com",
@@ -50,21 +42,11 @@ void main() {
     });
 
     test('Create_a_new_subscription', () async {
-      var subscriptionRequest = await _subscriptionApi.get();
-
       var subscriptionItems = [
-        SubscriptionSubitem(
-            description: "Mensalidade",
-            priceCents: 65000,
-            quantity: 1,
-            recurrent: true)
+        SubscriptionSubitem(description: "Mensalidade", priceCents: 65000, quantity: 1, recurrent: true)
       ];
 
-      var request = new SubscriptionRequestMessage(
-          customerId: _createdCustomer.id,
-          planId: _createdPlan.identifier,
-          isCreditBased: false,
-          subitems: subscriptionItems);
+      var request = new SubscriptionRequestMessage(customerId: _createdCustomer.id, planId: _createdPlan.identifier, isCreditBased: false, subitems: subscriptionItems);
 
       // Act
       var subscription = await _subscriptionApi.create(request: request);
@@ -75,27 +57,16 @@ void main() {
     });
 
     test('Suspended_a_subscription', () async {
-      var subscriptionRequest = await _subscriptionApi.get();
-
       var subscriptionItems = [
-        SubscriptionSubitem(
-            description: "Mensalidade",
-            priceCents: 65000,
-            quantity: 1,
-            recurrent: true)
+        SubscriptionSubitem(description: "Mensalidade", priceCents: 65000, quantity: 1, recurrent: true)
       ];
 
-      var request = new SubscriptionRequestMessage(
-          customerId: _createdCustomer.id,
-          planId: _createdPlan.identifier,
-          isCreditBased: false,
-          subitems: subscriptionItems);
+      var request = new SubscriptionRequestMessage(customerId: _createdCustomer.id, planId: _createdPlan.identifier, isCreditBased: false, subitems: subscriptionItems);
 
       // Act
       var subscription = await _subscriptionApi.create(request: request);
 
-      var suspendendSubscription =
-          await _subscriptionApi.suspend(subscription.id);
+      var suspendendSubscription = await _subscriptionApi.suspend(subscription.id);
 
       // Assert
       expect(suspendendSubscription.suspended, true);
@@ -103,44 +74,24 @@ void main() {
 
     //becarrefull with TimeOut
     test('Change_a_subscription_plan', () async {
-      var subscriptionRequest = await _subscriptionApi.get();
-
       var subscriptionItems = [
-        SubscriptionSubitem(
-            description: "Mensalidade",
-            priceCents: 65000,
-            quantity: 1,
-            recurrent: true)
+        SubscriptionSubitem(description: "Mensalidade", priceCents: 65000, quantity: 1, recurrent: true)
       ];
 
-      var request = new SubscriptionRequestMessage(
-          customerId: _createdCustomer.id,
-          planId: _createdPlan.identifier,
-          isCreditBased: false,
-          subitems: subscriptionItems);
+      var request = new SubscriptionRequestMessage(customerId: _createdCustomer.id, planId: _createdPlan.identifier, isCreditBased: false, subitems: subscriptionItems);
 
       // Act
       var currentSubscription = await _subscriptionApi.create(request: request);
 
       var radomPlan = Uuid().v1();
 
-      var newdPlan = await _planApi.create(
-          plan: PlanRequestMessage(
-              name: "$radomPlan-12x",
-              uniqueIdentifier: "$radomPlan-Plan",
-              cycle: 2,
-              intervalType: "months",
-              valueInCents: 200,
-              currencyTypeName: "BRL",
-              paymentMethod: PaymentMethod.BANK_SLIP));
+      var newdPlan = await _planApi.create(plan: PlanRequestMessage(name: "$radomPlan-12x", uniqueIdentifier: "$radomPlan-Plan", cycle: 2, intervalType: "months", valueInCents: 200, currencyTypeName: "BRL", paymentMethod: PaymentMethod.BANK_SLIP));
 
       // Act
-      var suspendendSubscription = await _subscriptionApi.changePlan(
-          currentSubscription.id, newdPlan.identifier);
+      var suspendendSubscription = await _subscriptionApi.changePlan(currentSubscription.id, newdPlan.identifier);
 
       // Assert
-      expect(suspendendSubscription.priceCents,
-          isNot(currentSubscription.priceCents));
+      expect(suspendendSubscription.priceCents, isNot(currentSubscription.priceCents));
     });
   });
 }

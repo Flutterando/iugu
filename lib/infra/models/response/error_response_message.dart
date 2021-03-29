@@ -1,7 +1,7 @@
 class ErrorResponseMessage {
-  int statusCode;
-  String reasonPhase;
-  List<ErrorMessage> errors;
+  late int statusCode;
+  late String reasonPhase;
+  late List<ErrorMessage> errors;
 
   // ErrorResponseMessage(int statusCode, string reasonPhase, List<ErrorMessage> errors)
   // {
@@ -53,8 +53,8 @@ class ErrorResponseMessage {
 }
 
 class ErrorMessage {
-  String fieldName;
-  List<String> errors;
+  late String fieldName;
+  late List<String> errors;
 
   ErrorMessage(String fieldName, List<String> errors) {
     fieldName = fieldName;
@@ -63,17 +63,17 @@ class ErrorMessage {
 }
 
 class IuguCompleteComplexErrorResponse {
-  int statusCode;
-  String reasonPhase;
-  UnformattedErrorMessage message;
+  late int statusCode;
+  late String reasonPhase;
+  late UnformattedErrorMessage message;
 }
 
 class UnformattedErrorMessage {
-  Map<String, List> errors;
+  late Map<String, List> errors;
 }
 
 class IuguCompleteSimpleErrorResponse {
-  int statusCode;
-  String reasonPhase;
-  String message;
+  late int statusCode;
+  late String reasonPhase;
+  late String message;
 }

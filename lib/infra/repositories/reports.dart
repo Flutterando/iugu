@@ -26,21 +26,17 @@ class Reports extends IDisposable {
   /// <param name="customApiToken">todo: describe customApiToken parameter on ReportAsync</param>
   /// <param name="filter">Opções de filtros e ordenação</param>
   /// <returns>A lista de saques paginada</returns>
-  Future<PaggedResponseMessage<RequestWithdrawResponseMessage>>
-      reportRequestWithdrawAsync({
-    String customApiToken,
+  Future<PaggedResponseMessage<RequestWithdrawResponseMessage>> reportRequestWithdrawAsync({
+    String customApiToken = '',
     String filter = "?limit=1000",
   }) async {
     var api = APIResource(_dio, "/withdraw_requests");
 
-    var result =
-        await api.getById(partOfUrl: filter, apiUserToken: customApiToken);
+    var result = await api.getById(partOfUrl: filter, apiUserToken: customApiToken);
 
     return PaggedResponseMessage<RequestWithdrawResponseMessage>(
       totalItems: result["totalItems"],
-      items: (result["items"] as List)
-          .map((e) => RequestWithdrawResponseMessage.fromMap(e))
-          .toList(),
+      items: (result["items"] as List).map((e) => RequestWithdrawResponseMessage.fromMap(e)).toList(),
     );
   }
 
@@ -49,8 +45,7 @@ class Reports extends IDisposable {
   /// </summary>
   /// <param name="customApiToken">token customizado</param>
   /// <returns>A lista de transferência</returns>
-  Future<TransfersReportResponseMessage> reportTransfersHistoryAsync(
-      String customApiToken) async {
+  Future<TransfersReportResponseMessage> reportTransfersHistoryAsync(String customApiToken) async {
     var api = APIResource(_dio, "/transfers");
     var result = await api.getById(apiUserToken: customApiToken);
 

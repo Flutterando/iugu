@@ -8,7 +8,7 @@ import 'api_resource.dart';
 /// Transfere um determinado valor de sua conta para a conta destino
 /// </summary>
 class Transfers extends IDisposable {
-  APIResource apiResource;
+  late APIResource apiResource;
 
   Transfers(IuguClient client) {
     apiResource = APIResource(client.properties.dio, "/transfers");
@@ -40,8 +40,7 @@ class Transfers extends IDisposable {
       "amount_cents": amountInCents
     };
 
-    var result = await apiResource.post(
-        data: user, apiUserToken: customSourceAccountApiToken);
+    var result = await apiResource.post(data: user, apiUserToken: customSourceAccountApiToken);
     return TransferModel.fromMap(result);
   }
 

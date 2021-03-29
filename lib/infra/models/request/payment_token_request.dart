@@ -5,16 +5,16 @@ import 'package:iugu/domain/entities/payment_info_model.dart';
 class PaymentTokenRequest {
   /// ID de sua Conta na Iugu (O ID de sua conta pode ser encontrado clicando na referência)
   /// <see cref="https://iugu.com/settings/account"/>
-  String accountId;
+  String? accountId;
 
   /// Método de Pagamento (atualmente somente credit_card)
-  String method;
+  String? method;
 
   /// Valor true para criar tokens de teste
-  bool test;
+  bool? test;
 
   /// Dados do Método de Pagamento
-  PaymentInfoModel paymentData;
+  PaymentInfoModel? paymentData;
 
   PaymentTokenRequest({
     this.accountId,
@@ -24,10 +24,10 @@ class PaymentTokenRequest {
   });
 
   PaymentTokenRequest copyWith({
-    String accountId,
-    String method,
-    bool test,
-    PaymentInfoModel paymentData,
+    String? accountId,
+    String? method,
+    bool? test,
+    PaymentInfoModel? paymentData,
   }) {
     return PaymentTokenRequest(
       accountId: accountId ?? this.accountId,
@@ -47,8 +47,6 @@ class PaymentTokenRequest {
   }
 
   factory PaymentTokenRequest.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return PaymentTokenRequest(
       accountId: map['account_id'],
       method: map['method'],
@@ -59,8 +57,7 @@ class PaymentTokenRequest {
 
   String toJson() => json.encode(toMap());
 
-  factory PaymentTokenRequest.fromJson(String source) =>
-      PaymentTokenRequest.fromMap(json.decode(source));
+  factory PaymentTokenRequest.fromJson(String source) => PaymentTokenRequest.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -71,18 +68,11 @@ class PaymentTokenRequest {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PaymentTokenRequest &&
-        o.accountId == accountId &&
-        o.method == method &&
-        o.test == test &&
-        o.paymentData == paymentData;
+    return o is PaymentTokenRequest && o.accountId == accountId && o.method == method && o.test == test && o.paymentData == paymentData;
   }
 
   @override
   int get hashCode {
-    return accountId.hashCode ^
-        method.hashCode ^
-        test.hashCode ^
-        paymentData.hashCode;
+    return accountId.hashCode ^ method.hashCode ^ test.hashCode ^ paymentData.hashCode;
   }
 }

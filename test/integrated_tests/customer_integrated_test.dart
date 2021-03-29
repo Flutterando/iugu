@@ -9,22 +9,16 @@ void main() {
   group("customer_integrated_test", () {
     test('Create_a_customer_with_success', () async {
       // Arrange
-      var custom = List<CustomVariables>();
+      List<CustomVariables> custom = [];
       custom.add(CustomVariables(name: "Tipo", value: "Developer"));
-      custom.add(CustomVariables(
-          name: "Representante", value: "Vilson Dauinheimer (RS)"));
+      custom.add(CustomVariables(name: "Representante", value: "Vilson Dauinheimer (RS)"));
 
       CustomerModel myCustomer;
 
       // Act
       var apiClient = Customer(IuguClientData.createClient);
 
-      myCustomer = await apiClient.create(
-          request: CustomerRequestMessage(
-              email: "bwolfnoob@gmail.com",
-              name: "Bwolf Teste 2 Flutter/Dart",
-              notes: "teste da api em Flutter/Dart",
-              customVariables: custom));
+      myCustomer = await apiClient.create(request: CustomerRequestMessage(email: "bwolfnoob@gmail.com", name: "Bwolf Teste 2 Flutter/Dart", notes: "teste da api em Flutter/Dart", customVariables: custom));
 
       // Assert
       expect(myCustomer.email, equals("bwolfnoob@gmail.com"));

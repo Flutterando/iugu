@@ -10,13 +10,12 @@ class PaggedResponseMessage<T> {
   List<T> items;
 
   PaggedResponseMessage({
-    this.totalItems,
-    this.items,
+    required this.totalItems,
+    required this.items,
   });
 
   @override
-  String toString() =>
-      'PaggedResponseMessage(totalItems: $totalItems, items: $items)';
+  String toString() => 'PaggedResponseMessage(totalItems: $totalItems, items: $items)';
 
   @override
   bool operator ==(Object o) {

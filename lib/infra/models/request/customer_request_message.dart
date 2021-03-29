@@ -19,39 +19,39 @@ class CustomerRequestMessage {
   String notes;
 
   ///  Variáveis Personalizadas
-  List<CustomVariables> customVariables;
+  List<CustomVariables>? customVariables;
 
   /// CEP do cliente
   String zipCode;
 
   /// Número do endereço do cliente
-  int number;
+  int? number;
 
   /// Complemento do endereço
   String complement;
 
   CustomerRequestMessage({
-    this.email,
-    this.name,
-    this.cpfOrCnpj,
-    this.withCopyEmails,
-    this.notes,
+    this.email = '',
+    this.name = '',
+    this.cpfOrCnpj = '',
+    this.withCopyEmails = '',
+    this.notes = '',
     this.customVariables,
-    this.zipCode,
+    this.zipCode = '',
     this.number,
-    this.complement,
+    this.complement = '',
   });
 
   CustomerRequestMessage copyWith({
-    String email,
-    String name,
-    String cpfOrCnpj,
-    String withCopyEmails,
-    String notes,
-    List<CustomVariables> customVariables,
-    String zipCode,
-    int number,
-    String complement,
+    String? email,
+    String? name,
+    String? cpfOrCnpj,
+    String? withCopyEmails,
+    String? notes,
+    List<CustomVariables>? customVariables,
+    String? zipCode,
+    int? number,
+    String? complement,
   }) {
     return CustomerRequestMessage(
       email: email ?? this.email,
@@ -73,7 +73,7 @@ class CustomerRequestMessage {
       'cpf_cnpj': cpfOrCnpj,
       'cc_emails': withCopyEmails,
       'notes': notes,
-      'custom_variables': customVariables?.map((x) => x?.toMap())?.toList(),
+      'custom_variables': customVariables?.map((x) => x.toMap()).toList(),
       'zip_code': zipCode,
       'number': number,
       'complement': complement,
@@ -81,16 +81,13 @@ class CustomerRequestMessage {
   }
 
   factory CustomerRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return CustomerRequestMessage(
       email: map['email'],
       name: map['name'],
       cpfOrCnpj: map['cpf_cnpj'],
       withCopyEmails: map['cc_emails'],
       notes: map['notes'],
-      customVariables: List<CustomVariables>.from(
-          map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
+      customVariables: List<CustomVariables>.from(map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
       zipCode: map['zip_code'],
       number: map['number'],
       complement: map['complement'],
@@ -99,8 +96,7 @@ class CustomerRequestMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory CustomerRequestMessage.fromJson(String source) =>
-      CustomerRequestMessage.fromMap(json.decode(source));
+  factory CustomerRequestMessage.fromJson(String source) => CustomerRequestMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -111,27 +107,11 @@ class CustomerRequestMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is CustomerRequestMessage &&
-        o.email == email &&
-        o.name == name &&
-        o.cpfOrCnpj == cpfOrCnpj &&
-        o.withCopyEmails == withCopyEmails &&
-        o.notes == notes &&
-        o.zipCode == zipCode &&
-        o.number == number &&
-        o.complement == complement;
+    return o is CustomerRequestMessage && o.email == email && o.name == name && o.cpfOrCnpj == cpfOrCnpj && o.withCopyEmails == withCopyEmails && o.notes == notes && o.zipCode == zipCode && o.number == number && o.complement == complement;
   }
 
   @override
   int get hashCode {
-    return email.hashCode ^
-        name.hashCode ^
-        cpfOrCnpj.hashCode ^
-        withCopyEmails.hashCode ^
-        notes.hashCode ^
-        customVariables.hashCode ^
-        zipCode.hashCode ^
-        number.hashCode ^
-        complement.hashCode;
+    return email.hashCode ^ name.hashCode ^ cpfOrCnpj.hashCode ^ withCopyEmails.hashCode ^ notes.hashCode ^ customVariables.hashCode ^ zipCode.hashCode ^ number.hashCode ^ complement.hashCode;
   }
 }

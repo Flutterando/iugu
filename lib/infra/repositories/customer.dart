@@ -11,7 +11,7 @@ import 'api_resource.dart';
 /// forma de pagamento padrão deste cliente.
 /// </summary>
 class Customer extends IDisposable {
-  APIResource apiResource;
+  late APIResource apiResource;
 
   Customer(IuguClient client) {
     apiResource = APIResource(client.properties.dio, "/customers");
@@ -41,7 +41,7 @@ class Customer extends IDisposable {
   //     return result;
   // }
 
-  Future<CustomerModel> getById({String id}) async {
+  Future<CustomerModel> getById({required String id}) async {
     var result = await apiResource.getById(id: id);
     return CustomerModel.fromMap(result);
   }
@@ -98,11 +98,10 @@ class Customer extends IDisposable {
   /// <param name="customApiToken"></param>
   /// <returns></returns>
   Future<CustomerModel> create({
-    CustomerRequestMessage request,
-    String customApiToken,
+    required CustomerRequestMessage request,
+    String customApiToken = '',
   }) async {
-    var result = await apiResource.post(
-        data: request.toMap(), apiUserToken: customApiToken);
+    var result = await apiResource.post(data: request.toMap(), apiUserToken: customApiToken);
     return CustomerModel.fromMap(result);
   }
 
@@ -113,7 +112,7 @@ class Customer extends IDisposable {
   //     return result;
   // }
 
-  Future<CustomerModel> delete({String id, String customApiToken}) async {
+  Future<CustomerModel> delete({required String id, required String customApiToken}) async {
     var result = await apiResource.delete(id: id, apiUserToken: customApiToken);
     return CustomerModel.fromMap(result);
   }
@@ -125,7 +124,7 @@ class Customer extends IDisposable {
   //     return result;
   // }
 
-  Future<CustomerModel> put({String id, CustomerModel model}) async {
+  Future<CustomerModel> put({required String id, required CustomerModel model}) async {
     var result = await apiResource.put(id: id, data: model.toMap());
     return CustomerModel.fromMap(result);
   }

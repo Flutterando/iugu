@@ -9,13 +9,13 @@ class AccountRequestWithdrawResponse {
   double withdrawValue;
 
   AccountRequestWithdrawResponse({
-    this.operationId,
-    this.withdrawValue,
+    required this.operationId,
+    required this.withdrawValue,
   });
 
   AccountRequestWithdrawResponse copyWith({
-    String operationId,
-    double withdrawValue,
+    String? operationId,
+    double? withdrawValue,
   }) {
     return AccountRequestWithdrawResponse(
       operationId: operationId ?? this.operationId,
@@ -31,8 +31,6 @@ class AccountRequestWithdrawResponse {
   }
 
   factory AccountRequestWithdrawResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AccountRequestWithdrawResponse(
       operationId: map['id'],
       withdrawValue: map['amount'],
@@ -41,20 +39,16 @@ class AccountRequestWithdrawResponse {
 
   String toJson() => json.encode(toMap());
 
-  factory AccountRequestWithdrawResponse.fromJson(String source) =>
-      AccountRequestWithdrawResponse.fromMap(json.decode(source));
+  factory AccountRequestWithdrawResponse.fromJson(String source) => AccountRequestWithdrawResponse.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'AccountRequestWithdrawResponse(operationId: $operationId, withdrawValue: $withdrawValue)';
+  String toString() => 'AccountRequestWithdrawResponse(operationId: $operationId, withdrawValue: $withdrawValue)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is AccountRequestWithdrawResponse &&
-        o.operationId == operationId &&
-        o.withdrawValue == withdrawValue;
+    return o is AccountRequestWithdrawResponse && o.operationId == operationId && o.withdrawValue == withdrawValue;
   }
 
   @override

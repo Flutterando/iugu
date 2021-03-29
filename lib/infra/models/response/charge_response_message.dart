@@ -20,12 +20,12 @@ class ChargeResponseMessage {
   String pdf;
 
   ChargeResponseMessage({
-    this.errors,
-    this.url,
-    this.success,
-    this.invoiceId,
-    this.message,
-    this.pdf,
+    required this.errors,
+    required this.url,
+    required this.success,
+    required this.invoiceId,
+    required this.message,
+    required this.pdf,
   });
 
   Map<String, dynamic> toMap() {
@@ -40,14 +40,12 @@ class ChargeResponseMessage {
   }
 
   factory ChargeResponseMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return ChargeResponseMessage(
-        errors: map['errors'] != null
+        errors: (map['errors'] != null && !(map['errors'] as Map).isEmpty)
             ? map['errors'] is Map
                 ? map['errors']
                 : Map<String, Object>.from(map['errors'])
-            : null,
+            : {},
         url: map['url'],
         success: map['success'],
         invoiceId: map['invoice_id'],
@@ -57,8 +55,7 @@ class ChargeResponseMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory ChargeResponseMessage.fromJson(String source) =>
-      ChargeResponseMessage.fromMap(json.decode(source));
+  factory ChargeResponseMessage.fromJson(String source) => ChargeResponseMessage.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -69,19 +66,11 @@ class ChargeResponseMessage {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is ChargeResponseMessage &&
-        o.url == url &&
-        o.success == success &&
-        o.invoiceId == invoiceId &&
-        o.message == message;
+    return o is ChargeResponseMessage && o.url == url && o.success == success && o.invoiceId == invoiceId && o.message == message;
   }
 
   @override
   int get hashCode {
-    return errors.hashCode ^
-        url.hashCode ^
-        success.hashCode ^
-        invoiceId.hashCode ^
-        message.hashCode;
+    return errors.hashCode ^ url.hashCode ^ success.hashCode ^ invoiceId.hashCode ^ message.hashCode;
   }
 }

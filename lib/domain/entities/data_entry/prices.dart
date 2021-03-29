@@ -2,10 +2,10 @@ import 'dart:convert';
 
 class Prices {
   /// Moeda do Preço (Somente "BRL" por enquanto)
-  String currency;
+  String? currency;
 
   /// Preço do Plano em Centavos
-  int valueCents;
+  int? valueCents;
 
   Prices({
     this.currency,
@@ -13,8 +13,8 @@ class Prices {
   });
 
   Prices copyWith({
-    String currency,
-    int valueCents,
+    String? currency,
+    int? valueCents,
   }) {
     return Prices(
       currency: currency ?? this.currency,
@@ -30,8 +30,6 @@ class Prices {
   }
 
   factory Prices.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Prices(
       currency: map['currency'],
       valueCents: map['value_cents'],

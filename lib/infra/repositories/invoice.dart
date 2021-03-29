@@ -10,7 +10,7 @@ import 'api_resource.dart';
 /// Os clientes efetuam pagamentos através das faturas.
 /// As faturas contém itens que representam o que o cliente está pagando, o serviço ou produto.
 class Invoice extends IDisposable {
-  APIResource apiResource;
+  late APIResource apiResource;
 
   Invoice(IuguClient client) {
     apiResource = APIResource(client.properties.dio, "/invoices");
@@ -45,20 +45,17 @@ class Invoice extends IDisposable {
   ///Future<PaggedResponseMessage<InvoiceModel>> getAll(String customApiToken, QueryStringFilter filter) async
   Future<PaggedResponseMessage<InvoiceModel>> getAll({
     String filter = "?limit=1000",
-    String customApiToken,
+    String customApiToken = '',
   }) async {
     //  var queryStringFilter = filter?.ToQueryStringUrl();
-    var result = await apiResource.getById(
-        partOfUrl: filter, apiUserToken: customApiToken);
+    var result = await apiResource.getById(partOfUrl: filter, apiUserToken: customApiToken);
     return PaggedResponseMessage<InvoiceModel>(
       totalItems: result["totalItems"],
-      items: (result["items"] as List)
-          .map((e) => InvoiceModel.fromMap(e))
-          .toList(),
+      items: (result["items"] as List).map((e) => InvoiceModel.fromMap(e)).toList(),
     );
   }
 
-  Future<InvoiceModel> getById({String id, String apiUserToken}) async {
+  Future<InvoiceModel> getById({required String id, String apiUserToken = ''}) async {
     var retorno = await apiResource.getById(
       id: id,
       apiUserToken: apiUserToken,
@@ -89,24 +86,24 @@ class Invoice extends IDisposable {
   /// <returns></returns>
 
   Future<InvoiceModel> create({
-    String email,
-    DateTime dueDate,
-    List<Item> items,
-    String returnUrl,
-    String expiredUrl,
-    String notificationUrl,
+    required String email,
+    required DateTime dueDate,
+    required List<Item> items,
+    String returnUrl = '',
+    String expiredUrl = '',
+    String notificationUrl = '',
+    String? customerId,
+    String subscriptionId = '',
+    int credits = 0,
+    Logs? logs,
+    List<CustomVariables>? customVariables,
+    PayerModel? payer,
+    List<EarlyPaymentDiscounts>? earlyPaymentDiscounts,
     int taxCents = 0,
     int discountCents = 0,
-    String customerId,
     bool ignoreDueEmail = false,
-    String subscriptionId,
-    int credits,
-    Logs logs,
-    List<CustomVariables> customVariables,
-    PayerModel payer,
     bool earlyPaymentDiscount = false,
-    List<EarlyPaymentDiscounts> earlyPaymentDiscounts,
-    String customApiToken,
+    String customApiToken = '',
     String paymentMethod = 'bank_slip',
   }) async {
     var invoice = InvoiceRequestMessage(
@@ -121,7 +118,11 @@ class Invoice extends IDisposable {
         ignoreDueDateMail: ignoreDueEmail,
         subscriptionId: subscriptionId,
         credits: credits,
-        logs: [logs],
+        logs: logs == null
+            ? null
+            : [
+                logs
+              ],
         customVariables: customVariables,
         notificationUrl: notificationUrl,
         enableEarlyPaymentDiscount: earlyPaymentDiscount,
@@ -129,29 +130,27 @@ class Invoice extends IDisposable {
         payer: payer,
         paymentMethod: paymentMethod);
 
-    var retorno = await apiResource.post(
-        data: invoice.toMap(), apiUserToken: customApiToken);
+    var retorno = await apiResource.post(data: invoice.toMap(), apiUserToken: customApiToken);
     return InvoiceModel.fromMap(retorno);
   }
 
-  Future<InvoiceModel> delete({String id}) async {
+  Future<InvoiceModel> delete({required String id}) async {
     var retorno = await apiResource.delete(id: id);
     return InvoiceModel.fromMap(retorno);
   }
 
-  Future<InvoiceModel> put({String id, InvoiceModel model}) async {
+  Future<InvoiceModel> put({required String id, required InvoiceModel model}) async {
     var retorno = await apiResource.put(id: id, data: model.toMap());
     return InvoiceModel.fromMap(retorno);
   }
 
-  Future<InvoiceModel> refund({String id}) async {
+  Future<InvoiceModel> refund({required String id}) async {
     var retorno = await apiResource.post(partOfUrl: "/$id/refund");
     return InvoiceModel.fromMap(retorno);
   }
 
-  Future<InvoiceModel> cancel({String id, String customApiToken}) async {
-    var retorno = await apiResource.put(
-        partOfUrl: "/$id/cancel", apiUserToken: customApiToken);
+  Future<InvoiceModel> cancel({required String id, String customApiToken = ''}) async {
+    var retorno = await apiResource.put(partOfUrl: "/$id/cancel", apiUserToken: customApiToken);
     return InvoiceModel.fromMap(retorno);
   }
 
@@ -163,14 +162,8 @@ class Invoice extends IDisposable {
   /// <returns>Objeto invoice resultante da requisição</returns>
   /// <param name="customApiToken">Token customizado geralmente passado quando está se trabalhando como marketplace</param>
 
-  Future<InvoiceModel> duplicate(
-      {String id,
-      InvoiceDuplicateRequestMessage data,
-      String customApiToken}) async {
-    var retorno = await apiResource.post(
-        data: data?.toMap(),
-        partOfUrl: "/$id/duplicate",
-        apiUserToken: customApiToken);
+  Future<InvoiceModel> duplicate({required String id, required InvoiceDuplicateRequestMessage data, String customApiToken = ''}) async {
+    var retorno = await apiResource.post(data: data.toMap(), partOfUrl: "/$id/duplicate", apiUserToken: customApiToken);
     return InvoiceModel.fromMap(retorno);
   }
 
@@ -179,7 +172,7 @@ class Invoice extends IDisposable {
   /// </summary>
   /// <param name="id">Identificador da fatura</param>
   /// <returns>Objeto invoice resultante da requisição</returns>
-  Future<InvoiceModel> capture({String id}) async {
+  Future<InvoiceModel> capture({required String id}) async {
     var retorno = await apiResource.post(partOfUrl: "/$id/capture");
     return InvoiceModel.fromMap(retorno);
   }
@@ -191,10 +184,8 @@ class Invoice extends IDisposable {
   /// <returns>Objeto invoice resultante da requisição</returns>
   /// <param name="customApiToken">Token customizado geralmente passado quando está se trabalhando como marketplace</param>
 
-  Future<InvoiceModel> resendInvoiceMail(
-      {String id, String customApiToken}) async {
-    var retorno = await apiResource.post(
-        partOfUrl: "/$id/send_email", apiUserToken: customApiToken);
+  Future<InvoiceModel> resendInvoiceMail({required String id, String customApiToken = ''}) async {
+    var retorno = await apiResource.post(partOfUrl: "/$id/send_email", apiUserToken: customApiToken);
     return InvoiceModel.fromMap(retorno);
   }
 }

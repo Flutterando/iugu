@@ -1,15 +1,16 @@
 name: iugu
 description: Client Flutter/Dart de acesso aos principais recursos da Api da IUGU
-version: 0.0.1-dev.2
+version: 1.0.0
 homepage: https://github.com/Flutterando/iugu
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  dio: ">=3.0.0 <4.0.0"
-  uuid: ">=2.0.0 <3.0.0"  
+  dio: ^4.0.0-beta4
+  uuid: ^3.0.1 
+  meta: ^1.3.0 
 
 dev_dependencies:
-  mockito: ^4.1.1
-  test:
+  mocktail: ^0.1.1
+  test: ^1.16.5

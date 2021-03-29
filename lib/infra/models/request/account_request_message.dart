@@ -8,13 +8,13 @@ class AccountRequestMessage {
   /// Percentual de comissionamento enviado para a conta que gerencia o marketplace (Valor entre 0 e 70)
   int commissionPercent;
   AccountRequestMessage({
-    this.name,
-    this.commissionPercent,
+    this.name = '',
+    this.commissionPercent = 0,
   });
 
   AccountRequestMessage copyWith({
-    String name,
-    int commissionPercent,
+    String? name,
+    int? commissionPercent,
   }) {
     return AccountRequestMessage(
       name: name ?? this.name,
@@ -30,8 +30,6 @@ class AccountRequestMessage {
   }
 
   factory AccountRequestMessage.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AccountRequestMessage(
       name: map['name'],
       commissionPercent: map['commission_percent'],
@@ -40,20 +38,16 @@ class AccountRequestMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory AccountRequestMessage.fromJson(String source) =>
-      AccountRequestMessage.fromMap(json.decode(source));
+  factory AccountRequestMessage.fromJson(String source) => AccountRequestMessage.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'AccountRequestMessage(name: $name, commissionPercent: $commissionPercent)';
+  String toString() => 'AccountRequestMessage(name: $name, commissionPercent: $commissionPercent)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is AccountRequestMessage &&
-        o.name == name &&
-        o.commissionPercent == commissionPercent;
+    return o is AccountRequestMessage && o.name == name && o.commissionPercent == commissionPercent;
   }
 
   @override

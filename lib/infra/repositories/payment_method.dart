@@ -9,11 +9,9 @@ class PaymentMethod extends IDisposable {
   final APIResource apiResource;
   final String customerId;
 
-  PaymentMethod(IuguClient client, this.customerId)
-      : apiResource = APIResource(
-            client.properties.dio, "/customers/$customerId/payment_methods");
+  PaymentMethod(IuguClient client, this.customerId) : apiResource = APIResource(client.properties.dio, "/customers/$customerId/payment_methods");
 
-  Future<PaymentMethodCompleteModel> get({String id}) async {
+  Future<PaymentMethodCompleteModel> get({required String id}) async {
     var result = await apiResource.getById(id: id);
     return PaymentMethodCompleteModel.fromMap(result);
   }
@@ -33,10 +31,10 @@ class PaymentMethod extends IDisposable {
   /// <param name="item_type">(opcional)	Tipo da Forma de Pagamento. Atualmente suportamos apenas Cartão de Crédito (tipo credit_card). Só deve ser enviado caso não envie token.</param>
   Future<PaymentMethodCompleteModel> create(
     String description,
-    CreditCard data,
+    CreditCard? data,
     bool setAsDefault,
-    String token,
-    String itemType,
+    String? token,
+    String? itemType,
   ) async {
     Object paymentmethod;
 
@@ -49,7 +47,7 @@ class PaymentMethod extends IDisposable {
     } else {
       paymentmethod = {
         description: description,
-        data: data.toMap(),
+        data: data?.toMap(),
         setAsDefault: setAsDefault,
         itemType: itemType,
       };
@@ -66,8 +64,7 @@ class PaymentMethod extends IDisposable {
   }
 
   //[Obsolete("Sera descontinuado na versão 2.x do client, use a versão assincrona do método")]
-  Future<PaymentMethodCompleteModel> put(
-      String id, PaymentMethodCompleteModel model) async {
+  Future<PaymentMethodCompleteModel> put(String id, PaymentMethodCompleteModel model) async {
     var result = await apiResource.put(id: id, data: model.toMap());
     return PaymentMethodCompleteModel.fromMap(result);
   }

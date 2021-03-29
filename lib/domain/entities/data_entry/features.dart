@@ -2,13 +2,13 @@ import 'dart:convert';
 
 class Feature {
   /// Nome da Funcionalidade
-  String name;
+  String? name;
 
   /// Identificador único da funcionalidade
-  String identifier;
+  String? identifier;
 
   /// Valor da Funcionalidade (número maior que 0)
-  int value;
+  int? value;
 
   Feature({
     this.name,
@@ -17,9 +17,9 @@ class Feature {
   });
 
   Feature copyWith({
-    String name,
-    String identifier,
-    int value,
+    String? name,
+    String? identifier,
+    int? value,
   }) {
     return Feature(
       name: name ?? this.name,
@@ -37,8 +37,6 @@ class Feature {
   }
 
   factory Feature.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Feature(
       name: map['name'],
       identifier: map['identifier'],
@@ -48,21 +46,16 @@ class Feature {
 
   String toJson() => json.encode(toMap());
 
-  factory Feature.fromJson(String source) =>
-      Feature.fromMap(json.decode(source));
+  factory Feature.fromJson(String source) => Feature.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'Feature(name: $name, identifier: $identifier, value: $value)';
+  String toString() => 'Feature(name: $name, identifier: $identifier, value: $value)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Feature &&
-        o.name == name &&
-        o.identifier == identifier &&
-        o.value == value;
+    return o is Feature && o.name == name && o.identifier == identifier && o.value == value;
   }
 
   @override
