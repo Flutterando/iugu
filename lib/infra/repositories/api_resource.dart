@@ -155,12 +155,12 @@ class APIResource extends IApiResources {
   Future<Map<String, dynamic>> post({
     dynamic data,
     String partOfUrl = '',
-    String apiUserToken = '',
+    String? apiUserToken,
   }) async {
     Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters.map((key, value) => MapEntry(key, value));
 
-    if (apiUserToken.isNotEmpty) {
+    if (apiUserToken?.isNotEmpty ?? false) {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
 
@@ -178,7 +178,6 @@ class APIResource extends IApiResources {
     if (partOfUrl.isNotEmpty) {
       url += '$partOfUrl';
     }
-    // data?..removeWhere((key, value) => value == "")..removeWhere((key, value) => value == null);
 
     try {
       var result = await _dio.post(url, data: data);

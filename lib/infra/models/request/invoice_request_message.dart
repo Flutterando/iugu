@@ -159,7 +159,7 @@ class InvoiceRequestMessage {
       'discountCents': discountCents,
       'customerId': customerId,
       'ignoreDueDateMail': ignoreDueDateMail,
-      'subscriptionId': subscriptionId,
+      'subscription_id': subscriptionId,
       'paymentMethod': paymentMethod,
       'credits': credits,
       'logs': logs?.map((x) => x.toMap()).toList(),

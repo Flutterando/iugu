@@ -4,42 +4,42 @@ import 'package:iugu/domain/entities/data_entry/custom_variables.dart';
 
 class CustomerRequestMessage {
   /// E-Mail do Cliente
-  String email;
+  String? email;
 
   /// Nome do Cliente
-  String name;
+  String? name;
 
   /// E-Mail do Cliente
-  String cpfOrCnpj;
+  String? cpfOrCnpj;
 
   /// Endereços de E-mail para cópia separados por vírgula.
-  String withCopyEmails;
+  String? withCopyEmails;
 
   /// Anotações Gerais do Cliente
-  String notes;
+  String? notes;
 
   ///  Variáveis Personalizadas
   List<CustomVariables>? customVariables;
 
   /// CEP do cliente
-  String zipCode;
+  String? zipCode;
 
   /// Número do endereço do cliente
   int? number;
 
   /// Complemento do endereço
-  String complement;
+  String? complement;
 
   CustomerRequestMessage({
-    this.email = '',
-    this.name = '',
-    this.cpfOrCnpj = '',
-    this.withCopyEmails = '',
-    this.notes = '',
+    this.email,
+    this.name,
+    this.cpfOrCnpj,
+    this.withCopyEmails,
+    this.notes,
     this.customVariables,
-    this.zipCode = '',
+    this.zipCode,
     this.number,
-    this.complement = '',
+    this.complement,
   });
 
   CustomerRequestMessage copyWith({
