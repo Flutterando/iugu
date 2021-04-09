@@ -10,7 +10,7 @@ class IuguProperties {
   final String urlApi;
   late Dio _dio;
 
-  IuguProperties({required this.apiKey, required this.urlApi})
+  IuguProperties({required this.apiKey, required this.urlApi, Dio? customDio})
       : assert(
           apiKey.trim() != "",
           "You need to set API Key",
@@ -19,14 +19,15 @@ class IuguProperties {
           urlApi.trim() != "",
           "You need to set a valid url",
         ) {
-    _dio = Dio(
-      BaseOptions(
-        baseUrl: urlApi,
-        queryParameters: {
-          'api_token': apiKey
-        },
-      ),
-    );
+    _dio = customDio ??
+        Dio(
+          BaseOptions(
+            baseUrl: urlApi,
+            queryParameters: {
+              'api_token': apiKey
+            },
+          ),
+        );
   }
 
   Dio get dio => _dio;
