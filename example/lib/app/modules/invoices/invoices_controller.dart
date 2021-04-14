@@ -17,7 +17,7 @@ abstract class _InvoicesControllerBase with Store {
   }
 
   @observable
-  PaggedResponseMessage<InvoiceModel> result;
+  PaggedResponseMessage<InvoiceModel>? result;
 
   @action
   Future getInvoices() async {
@@ -32,7 +32,7 @@ abstract class _InvoicesControllerBase with Store {
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
           content: Text(
-            result.currency,
+            result.currency ?? '',
           ),
         );
       });
@@ -40,7 +40,7 @@ abstract class _InvoicesControllerBase with Store {
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
           content: Text(
-            e.response.data['errors'].toString(),
+            e.response?.data['errors']?.toString() ?? '',
           ),
         );
       });
@@ -54,7 +54,7 @@ abstract class _InvoicesControllerBase with Store {
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
           content: Text(
-            result.currency,
+            result.currency ?? '',
           ),
         );
       });
@@ -62,7 +62,7 @@ abstract class _InvoicesControllerBase with Store {
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
           content: Text(
-            e.response.data['errors'].toString(),
+            e.response?.data['errors']?.toString() ?? '',
           ),
         );
       });
@@ -76,7 +76,7 @@ abstract class _InvoicesControllerBase with Store {
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
           content: Text(
-            result.currency,
+            result.currency ?? '',
           ),
         );
       });
@@ -84,7 +84,7 @@ abstract class _InvoicesControllerBase with Store {
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
           content: Text(
-            e.response.data['errors'].toString(),
+            e.response?.data['errors']?.toString() ?? '',
           ),
         );
       });
@@ -106,7 +106,7 @@ abstract class _InvoicesControllerBase with Store {
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
           content: Text(
-            result.currency,
+            result.currency ?? '',
           ),
         );
       });
@@ -114,7 +114,7 @@ abstract class _InvoicesControllerBase with Store {
       Modular.to.showDialog(builder: (_) {
         return AlertDialog(
           content: Text(
-            e.response.data['errors'].toString(),
+            e.response?.data['errors']?.toString() ?? '',
           ),
         );
       });

@@ -4,15 +4,13 @@ import 'tokenizacao_controller.dart';
 
 class TokenizacaoPage extends StatefulWidget {
   final String title;
-  const TokenizacaoPage({Key key, this.title = "Tokenizacao"})
-      : super(key: key);
+  const TokenizacaoPage({Key? key, this.title = "Tokenizacao"}) : super(key: key);
 
   @override
   _TokenizacaoPageState createState() => _TokenizacaoPageState();
 }
 
-class _TokenizacaoPageState
-    extends ModularState<TokenizacaoPage, TokenizacaoController> {
+class _TokenizacaoPageState extends ModularState<TokenizacaoPage, TokenizacaoController> {
   //use 'controller' variable to access controller
 
   @override

@@ -5,14 +5,13 @@ import 'invoices_controller.dart';
 
 class InvoicesPage extends StatefulWidget {
   final String title;
-  const InvoicesPage({Key key, this.title = "Invoices"}) : super(key: key);
+  const InvoicesPage({Key? key, this.title = "Invoices"}) : super(key: key);
 
   @override
   _InvoicesPageState createState() => _InvoicesPageState();
 }
 
-class _InvoicesPageState
-    extends ModularState<InvoicesPage, InvoicesController> {
+class _InvoicesPageState extends ModularState<InvoicesPage, InvoicesController> {
   //use 'controller' variable to access controller
 
   @override
@@ -29,7 +28,7 @@ class _InvoicesPageState
         }
 
         return ListView.builder(
-            itemCount: controller.result.totalItems,
+            itemCount: controller.result?.totalItems,
             itemBuilder: (_, index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -39,17 +38,15 @@ class _InvoicesPageState
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(controller.result.items[index].email),
-                          Text(controller
-                              .result.items[index].variables[9].value),
+                          Text(controller?.result?.items[index].email ?? ''),
+                          Text(controller?.result?.items[index].variables?[9].value ?? ''),
                         ],
                       ),
                       Column(
                         children: [
                           RaisedButton(
                             onPressed: () {
-                              controller.consultarFatura(
-                                  controller.result.items[index].id);
+                              controller.consultarFatura(controller.result?.items[index].id ?? '');
                             },
                             child: Text(
                               "Consultar Fatura",
@@ -61,8 +58,7 @@ class _InvoicesPageState
                           ),
                           RaisedButton(
                             onPressed: () {
-                              controller.capturarFatura(
-                                  controller.result.items[index].id);
+                              controller.capturarFatura(controller.result?.items[index].id ?? '');
                             },
                             child: Text(
                               "Capturar Fatura",
@@ -74,8 +70,7 @@ class _InvoicesPageState
                           ),
                           RaisedButton(
                             onPressed: () {
-                              controller.reembolsarFatura(
-                                  controller.result.items[index].id);
+                              controller.reembolsarFatura(controller.result?.items[index].id ?? '');
                             },
                             child: Text(
                               "Reembolso Fatura",
@@ -88,8 +83,8 @@ class _InvoicesPageState
                           RaisedButton(
                             onPressed: () {
                               controller.segundaViaFatura(
-                                controller.result.items[index].id,
-                                controller.result.items[index].items,
+                                controller?.result?.items[index].id ?? '',
+                                controller?.result?.items[index].items ?? [],
                               );
                             },
                             child: Text(

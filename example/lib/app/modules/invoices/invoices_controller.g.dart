@@ -12,13 +12,13 @@ mixin _$InvoicesController on _InvoicesControllerBase, Store {
   final _$resultAtom = Atom(name: '_InvoicesControllerBase.result');
 
   @override
-  PaggedResponseMessage<InvoiceModel> get result {
+  PaggedResponseMessage<InvoiceModel>? get result {
     _$resultAtom.reportRead();
     return super.result;
   }
 
   @override
-  set result(PaggedResponseMessage<InvoiceModel> value) {
+  set result(PaggedResponseMessage<InvoiceModel>? value) {
     _$resultAtom.reportWrite(value, super.result, () {
       super.result = value;
     });

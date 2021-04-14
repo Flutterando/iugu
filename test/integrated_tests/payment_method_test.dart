@@ -13,7 +13,19 @@ void main() {
       // Arrange
       var paymentMethod = PaymentMethod(IuguClientData.createClient, '6DD884D094E74F0B9762267EDC7A8FA0');
 
-      var paymentRequest = PaymentTokenRequest(accountId: "FAB1ECBDA24B4242ACCF520272FD8247", method: Consts.PaymentMethod.CREDIT_CARD, test: true, paymentData: PaymentInfoModel(firstName: "Rodrigo", lastName: "Couto", month: "01", year: "2028", number: "38520000023237", verificationValue: "123"));
+      var paymentRequest = PaymentTokenRequest(
+        accountId: "FAB1ECBDA24B4242ACCF520272FD8247",
+        method: Consts.PaymentMethod.CREDIT_CARD,
+        test: true,
+        paymentData: PaymentInfoModel(
+          firstName: "Rodrigo",
+          lastName: "Couto",
+          month: "01",
+          year: "2028",
+          number: "38520000023237",
+          verificationValue: "123",
+        ),
+      );
 
       PaymentTokenResponse paymentTokenResponse;
 

@@ -228,7 +228,7 @@ class InvoiceModel {
       variables: List<Variable>.from(map['variables']?.map((x) => Variable.fromMap(x))),
       customVariables: List<CustomVariables>.from(map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
       earlyPaymentDiscount: map['early_payment_discount'],
-      earlyPaymentDiscounts: List<EarlyPaymentDiscounts>.from(map['early_payment_discounts']?.map((x) => EarlyPaymentDiscounts.fromMap(x))),
+      earlyPaymentDiscounts: map['early_payment_discounts'] == null ? List<EarlyPaymentDiscounts>.from(map['early_payment_discounts']?.map((x) => EarlyPaymentDiscounts.fromMap(x))) : [],
       logs: List<Logs>.from(map['logs']?.map((x) => Logs.fromMap(x))),
     );
   }
