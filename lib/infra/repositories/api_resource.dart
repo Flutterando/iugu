@@ -10,7 +10,8 @@ class APIResource extends IApiResources {
   APIResource(this.dio, this.baseURI);
 
   @override
-  Future<Map<String, dynamic>> delete({String id = '', String apiUserToken = ''}) async {
+  Future<Map<String, dynamic>> delete(
+      {String id = '', String apiUserToken = ''}) async {
     Dio _dio = dio;
     Map<String, dynamic> queryParameters = dio.options.queryParameters;
 
@@ -18,9 +19,7 @@ class APIResource extends IApiResources {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
         queryParameters.remove('api_token');
-        queryParameters.addAll({
-          'api_token': apiUserToken
-        });
+        queryParameters.addAll({'api_token': apiUserToken});
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -56,9 +55,7 @@ class APIResource extends IApiResources {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
         queryParameters.remove('api_token');
-        queryParameters.addAll({
-          'api_token': apiUserToken
-        });
+        queryParameters.addAll({'api_token': apiUserToken});
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -92,9 +89,7 @@ class APIResource extends IApiResources {
         _dio = copyDio(dio.options);
 
         queryParameters.remove('api_token');
-        queryParameters.addAll({
-          'api_token': apiUserToken
-        });
+        queryParameters.addAll({'api_token': apiUserToken});
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -126,9 +121,7 @@ class APIResource extends IApiResources {
         _dio = copyDio(dio.options);
 
         queryParameters.remove('api_token');
-        queryParameters.addAll({
-          'api_token': apiUserToken
-        });
+        queryParameters.addAll({'api_token': apiUserToken});
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -158,16 +151,15 @@ class APIResource extends IApiResources {
     String? apiUserToken,
   }) async {
     Dio _dio = dio;
-    Map<String, dynamic> queryParameters = dio.options.queryParameters.map((key, value) => MapEntry(key, value));
+    Map<String, dynamic> queryParameters =
+        dio.options.queryParameters.map((key, value) => MapEntry(key, value));
 
     if (apiUserToken?.isNotEmpty ?? false) {
       if (queryParameters.containsKey("api_token")) {
         _dio = copyDio(dio.options);
 
         queryParameters.remove('api_token');
-        queryParameters.addAll({
-          'api_token': apiUserToken
-        });
+        queryParameters.addAll({'api_token': apiUserToken});
       }
 
       _dio.options.queryParameters = queryParameters;
@@ -189,23 +181,7 @@ class APIResource extends IApiResources {
   }
 
   Dio copyDio(opt) {
-    return Dio(BaseOptions(
-      baseUrl: opt.baseUrl,
-      extra: opt.extra,
-      headers: opt.headers,
-      contentType: opt.contentType,
-      connectTimeout: opt.connectTimeout,
-      followRedirects: opt.followRedirects,
-      maxRedirects: opt.maxRedirects,
-      method: opt.method,
-      receiveDataWhenStatusError: opt.receiveDataWhenStatusError,
-      receiveTimeout: opt.receiveTimeout,
-      requestEncoder: opt.requestEncoder,
-      responseDecoder: opt.responseDecoder,
-      responseType: opt.responseType,
-      sendTimeout: opt.sendTimeout,
-      validateStatus: opt.validateStatus,
-    ));
+    return Dio(opt);
   }
 
   @override
