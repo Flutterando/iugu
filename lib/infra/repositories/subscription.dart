@@ -27,6 +27,17 @@ class Subscription extends IDisposable {
     );
   }
 
+  Future<SubscriptionModel> getById({
+    required String id,
+    String apiUserToken = '',
+  }) async {
+    var result = await apiResource.getById(
+      id: id,
+      apiUserToken: apiUserToken,
+    );
+    return SubscriptionModel.fromMap(result);
+  }
+
   /// <summary>
   /// Cria uma assinatura para um cliente cadastrado
   /// </summary>
