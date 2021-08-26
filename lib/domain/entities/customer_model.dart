@@ -6,6 +6,7 @@ import 'package:iugu/domain/entities/payment_method_model.dart';
 class CustomersModel {
   int totalItems;
   List<CustomerModel>? items;
+
   CustomersModel({
     this.totalItems = 0,
     this.items,
@@ -31,13 +32,15 @@ class CustomersModel {
   factory CustomersModel.fromMap(Map<String, dynamic> map) {
     return CustomersModel(
       totalItems: map['total_items'] ?? map['totalItems'],
-      items: List<CustomerModel>.from(map['items']?.map((x) => CustomerModel.fromMap(x))),
+      items: List<CustomerModel>.from(
+          map['items']?.map((x) => CustomerModel.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CustomersModel.fromJson(String source) => CustomersModel.fromMap(json.decode(source));
+  factory CustomersModel.fromJson(String source) =>
+      CustomersModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'CustomersModel(totalItems: $totalItems, items: $items)';
@@ -184,7 +187,8 @@ class CustomerModel {
       notes: map['notes'],
       createdAt: map['created_at'],
       updatedAt: map['updated_at'],
-      customVariables: List<CustomVariables>.from(map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
+      customVariables: List<CustomVariables>.from(
+          map['custom_variables']?.map((x) => CustomVariables.fromMap(x))),
       zipCode: map['zip_code'],
       number: map['number'] != null
           ? map['number'] is String
@@ -209,7 +213,8 @@ class CustomerModel {
 
   String toJson() => json.encode(toMap());
 
-  factory CustomerModel.fromJson(String source) => CustomerModel.fromMap(json.decode(source));
+  factory CustomerModel.fromJson(String source) =>
+      CustomerModel.fromMap(json.decode(source));
 
   @override
   String toString() {
