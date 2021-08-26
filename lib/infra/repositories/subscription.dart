@@ -11,14 +11,12 @@ class Subscription extends IDisposable {
     apiResource = APIResource(client.properties.dio, "/subscriptions");
   }
 
-  Future<PaggedResponseMessage<SubscriptionModel>> get({
-    String id = '',
-    String partOfUrl = '',
+  Future<PaggedResponseMessage<SubscriptionModel>> getAll({
+    String filter = '?limit=1000',
     String apiUserToken = '',
   }) async {
     var result = await apiResource.getById(
-      id: id,
-      partOfUrl: partOfUrl,
+      partOfUrl: filter,
       apiUserToken: apiUserToken,
     );
     return PaggedResponseMessage<SubscriptionModel>(
